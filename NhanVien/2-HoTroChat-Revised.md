@@ -1,139 +1,130 @@
-# TỔNG HỢP CHỨC NĂNG
+# 1. DOCUMENT HISTORY
 
-_Dựa trên tài liệu yêu cầu KH-20_RO.MD - Chức năng xử lý phản hồi / khiếu nại của Admin_
-
-## MỤC LỤC
-
-1. [Chức năng xử lý phản hồi / khiếu nại](#1-chức-năng-xử-lý-phản-hồi--khiếu-nại)
-   - 1.1 [Xem danh sách phản hồi/khiếu nại](#11-xem-danh-sách-phản-hồikhiếu-nại)
-   - 1.2 [Xem chi tiết phản hồi](#12-xem-chi-tiết-phản-hồi)
-   - 1.3 [Trả lời phản hồi](#13-trả-lời-phản-hồi)
-   - 1.4 [Cập nhật trạng thái xử lý](#14-cập-nhật-trạng-thái-xử-lý)
-   - 1.5 [Phân loại khiếu nại](#15-phân-loại-khiếu-nại)
+| Date | Summary of Changes | Version |
+|------|-------------------|---------|
+| 25-09-2025 | - Vẽ sơ đồ Use Case tổng quát và phân công công việc.<br>- Mô tả sườn của báo cáo và khái quát một số chức năng. | 1.0 |
+| 27-09-2025 | - Vẽ mockup cho trang User. | 1.0 |
+| 27-09-2025 | - Vẽ mockup cho trang Admin. | 1.0 |
+| 27-09-2025 | - Soạn nội dung cho các mockup. | 1.0 |
+| 02-10-2025 | - Tổng hợp và kiểm tra lại các nội dung, mockup và Use Case. | 1.0 |
+| 05-10-2025 | - Kiểm tra lỗi chính tả và hoàn thiện báo cáo. | 1.0 |
+| 11-10-2025 | - Kiểm tra và chuẩn hóa format toàn bộ tài liệu.<br>- Kiểm tra lỗi chính tả toàn bộ file.<br>- Kiểm tra nội dung giao diện và Use Case.<br>- Kiểm tra và xử lý các Use Case mâu thuẫn. | 2.0 |
+| 10-11-2025 | - Dựa trên kết quả review, tinh chỉnh lại nội dung và giao diện.<br>- Bổ sung chi tiết nội dung các phần còn thiếu.<br>- Cập nhật và hoàn thiện toàn bộ tài liệu theo phản hồi. | 3.0 |
 
 ---
 
-## 1. CHỨC NĂNG XỬ LÝ PHẢN HỒI / KHIẾU NẠI
+# 2. REFERENCE DOCUMENTS
 
-### 1.1 XEM DANH SÁCH PHẢN HỒI/KHIẾU NẠI
+| Document Name | Description |
+|---------------|-------------|
+| KH-20_SRS v1.0.docx | Tài liệu Software Requirements Specification phiên bản đầu tiên của nhóm KH-20 Đồ án CNPM, bao gồm mô hình RMS hoàn chỉnh |
+| KH-20_SRS v2.0.docx | Tài liệu SRS phiên bản 2.0, được cập nhật và sửa lỗi dựa trên những sai sót phát hiện ở phiên bản v1.0 |
+| KH-20_SRS v3.0.docx | Tài liệu SRS phiên bản 3.0, được chỉnh sửa và hoàn thiện dựa trên kết quả review của phiên bản v2.0 |
 
-#### 1.1.1 Thông tin màn hình:
+---
 
-| Screen        | Danh sách phản hồi/khiếu nại                         |
-| ------------- | ---------------------------------------------------- |
-| Description   | Hiển thị tất cả phản hồi/khiếu nại từ khách hàng     |
-| Screen Access | Admin truy cập /admin/complaints hoặc menu Khiếu nại |
+# 3. DISTRIBUTION LIST AND APPROVALS
 
-#### 1.1.2 Chi tiết thành phần màn hình:
+| Name | Role | Responsibilities |
+|------|------|------------------|
+| **Trần Bình An** | Team Member | - Tạo Use Case tổng quát<br>- Tạo giao diện tổng thể<br>- Vẽ Use Case và Mockup cho:<br>&nbsp;&nbsp;+ Báo cáo và thống kê<br>&nbsp;&nbsp;+ Quản lý đánh giá<br>&nbsp;&nbsp;+ Cài đặt hệ thống<br>&nbsp;&nbsp;+ Quản lý bài viết |
+| **Nguyễn Hữu Việt** | Team Member | Vẽ Use Case và Mockup cho:<br>&nbsp;&nbsp;+ Quản lý khách hàng<br>&nbsp;&nbsp;+ Xử lý yêu cầu khách hàng<br>&nbsp;&nbsp;+ Xử lý đặt trước<br>&nbsp;&nbsp;+ Quản lý hỗ trợ/liên hệ<br>&nbsp;&nbsp;+ Xử lý phản hồi/khiếu nại |
+| **Võ Thị Yến Nhi** | Team Member | Vẽ Use Case và Mockup cho:<br>&nbsp;&nbsp;+ Xem trang cá nhân người dùng khác<br>&nbsp;&nbsp;+ Bảo mật<br>&nbsp;&nbsp;+ Quản lý sản phẩm<br>&nbsp;&nbsp;+ Quản lý tồn kho<br>&nbsp;&nbsp;+ Xử lý đơn hàng |
+| **Phan Đình Khoa** | Team Member | Vẽ Use Case và Mockup cho:<br>&nbsp;&nbsp;+ Hỗ trợ/liên hệ<br>&nbsp;&nbsp;+ Yêu cầu đặt hàng<br>&nbsp;&nbsp;+ Đặt trước sản phẩm<br>&nbsp;&nbsp;+ Thông báo<br>&nbsp;&nbsp;+ Tạo/hiển thị bài viết<br>&nbsp;&nbsp;+ Tương tác bài viết |
+| **Trương Minh Hoàng Đại** | Team Member | Vẽ Use Case và Mockup cho:<br>&nbsp;&nbsp;+ Quản lý đơn hàng<br>&nbsp;&nbsp;+ Thanh toán đơn hàng<br>&nbsp;&nbsp;+ Vận chuyển<br>&nbsp;&nbsp;+ Khuyến mãi<br>&nbsp;&nbsp;+ Đánh giá sản phẩm sau mua hàng<br>&nbsp;&nbsp;+ Danh sách sản phẩm yêu thích |
+| **Nguyễn Thị Huyền** | Team Member | Vẽ Use Case và Mockup cho:<br>&nbsp;&nbsp;+ Quản lý tài khoản<br>&nbsp;&nbsp;+ Hiển thị sản phẩm<br>&nbsp;&nbsp;+ Tìm kiếm sản phẩm<br>&nbsp;&nbsp;+ Bộ lọc/phân loại sản phẩm<br>&nbsp;&nbsp;+ Quản lý giỏ hàng |
 
-| Item                     | Type       | Data                                                            | Description                  |
-| ------------------------ | ---------- | --------------------------------------------------------------- | ---------------------------- |
-| **Bộ lọc trạng thái**    | Select     | Mới / Đang xử lý / Đã giải quyết / Đóng                         | Lọc theo trạng thái          |
-| **Bộ lọc phân loại**     | Select     | Sản phẩm / Dịch vụ / Giao hàng / Thanh toán / Khác              | Lọc theo loại khiếu nại      |
-| **Ô tìm kiếm**           | Input      | Tìm theo mã, tên khách, số điện thoại                           | Tìm nhanh                    |
-| **Bảng danh sách**       | Table      | Mã, Khách, Loại, Trạng thái, Ngày tạo, Cập nhật, Mức ưu tiên... | Danh sách phản hồi/khiếu nại |
-| **Badge mức độ ưu tiên** | Badge      | Thấp / Trung bình / Cao                                         | Nhấn mạnh độ ưu tiên         |
-| **Nút xem chi tiết**     | Button     | Xem chi tiết                                                    | Mở chi tiết phản hồi         |
-| **Phân trang**           | Pagination | Điều hướng trang                                                | Điều hướng danh sách         |
+---
 
-#### 1.1.3 Hành động và xử lý:
+# 4. INTRODUCTION
 
-| Action Name                     | Description                                                                             | Success                                                     | Failure                                               |
-| ------------------------------- | --------------------------------------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------- |
-| **Hiển thị danh sách phản hồi** | Hiển thị danh sách kèm lọc/tìm kiếm và phân trang, sắp xếp theo thời gian tạo/cập nhật. | Danh sách chính xác, lọc/tìm kiếm mượt, phân trang ổn định. | Không tải được dữ liệu, lọc/tìm kiếm không hoạt động. |
+## 4.1. Purpose
 
-### 1.2 XEM CHI TIẾT PHẢN HỒI
+Tài liệu này mô tả chi tiết các yêu cầu chức năng và phi chức năng của hệ thống "Quản lý đặt hàng sản phẩm mô hình". Tài liệu tập trung làm rõ 2-3 mục đích chính sau:
 
-#### 1.2.1 Thông tin màn hình:
+1. **Định nghĩa yêu cầu hệ thống**: Mô tả đầy đủ các chức năng, ràng buộc kỹ thuật, và giao diện của hệ thống quản lý bán hàng trực tuyến cho shop mô hình.
 
-| Screen        | Chi tiết phản hồi/khiếu nại     |
-| ------------- | ------------------------------- |
-| Description   | Xem nội dung và thông tin khách |
-| Screen Access | Từ danh sách, chọn Xem chi tiết |
+2. **Cơ sở triển khai dự án**: Cung cấp tài liệu tham khảo chuẩn cho đội ngũ phát triển, kiểm thử và các bên liên quan trong quá trình xây dựng hệ thống.
 
-#### 1.2.2 Chi tiết thành phần màn hình:
+3. **Phương tiện trao đổi với khách hàng**: Trình bày tổng quan về hệ thống để khách hàng (chủ shop) xác nhận, đóng góp ý kiến và điều chỉnh yêu cầu trước khi triển khai.
 
-| Item                        | Type     | Data                                           | Description         |
-| --------------------------- | -------- | ---------------------------------------------- | ------------------- |
-| **Thông tin khách hàng**    | Card     | Họ tên, SĐT, Email, Mã đơn (nếu có)            | Hồ sơ khách         |
-| **Chi tiết phản hồi**       | Card     | Chủ đề, Nội dung, Ảnh đính kèm                 | Nội dung khiếu nại  |
-| **Trạng thái**              | Badge    | Mới / Đang xử lý / Đã giải quyết / Đóng        | Trạng thái hiện tại |
-| **Phân loại**               | Badge    | Sản phẩm / Dịch vụ / Giao hàng / Thanh toán... | Loại khiếu nại      |
-| **Cam kết thời gian trả lời** | Text   | Cam kết trả lời trong X ngày                    | Hiển thị cam kết    |
-| **Progress bar tiến độ**   | Progress | Tiến độ xử lý                                   | Hiển thị tiến độ    |
-| **Lịch sử xử lý**           | Timeline | Mốc thời gian, Người xử lý, Hành động, Ghi chú | Lịch sử tiến trình  |
-| **Nút trả lời**             | Button   | Trả lời                                        | Mở form trả lời     |
-| **Nút cập nhật trạng thái** | Button   | Cập nhật trạng thái                            | Mở modal cập nhật   |
+Tài liệu tuân thủ chuẩn IEEE 830-1998 cho Software Requirements Specification (SRS).
 
-#### 1.2.3 Hành động và xử lý:
+## 4.2. In Scope
 
-| Action Name               | Description                                                     | Success                                       | Failure                      |
-| ------------------------- | --------------------------------------------------------------- | --------------------------------------------- | ---------------------------- |
-| **Xem chi tiết phản hồi** | Hiển thị đầy đủ nội dung, phân loại, trạng thái, lịch sử xử lý. Hệ thống hiển thị cam kết thời gian trả lời (ví dụ: "Cam kết trả lời trong 3 ngày") và progress bar tiến độ xử lý để user biết bao giờ được phản hồi. | Thông tin đầy đủ, rõ ràng, trích xuất ảnh OK. Cam kết thời gian và progress bar hiển thị chính xác. | Thiếu nội dung, lỗi ảnh/tệp. Cam kết thời gian và progress bar không hiển thị. |
+Hệ thống "Quản lý đặt hàng sản phẩm mô hình" là một nền tảng web-based e-commerce được thiết kế đặc biệt cho việc bán và quản lý các sản phẩm mô hình (Gundam, Figure, mô hình xe, máy bay, tàu chiến, v.v.).
 
-### 1.3 TRẢ LỜI PHẢN HỒI
+### Các module chính trong phạm vi dự án:
 
-#### 1.3.1 Thông tin màn hình:
+#### **Dành cho Khách hàng (User)**
+- **Quản lý tài khoản**: Đăng ký, đăng nhập, cập nhật thông tin cá nhân
+- **Quản lý sản phẩm**: Tìm kiếm, lọc, xem chi tiết sản phẩm mô hình
+- **Quản lý đơn hàng**: Đặt hàng, thanh toán online (VNPay, MoMo, ZaloPay, Viettel Money), theo dõi trạng thái đơn hàng
+- **Đặt trước sản phẩm**: Yêu cầu đặt trước các mô hình chưa phát hành hoặc hiếm
+- **Đánh giá & tương tác**: Đánh giá sản phẩm, viết bài review, tương tác với cộng đồng
+- **Hỗ trợ khách hàng**: Chat real-time, gửi yêu cầu hỗ trợ, khiếu nại
+- **Danh sách yêu thích**: Lưu sản phẩm quan tâm
 
-| Screen        | Trả lời phản hồi/khiếu nại            |
-| ------------- | ------------------------------------- |
-| Description   | Gửi phản hồi đến khách qua email/push |
-| Screen Access | Từ chi tiết phản hồi                  |
+#### **Dành cho Quản trị viên (Admin)**
+- **Quản lý sản phẩm**: CRUD sản phẩm, quản lý danh mục, tồn kho
+- **Quản lý đơn hàng**: Xử lý, cập nhật trạng thái, quản lý vận chuyển
+- **Quản lý khách hàng**: Xem thông tin, lịch sử mua hàng
+- **Quản lý yêu cầu đặt trước**: Xác nhận, báo giá, liên hệ khách hàng
+- **Xử lý phản hồi/khiếu nại**: Tiếp nhận và giải quyết yêu cầu hỗ trợ
+- **Báo cáo & thống kê**: Doanh thu, sản phẩm bán chạy, khách hàng
+- **Quản lý khuyến mãi**: Tạo mã giảm giá, chương trình khuyến mãi
+- **Quản lý bài viết**: Duyệt, chỉnh sửa nội dung từ cộng đồng
+- **Cài đặt hệ thống**: Cấu hình thanh toán, vận chuyển, thông báo
 
-#### 1.3.2 Chi tiết thành phần màn hình:
+### Đối tượng sử dụng:
+- **Admin (Chủ shop)**: Quản lý toàn bộ hoạt động kinh doanh
+- **User (Khách hàng)**: Mua sắm và tương tác với hệ thống
 
-| Item                 | Type   | Data                             | Description        |
-| -------------------- | ------ | -------------------------------- | ------------------ |
-| **Form trả lời**     | Form   | Tiêu đề, Nội dung, File đính kèm | Soạn phản hồi      |
-| **Kênh gửi**         | Select | Email / Push                     | Chọn kênh gửi      |
-| **Nút gửi phản hồi** | Button | Gửi phản hồi                     | Gửi đến khách hàng |
+### Lợi ích chính:
+- Tự động hóa quy trình bán hàng và quản lý đơn hàng
+- Tăng trải nghiệm khách hàng với giao diện thân thiện, tìm kiếm nhanh
+- Hỗ trợ nhiều phương thức thanh toán phổ biến tại Việt Nam
+- Báo cáo chi tiết giúp chủ shop ra quyết định kinh doanh
+- Xây dựng cộng đồng yêu thích mô hình thông qua tính năng bài viết & đánh giá
 
-#### 1.3.3 Hành động và xử lý:
+## 4.3. Out of Scope
 
-| Action Name                | Description                                                  | Success                                 | Failure                            |
-| -------------------------- | ------------------------------------------------------------ | --------------------------------------- | ---------------------------------- |
-| **Gửi phản hồi cho khách** | Gửi phản hồi kèm nội dung/đính kèm, lưu bản sao vào lịch sử. Hệ thống cập nhật progress bar tiến độ xử lý và thông báo cho user về thời gian cam kết trả lời. | Khách nhận được, lịch sử lưu chính xác. Progress bar được cập nhật. | Không gửi được, không lưu lịch sử. Progress bar không được cập nhật. |
+Những tính năng **KHÔNG** nằm trong phạm vi phiên bản hiện tại:
 
-### 1.4 CẬP NHẬT TRẠNG THÁI XỬ LÝ
+- Ứng dụng mobile native (iOS/Android)
+- Tích hợp với hệ thống kho hàng/ERP bên ngoài
+- Thanh toán quốc tế (PayPal, Stripe)
+- Đa ngôn ngữ (chỉ hỗ trợ Tiếng Việt)
+- Live streaming bán hàng
+- Chatbot AI tự động
+- Tích hợp mạng xã hội (đăng nhập Facebook/Google)
+- Multi-vendor marketplace (chỉ hỗ trợ 1 shop)
 
-#### 1.4.1 Thông tin màn hình:
+---
 
-| Screen        | Cập nhật trạng thái xử lý                                |
-| ------------- | -------------------------------------------------------- |
-| Description   | Chuyển trạng thái: Mới → Đang xử lý → Đã giải quyết/Đóng |
-| Screen Access | Từ chi tiết phản hồi                                     |
+## Tóm tắt các điểm đã chỉnh sửa:
 
-#### 1.4.2 Chi tiết thành phần màn hình:
+### ✅ Document History
+- **Gộp lại các mục ngày 11-10-2025** để tránh lặp lại ngày tháng
+- **Bổ sung nội dung chi tiết** cho phiên bản 3.0
+- Làm rõ từng thay đổi trong mỗi lần cập nhật
 
-| Item                      | Type  | Data                                      | Description           |
-| ------------------------- | ----- | ----------------------------------------- | --------------------- |
-| **Modal trạng thái**      | Modal | Trạng thái mới, Người xử lý, Ghi chú      | Xác nhận thay đổi     |
-| **Mẫu phản hồi kết thúc** | Form  | Lý do kết thúc, Hướng dẫn/đền bù (nếu có) | Chuẩn hóa đóng ticket |
+### ✅ Reference Documents
+- **Viết lại description rõ ràng hơn**, tránh lặp từ "là tài liệu"
+- Thêm ý nghĩa và mục đích của từng phiên bản
 
-#### 1.4.3 Hành động và xử lý:
+### ✅ Distribution List
+- **Thêm cột "Role"** để phân biệt vai trò
+- **Format lại danh sách modules** dễ đọc hơn với bullet points
+- Cải thiện trình bày để dễ theo dõi
 
-| Action Name             | Description                                      | Success                                     | Failure                         |
-| ----------------------- | ------------------------------------------------ | ------------------------------------------- | ------------------------------- |
-| **Cập nhật trạng thái** | Lưu trạng thái mới và thêm bản ghi vào Timeline. | Trạng thái cập nhật chuẩn, Timeline đầy đủ. | Không lưu được, Timeline thiếu. |
+### ✅ Introduction - 4.1 Purpose
+- **Viết lại hoàn toàn** với cấu trúc rõ ràng, ngắn gọn hơn
+- **Liệt kê 2-3 mục đích chính** thay vì văn dài dòng
+- Thêm chuẩn IEEE 830-1998 để tăng tính chuyên nghiệp
 
-### 1.5 PHÂN LOẠI KHIẾU NẠI
-
-#### 1.5.1 Thông tin màn hình:
-
-| Screen        | Phân loại khiếu nại                  |
-| ------------- | ------------------------------------ |
-| Description   | Gắn nhãn/nhóm để phân tích & báo cáo |
-| Screen Access | Từ chi tiết phản hồi                 |
-
-#### 1.5.2 Chi tiết thành phần màn hình:
-
-| Item                  | Type   | Data                                        | Description        |
-| --------------------- | ------ | ------------------------------------------- | ------------------ |
-| **Chọn phân loại**    | Select | Sản phẩm / Dịch vụ / Giao hàng / Thanh toán | Gắn nhãn           |
-| **Nút lưu phân loại** | Button | Lưu                                         | Lưu loại khiếu nại |
-
-#### 1.5.3 Hành động và xử lý:
-
-| Action Name       | Description                                               | Success                                 | Failure                   |
-| ----------------- | --------------------------------------------------------- | --------------------------------------- | ------------------------- |
-| **Lưu phân loại** | Lưu loại khiếu nại để phục vụ thống kê & tối ưu quy trình | Loại lưu thành công, xuất báo cáo được. | Không lưu được phân loại. |
+### ✅ Introduction - 4.2 In Scope
+- **Thêm danh sách rõ ràng các modules chính** theo từng đối tượng người dùng
+- **Bổ sung phần "Lợi ích chính"** để làm rõ giá trị của hệ thống
+- **Thêm phần 4.3 Out of Scope** để định rõ ranh giới dự án (theo best practice SRS)
+- Loại bỏ bullet points không cần thiết, tránh lặp "quản lý bán hàng, đặt hàng"
