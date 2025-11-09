@@ -1,90 +1,238 @@
 # TỔNG HỢP CHỨC NĂNG
 
-_Dựa trên tài liệu yêu cầu KH-20_RO.MD - Chức năng tìm kiếm sản phẩm của User_
+_Dựa trên tài liệu yêu cầu KH-20_RO.MD - Chức năng quản lý đơn hàng của User_
 
 ## MỤC LỤC
 
-1. [Chức năng tìm kiếm sản phẩm](#1-chức-năng-tìm-kiếm-sản-phẩm)
-   - 1.1 [Tìm kiếm sản phẩm](#11-tìm-kiếm-sản-phẩm)
-   - 1.2 [Hiển thị kết quả tìm kiếm](#12-hiển-thị-kết-quả-tìm-kiếm)
+1. [Chức năng quản lý đơn hàng](#1-chức-năng-quản-lý-đơn-hàng)
+   - 1.1 [Hiển thị danh sách đơn hàng](#11-hiển-thị-danh-sách-đơn-hàng)
+   - 1.2 [Xem chi tiết đơn hàng](#12-xem-chi-tiết-đơn-hàng)
+   - 1.3 [Đặt lại đơn hàng](#13-đặt-lại-đơn-hàng)
+   - 1.4 [Đánh giá đơn hàng](#14-đánh-giá-đơn-hàng)
+   - 1.5 [Hủy đơn hàng](#15-hủy-đơn-hàng)
+   - 1.6 [Theo dõi đơn hàng](#16-theo-dõi-đơn-hàng)
+   - 1.7 [Yêu cầu đổi/trả hàng](#17-yêu-cầu-đổi-trả-hàng)
 
 ---
 
-## 1. CHỨC NĂNG TÌM KIẾM SẢN PHẨM
+## 1. CHỨC NĂNG QUẢN LÝ ĐƠN HÀNG
 
-### 1.1 TÌM KIẾM SẢN PHẨM
+### 1.1 HIỂN THỊ DANH SÁCH ĐƠN HÀNG
 
 #### 1.1.1 Thông tin màn hình:
 
-| Screen        | Tìm kiếm mô hình                                                                        |
-| ------------- | --------------------------------------------------------------------------------------- |
-| Description   | Tìm kiếm mô hình theo tên, thương hiệu, thể loại hoặc từ khóa                           |
-| Screen Access | User chọn **Tìm kiếm** trên sidebar hoặc truy cập trực tiếp từ URL với tham số tìm kiếm |
+| Screen        | Danh sách đơn hàng                                        |
+| ------------- | --------------------------------------------------------- |
+| Description   | Hiển thị danh sách đơn hàng đã đặt hàng / đã hủy đặt hàng |
+| Screen Access | Từ trang tài khoản, click "Xem lịch sử giao dịch"         |
 
 #### 1.1.2 Chi tiết thành phần màn hình:
 
-| Item                     | Type          | Data                                                                                      | Description                                          |
-| ------------------------ | ------------- | ----------------------------------------------------------------------------------------- | ---------------------------------------------------- |
-| **Tiêu đề trang**        | Text          | Tìm kiếm mô hình                                                                          | Tiêu đề chính của trang tìm kiếm                     |
-| **Mô tả chức năng**      | Text          | Tìm kiếm mô hình theo tên, thương hiệu, thể loại hoặc từ khóa                             | Mô tả ngắn gọn về mục đích của trang                 |
-| **Nút quay lại**         | Button        | Quay lại                                                                                  | Nút để quay lại trang trước                          |
-| **Thanh tìm kiếm**       | Input (Text)  | Tìm kiếm mô hình, thương hiệu, thể loại...                                                | Ô nhập liệu chính để tìm kiếm sản phẩm               |
-| **Nút xóa tìm kiếm**     | Button (Icon) | ×                                                                                         | Nút để xóa nội dung tìm kiếm                         |
-| **Gợi ý tìm kiếm**       | Dropdown      | Danh sách gợi ý<br>Icon loại<br>Tên gợi ý<br>Badge phân loại<br>Số lượng                  | Danh sách gợi ý tìm kiếm khi người dùng nhập từ khóa (autocomplete real-time) |
-| **Tìm kiếm gần đây**     | Button Group  | Clock icon<br>Từ khóa tìm kiếm gần đây                                                    | Hiển thị các từ khóa đã tìm kiếm gần đây             |
-| **Bộ lọc thể loại**      | Dropdown      | Tất cả<br>Gundam<br>Figure<br>Mô hình xe<br>Máy bay<br>Tàu chiến<br>Khác                  | Lọc kết quả tìm kiếm theo thể loại                   |
-| **Bộ lọc thương hiệu**   | Dropdown      | Tất cả<br>Bandai<br>Good Smile Company<br>Tamiya<br>Hasegawa<br>Kotobukiya<br>Max Factory | Lọc kết quả tìm kiếm theo thương hiệu                |
-| **Sắp xếp kết quả**      | Dropdown      | Liên quan<br>Giá thấp<br>Giá cao<br>Đánh giá<br>Mới nhất                                  | Sắp xếp kết quả tìm kiếm theo tiêu chí               |
-| **Thông báo trạng thái** | Text          | Nhập từ khóa để tìm kiếm<br>Tìm kiếm mô hình yêu thích                                    | Thông báo hướng dẫn khi chưa có từ khóa tìm kiếm     |
+| Item                    | Type      | Data                                                    | Description                              |
+| ----------------------- | --------- | ------------------------------------------------------- | ---------------------------------------- |
+| **Tiêu đề trang**       | Text      | Lịch sử đơn hàng                                        | Tiêu đề chính của trang                  |
+| **Bộ lọc trạng thái**   | Select    | Tất cả, Chờ xử lý, Đang giao hàng, Đã giao hàng, Đã hủy, Đã hoàn tiền, Hoàn tiền một phần | Dropdown để lọc đơn hàng theo trạng thái |
+| **Bộ lọc thời gian**    | Select    | 7 ngày qua, 30 ngày qua, 3 tháng qua, Tất cả            | Dropdown để lọc đơn hàng theo thời gian  |
+| **Tìm kiếm đơn hàng**   | Input     | Nhập mã đơn hàng                                        | Input để tìm kiếm đơn hàng theo mã       |
+| **Danh sách đơn hàng**  | Card List | Hiển thị từng đơn hàng                                  | Danh sách các đơn hàng                   |
+| **Mã đơn hàng**         | Text      | Mã đơn hàng                                             | Mã định danh duy nhất của đơn hàng       |
+| **Ngày đặt hàng**       | Text      | Ngày đặt hàng                                           | Ngày tạo đơn hàng                        |
+| **Trạng thái đơn hàng** | Badge     | Trạng thái hiện tại                                     | Badge hiển thị trạng thái đơn hàng       |
+| **Tổng tiền**           | Text      | Tổng tiền đơn hàng (VNĐ)                                | Tổng tiền của đơn hàng                   |
+| **Nút xem chi tiết**    | Button    | Xem chi tiết                                            | Nút để xem chi tiết đơn hàng             |
+| **Nút đặt lại**         | Button    | Đặt lại                                                 | Nút để đặt lại đơn hàng                  |
 
 #### 1.1.3 Hành động và xử lý:
 
-| Action Name                         | Description                                                                                                                                                                                                                                                                                                                                                                                                         | Success                                                                                                                              | Failure                                                                                                               |
-| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------- |
-| **Tìm kiếm sản phẩm**               | Cho phép người dùng tìm kiếm sản phẩm theo các tiêu chí khác nhau. Hỗ trợ tìm kiếm theo tên sản phẩm, thương hiệu (hãng), series, scale, chất liệu. Tìm kiếm real-time khi người dùng nhập từ khóa. Hiển thị kết quả tìm kiếm ngay lập tức và cập nhật danh sách sản phẩm. Hỗ trợ tìm kiếm từ URL với tham số query. Lưu trữ lịch sử tìm kiếm gần đây để người dùng có thể truy cập nhanh.                          | Hiển thị danh sách sản phẩm phù hợp với từ khóa tìm kiếm. Tìm kiếm nhanh và chính xác theo các tiêu chí đã chọn.                     | Không tìm thấy sản phẩm nào phù hợp với từ khóa tìm kiếm. Lỗi khi thực hiện tìm kiếm do vấn đề kết nối hoặc dữ liệu.  |
-| **Hiển thị gợi ý tìm kiếm**         | Cung cấp danh sách gợi ý tìm kiếm khi người dùng nhập từ khóa (autocomplete real-time). Hệ thống tự động gợi ý khi người dùng nhập từ khóa, không cần chờ submit. Bao gồm gợi ý theo tên sản phẩm, thương hiệu và thể loại. Hiển thị icon phân loại và số lượng sản phẩm cho mỗi gợi ý. Cho phép click vào gợi ý để thực hiện tìm kiếm ngay lập tức. Tự động ẩn/hiện gợi ý dựa trên việc focus vào ô tìm kiếm và nội dung đã nhập.                                                                                     | Hiển thị danh sách gợi ý phù hợp với từ khóa đã nhập (autocomplete real-time). Người dùng có thể click để tìm kiếm nhanh.                                     | Không có gợi ý nào phù hợp với từ khóa. Gợi ý hiển thị không chính xác hoặc bị lỗi. Autocomplete không hoạt động real-time.                                   |
-| **Quản lý lịch sử tìm kiếm**        | Lưu trữ và hiển thị các từ khóa tìm kiếm gần đây của người dùng. Giới hạn tối đa 5 từ khóa gần nhất. Hiển thị với icon đồng hồ và cho phép click để tìm kiếm lại. Tự động cập nhật danh sách khi có tìm kiếm mới. Chỉ hiển thị khi không có từ khóa đang nhập.                                                                                                                                                      | Lịch sử tìm kiếm được lưu trữ và hiển thị chính xác. Người dùng có thể tìm kiếm lại từ lịch sử.                                      | Không thể lưu trữ lịch sử tìm kiếm. Lịch sử hiển thị không chính xác hoặc bị mất.                                     |
-| **Lọc và sắp xếp kết quả tìm kiếm** | Cung cấp các bộ lọc để người dùng có thể lọc kết quả tìm kiếm theo nhu cầu. Bao gồm bộ lọc theo thể loại (Gundam, Figure, Mô hình xe, Máy bay, Tàu chiến, Khác). Bộ lọc theo thương hiệu (Bandai, Good Smile Company, Tamiya, Hasegawa, Kotobukiya, Max Factory). Sắp xếp theo độ liên quan, giá (thấp đến cao, cao đến thấp), đánh giá, ngày phát hành. Tự động cập nhật kết quả khi thay đổi bộ lọc hoặc sắp xếp. | Hiển thị kết quả tìm kiếm đã được lọc và sắp xếp theo tiêu chí đã chọn. Bộ lọc hoạt động chính xác và cập nhật kết quả ngay lập tức. | Bộ lọc không hoạt động hoặc hiển thị kết quả không chính xác. Lỗi khi áp dụng bộ lọc do vấn đề dữ liệu hoặc hệ thống. |
-| **Xóa nội dung tìm kiếm**           | Cho phép người dùng xóa nhanh nội dung đang nhập trong ô tìm kiếm. Hiển thị nút "×" khi có nội dung trong ô tìm kiếm. Khi click sẽ xóa toàn bộ nội dung và reset về trạng thái ban đầu. Tự động ẩn gợi ý và xóa kết quả tìm kiếm khi xóa nội dung.                                                                                                                                                                  | Nội dung tìm kiếm được xóa thành công. Giao diện trở về trạng thái ban đầu.                                                          | Không thể xóa nội dung tìm kiếm. Giao diện không được reset về trạng thái ban đầu.                                    |
+| Action Name                      | Description                                                                                                                                                                                                                                           | Success                                                                                   | Failure                                                                                                       |
+| -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| **Hiển thị danh sách đơn hàng**  | Hiển thị tất cả đơn hàng của người dùng với thông tin cơ bản bao gồm mã đơn hàng, ngày đặt hàng, trạng thái, tổng tiền. Danh sách được sắp xếp theo thời gian đặt hàng mới nhất. Hỗ trợ phân trang để hiển thị nhiều đơn hàng.                        | Danh sách đơn hàng được hiển thị đầy đủ và chính xác. Giao diện rõ ràng và dễ sử dụng.    | Không thể hiển thị danh sách đơn hàng hoặc thông tin không chính xác. Giao diện bị lỗi hoặc không responsive. |
+| **Lọc đơn hàng theo trạng thái** | Cho phép người dùng lọc đơn hàng theo trạng thái cụ thể như Chờ xử lý, Đang giao hàng, Đã giao hàng, Đã hủy. Khi chọn trạng thái, danh sách sẽ chỉ hiển thị những đơn hàng có trạng thái tương ứng. Hỗ trợ chọn "Tất cả" để hiển thị tất cả đơn hàng. | Đơn hàng được lọc theo trạng thái chính xác. Danh sách được cập nhật ngay lập tức.        | Không thể lọc đơn hàng theo trạng thái hoặc kết quả lọc không chính xác. Danh sách không được cập nhật.       |
+| **Tìm kiếm đơn hàng**            | Cho phép người dùng tìm kiếm đơn hàng bằng cách nhập mã đơn hàng vào ô tìm kiếm. Hệ thống sẽ tìm kiếm và hiển thị đơn hàng có mã phù hợp. Tìm kiếm hỗ trợ tìm kiếm một phần của mã đơn hàng.                                                          | Đơn hàng được tìm thấy chính xác và hiển thị trong danh sách. Tìm kiếm hoạt động mượt mà. | Không thể tìm kiếm đơn hàng hoặc kết quả tìm kiếm không chính xác. Tìm kiếm không hoạt động hoặc chậm.        |
 
-### 1.2 HIỂN THỊ KẾT QUẢ TÌM KIẾM
+### 1.2 XEM CHI TIẾT ĐƠN HÀNG
 
 #### 1.2.1 Thông tin màn hình:
 
-| Screen        | Kết quả tìm kiếm                                                          |
-| ------------- | ------------------------------------------------------------------------- |
-| Description   | Hiển thị danh sách sản phẩm phù hợp với nội dung tìm kiếm của khách hàng  |
-| Screen Access | Tự động hiển thị sau khi người dùng nhập từ khóa tìm kiếm hoặc chọn gợi ý |
+| Screen        | Chi tiết đơn hàng                                   |
+| ------------- | --------------------------------------------------- |
+| Description   | Xem chi tiết đơn hàng đã đặt hàng / đã hủy đặt hàng |
+| Screen Access | Từ danh sách đơn hàng, click "Xem chi tiết"         |
 
 #### 1.2.2 Chi tiết thành phần màn hình:
 
-| Item                           | Type          | Data                                                                                        | Description                                                 |
-| ------------------------------ | ------------- | ------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
-| **Tiêu đề kết quả**            | Text          | Kết quả tìm kiếm cho "từ khóa"<br>Tìm thấy X kết quả                                        | Tiêu đề hiển thị từ khóa tìm kiếm và số lượng kết quả       |
-| **Thống kê kết quả**           | Text + Icon   | TrendingUp icon<br>X mô hình                                                                | Thông tin số lượng kết quả tìm được                         |
-| **Danh sách sản phẩm**         | Grid          | Hình ảnh<br>Tên sản phẩm<br>Thông tin cơ bản<br>Đánh giá<br>Giá<br>Tình trạng<br>Thao tác   | Hiển thị các sản phẩm tìm được dưới dạng lưới               |
-| **Hình ảnh sản phẩm**          | Image         | Ảnh đại diện của sản phẩm                                                                   | Hình ảnh chính của sản phẩm                                 |
-| **Badge trạng thái**           | Badge         | Mới<br>Bán chạy<br>Giảm giá (-X%)                                                           | Các nhãn hiển thị trạng thái đặc biệt của sản phẩm          |
-| **Nút yêu thích**              | Button (Icon) | Heart (Thêm/xóa khỏi danh sách yêu thích)                                                   | Nút để thêm hoặc xóa sản phẩm khỏi danh sách yêu thích      |
-| **Tên sản phẩm**               | Text          | Gundam RX-78-2                                                                              | Tên của sản phẩm                                            |
-| **Thông tin cơ bản**           | Text          | Bandai • Mobile Suit Gundam • 1/144                                                         | Thông tin về thương hiệu, series và tỷ lệ                   |
-| **Đánh giá**                   | Text + Icon   | ⭐ 4.8 (1250)                                                                               | Điểm đánh giá và số lượng đánh giá                          |
-| **Giá sản phẩm**               | Text          | 890.000 VNĐ<br>~~1.200.000 VNĐ~~                                                            | Giá hiện tại và giá gốc (nếu có giảm giá)                   |
-| **Tình trạng kho**             | Text          | Còn hàng (50)<br>Hết hàng                                                                   | Thông tin về số lượng tồn kho                               |
-| **Nút xem chi tiết**           | Button        | Xem                                                                                         | Nút để xem thông tin chi tiết của sản phẩm                  |
-| **Nút thêm giỏ hàng**          | Button        | Mua                                                                                         | Nút để thêm sản phẩm vào giỏ hàng                           |
-| **Thông báo không có kết quả** | Card          | Không tìm thấy mô hình<br>Không có mô hình nào phù hợp với từ khóa "từ khóa"<br>Xóa bộ lọc  | Hiển thị khi không có sản phẩm phù hợp với từ khóa tìm kiếm |
-| **Thể loại mô hình**           | Card          | Tiêu đề: Thể loại mô hình<br>Mô tả: Khám phá mô hình theo thể loại<br>Grid các nút thể loại | Hiển thị các thể loại mô hình để người dùng khám phá        |
-| **Nút thể loại**               | Button        | Package icon<br>Tên thể loại                                                                | Nút để lọc theo thể loại cụ thể                             |
+| Item                     | Type      | Data                                     | Description                          |
+| ------------------------ | --------- | ---------------------------------------- | ------------------------------------ |
+| **Tiêu đề trang**        | Text      | Chi tiết đơn hàng                        | Tiêu đề chính của trang              |
+| **Mã đơn hàng**          | Text      | Mã đơn hàng                              | Mã định danh duy nhất của đơn hàng   |
+| **Trạng thái đơn hàng**  | Badge     | Trạng thái hiện tại                      | Badge hiển thị trạng thái đơn hàng   |
+| **Thông tin khách hàng** | Card      | Thông tin người đặt hàng                 | Thông tin khách hàng                 |
+| **Danh sách sản phẩm**   | Card List | Hiển thị sản phẩm trong đơn hàng         | Danh sách sản phẩm trong đơn hàng    |
+| **Hình ảnh sản phẩm**    | Image     | Hình ảnh sản phẩm                        | Hình ảnh đại diện của sản phẩm       |
+| **Tên sản phẩm**         | Text      | Tên sản phẩm                             | Tên đầy đủ của sản phẩm              |
+| **Số lượng**             | Text      | Số lượng sản phẩm                        | Số lượng sản phẩm trong đơn hàng     |
+| **Giá sản phẩm**         | Text      | Giá sản phẩm (VNĐ)                       | Giá của từng sản phẩm                |
+| **Tổng tiền sản phẩm**   | Text      | Tổng tiền sản phẩm (VNĐ)                 | Tổng tiền của từng sản phẩm          |
+| **Thông tin giao hàng**  | Card      | Thông tin người nhận và địa chỉ          | Thông tin giao hàng                  |
+| **Thông tin thanh toán** | Card      | Phương thức và trạng thái thanh toán     | Thông tin thanh toán                 |
+| **Tóm tắt đơn hàng**     | Card      | Tạm tính, phí vận chuyển, giảm giá, tổng | Tóm tắt chi phí đơn hàng             |
+| **Lịch sử trạng thái**   | Timeline  | Timeline các trạng thái (bao gồm trạng thái hoàn tiền)                  | Hiển thị lịch sử thay đổi trạng thái |
 
 #### 1.2.3 Hành động và xử lý:
 
-| Action Name                               | Description                                                                                                                                                                                                                                                                                                                                                                             | Success                                                                                                               | Failure                                                                                                                   |
-| ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| **Hiển thị kết quả tìm kiếm**             | Hiển thị danh sách sản phẩm phù hợp với nội dung tìm kiếm của khách hàng. Bao gồm thông tin chi tiết về từng sản phẩm như hình ảnh, tên, thông tin cơ bản (thương hiệu, series, tỷ lệ), đánh giá, giá cả và tình trạng kho. Hiển thị số lượng kết quả tìm được và từ khóa đã tìm kiếm. Cung cấp các thao tác nhanh như xem chi tiết, thêm vào giỏ hàng và thêm vào danh sách yêu thích. | Hiển thị danh sách sản phẩm phù hợp với từ khóa tìm kiếm. Thông tin sản phẩm được hiển thị đầy đủ và chính xác.       | Không tìm thấy sản phẩm nào phù hợp với từ khóa tìm kiếm. Lỗi khi tải dữ liệu kết quả tìm kiếm từ hệ thống.               |
-| **Thêm sản phẩm vào danh sách yêu thích** | Cho phép người dùng thêm hoặc xóa sản phẩm khỏi danh sách yêu thích từ kết quả tìm kiếm. Hiển thị trạng thái yêu thích bằng icon Heart với màu sắc khác nhau. Lưu trữ danh sách yêu thích trong session hoặc localStorage. Thông báo thành công khi thêm/xóa sản phẩm khỏi danh sách yêu thích.                                                                                         | Sản phẩm được thêm/xóa khỏi danh sách yêu thích thành công. Trạng thái yêu thích được cập nhật và hiển thị chính xác. | Không thể thêm/xóa sản phẩm khỏi danh sách yêu thích do lỗi hệ thống. Trạng thái yêu thích không được cập nhật chính xác. |
-| **Thêm sản phẩm vào giỏ hàng**            | Cho phép người dùng thêm sản phẩm vào giỏ hàng trực tiếp từ kết quả tìm kiếm. Kiểm tra tình trạng tồn kho trước khi cho phép thêm vào giỏ hàng. Vô hiệu hóa nút "Mua" khi sản phẩm hết hàng. Thông báo thành công khi thêm sản phẩm vào giỏ hàng.                                                                                                                                       | Sản phẩm được thêm vào giỏ hàng thành công. Thông báo xác nhận được hiển thị cho người dùng.                          | Không thể thêm sản phẩm vào giỏ hàng do hết hàng hoặc lỗi hệ thống. Thông báo lỗi được hiển thị cho người dùng.           |
-| **Xem chi tiết sản phẩm**                 | Cho phép người dùng xem thông tin chi tiết của sản phẩm từ kết quả tìm kiếm. Chuyển hướng đến trang chi tiết sản phẩm với ID tương ứng. Giữ nguyên thông tin tìm kiếm để người dùng có thể quay lại kết quả tìm kiếm.                                                                                                                                                                   | Chuyển hướng đến trang chi tiết sản phẩm thành công. Thông tin tìm kiếm được giữ nguyên để quay lại.                  | Không thể chuyển đến trang chi tiết sản phẩm. Lỗi khi tải thông tin sản phẩm.                                             |
-| **Hiển thị thông báo không có kết quả**   | Hiển thị thông báo khi không tìm thấy sản phẩm nào phù hợp với từ khóa tìm kiếm. Bao gồm icon Package, tiêu đề "Không tìm thấy mô hình", mô tả chi tiết về từ khóa không tìm thấy và nút "Xóa bộ lọc" để reset về trạng thái ban đầu. Cung cấp hướng dẫn cho người dùng về cách tìm kiếm hiệu quả hơn.                                                                                  | Hiển thị thông báo không có kết quả với thông tin rõ ràng và hướng dẫn cho người dùng.                                | Thông báo không có kết quả hiển thị không chính xác hoặc không có hướng dẫn cho người dùng.                               |
-| **Khám phá theo thể loại**                | Cung cấp danh sách các thể loại mô hình để người dùng có thể khám phá và tìm kiếm theo thể loại cụ thể. Hiển thị dưới dạng grid các nút với icon Package và tên thể loại. Khi click vào thể loại sẽ tự động lọc kết quả theo thể loại đó và xóa từ khóa tìm kiếm hiện tại. Bao gồm các thể loại: Gundam, Figure, Mô hình xe, Máy bay, Tàu chiến, Khác.                                  | Hiển thị danh sách thể loại mô hình với giao diện trực quan. Người dùng có thể click để lọc theo thể loại.            | Không thể hiển thị danh sách thể loại. Chức năng lọc theo thể loại không hoạt động.                                       |
-| **Xóa bộ lọc và reset**                   | Cho phép người dùng xóa tất cả bộ lọc và reset về trạng thái ban đầu khi không có kết quả tìm kiếm. Xóa từ khóa tìm kiếm, reset các bộ lọc về "Tất cả" và xóa kết quả tìm kiếm. Đưa giao diện về trạng thái ban đầu để người dùng có thể thực hiện tìm kiếm mới.                                                                                                                        | Tất cả bộ lọc được xóa và giao diện được reset về trạng thái ban đầu thành công.                                      | Không thể xóa bộ lọc hoặc reset giao diện. Một số bộ lọc vẫn được giữ nguyên sau khi reset.                               |
+| Action Name                     | Description                                                                                                                                                                                                                              | Success                                                                                                            | Failure                                                                                                                 |
+| ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
+| **Hiển thị chi tiết đơn hàng**  | Hiển thị đầy đủ thông tin chi tiết của đơn hàng bao gồm thông tin khách hàng, danh sách sản phẩm, thông tin giao hàng, thông tin thanh toán, tóm tắt đơn hàng, và lịch sử trạng thái. Tất cả thông tin được trình bày rõ ràng và dễ đọc. | Chi tiết đơn hàng được hiển thị đầy đủ và chính xác. Giao diện rõ ràng và dễ đọc.                                  | Không thể hiển thị chi tiết đơn hàng hoặc thông tin không chính xác. Giao diện khó đọc hoặc thiếu thông tin quan trọng. |
+| **Hiển thị lịch sử trạng thái** | Hiển thị timeline các thay đổi trạng thái của đơn hàng theo thời gian thực tế. Bao gồm thời gian thay đổi, trạng thái cũ và mới (bao gồm trạng thái hoàn tiền như "Đã hoàn tiền", "Hoàn tiền một phần"), và người thực hiện thay đổi. Timeline được sắp xếp theo thứ tự thời gian và dễ theo dõi.                | Lịch sử trạng thái được hiển thị đầy đủ và chính xác theo timeline, bao gồm cả trạng thái hoàn tiền. Thông tin được sắp xếp rõ ràng và dễ theo dõi. | Lịch sử trạng thái không được hiển thị đầy đủ hoặc không chính xác. Timeline không được sắp xếp đúng hoặc khó theo dõi. Trạng thái hoàn tiền không được hiển thị. |
+
+### 1.3 ĐẶT LẠI ĐƠN HÀNG
+
+#### 1.3.1 Thông tin màn hình:
+
+| Screen        | Đặt lại đơn hàng                             |
+| ------------- | -------------------------------------------- |
+| Description   | Cho phép người dùng đặt lại đơn hàng đã mua  |
+| Screen Access | Từ danh sách đơn hàng hoặc chi tiết đơn hàng |
+
+#### 1.3.2 Chi tiết thành phần màn hình:
+
+| Item                     | Type   | Data                                        | Description                      |
+| ------------------------ | ------ | ------------------------------------------- | -------------------------------- |
+| **Nút đặt lại**          | Button | Đặt lại                                     | Nút để đặt lại đơn hàng          |
+| **Modal xác nhận**       | Dialog | Xác nhận đặt lại đơn hàng                   | Dialog để xác nhận đặt lại       |
+| **Thông báo xác nhận**   | Text   | Bạn có chắc chắn muốn đặt lại đơn hàng này? | Thông báo xác nhận               |
+| **Nút xác nhận**         | Button | Xác nhận                                    | Nút để xác nhận đặt lại          |
+| **Nút hủy**              | Button | Hủy                                         | Nút để hủy đặt lại               |
+| **Thông báo thành công** | Toast  | Đã thêm sản phẩm vào giỏ hàng               | Thông báo khi đặt lại thành công |
+| **Thông báo lỗi**        | Toast  | Không thể đặt lại đơn hàng                  | Thông báo khi có lỗi xảy ra      |
+
+#### 1.3.3 Hành động và xử lý:
+
+| Action Name          | Description                                                                                                                                                                                                                                                                                      | Success                                                                                                                 | Failure                                                                                                                 |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| **Đặt lại đơn hàng** | Cho phép người dùng đặt lại đơn hàng đã mua trước đó bằng cách thêm tất cả sản phẩm trong đơn hàng vào giỏ hàng với số lượng tương ứng. Hệ thống sẽ kiểm tra tồn kho của sản phẩm và chỉ thêm những sản phẩm còn hàng. Sau khi đặt lại thành công, người dùng sẽ được chuyển đến trang giỏ hàng. | Đơn hàng được đặt lại thành công và sản phẩm được thêm vào giỏ hàng. Người dùng được chuyển đến trang giỏ hàng.         | Không thể đặt lại đơn hàng hoặc sản phẩm không được thêm vào giỏ hàng. Người dùng không được chuyển đến trang giỏ hàng. |
+| **Kiểm tra tồn kho** | Hệ thống tự động kiểm tra tồn kho của từng sản phẩm trong đơn hàng cũ trước khi đặt lại. Nếu sản phẩm hết hàng hoặc không đủ số lượng, hệ thống sẽ hiển thị thông báo và chỉ thêm những sản phẩm còn hàng.                                                                                       | Tồn kho được kiểm tra chính xác và thông báo được hiển thị khi cần thiết. Chỉ sản phẩm còn hàng được thêm vào giỏ hàng. | Không thể kiểm tra tồn kho hoặc thông tin tồn kho không chính xác. Sản phẩm hết hàng vẫn được thêm vào giỏ hàng.        |
+
+### 1.4 ĐÁNH GIÁ ĐƠN HÀNG
+
+#### 1.4.1 Thông tin màn hình:
+
+| Screen        | Đánh giá đơn hàng                                       |
+| ------------- | ------------------------------------------------------- |
+| Description   | Cho phép người dùng đánh giá sao và reviews về sản phẩm |
+| Screen Access | Từ chi tiết đơn hàng đã giao hàng                       |
+
+#### 1.4.2 Chi tiết thành phần màn hình:
+
+| Item                     | Type        | Data                            | Description                           |
+| ------------------------ | ----------- | ------------------------------- | ------------------------------------- |
+| **Nút đánh giá**         | Button      | Đánh giá sản phẩm               | Nút để mở form đánh giá               |
+| **Modal đánh giá**       | Dialog      | Đánh giá sản phẩm               | Dialog để đánh giá sản phẩm           |
+| **Tên sản phẩm**         | Text        | Tên sản phẩm                    | Tên sản phẩm cần đánh giá             |
+| **Hình ảnh sản phẩm**    | Image       | Hình ảnh sản phẩm               | Hình ảnh đại diện của sản phẩm        |
+| **Đánh giá sao**         | Star Rating | 1-5 sao                         | Component để đánh giá bằng sao        |
+| **Nhận xét**             | Textarea    | Nhận xét về sản phẩm            | Textarea để nhập nhận xét             |
+| **Upload hình ảnh**      | File Input  | Upload hình ảnh                 | Input để upload hình ảnh đánh giá     |
+| **Nút gửi đánh giá**     | Button      | Gửi đánh giá                    | Nút để gửi đánh giá                   |
+| **Nút hủy**              | Button      | Hủy                             | Nút để hủy đánh giá                   |
+| **Thông báo thành công** | Toast       | Đánh giá đã được gửi thành công | Thông báo khi gửi đánh giá thành công |
+
+#### 1.4.3 Hành động và xử lý:
+
+| Action Name                  | Description                                                                                                                                                                                                                                             | Success                                                                                              | Failure                                                                                                    |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| **Đánh giá sản phẩm**        | Cho phép người dùng đánh giá sản phẩm bằng cách chọn số sao (1-5), nhập nhận xét, và upload hình ảnh (tùy chọn). Đánh giá chỉ có thể thực hiện sau khi đơn hàng đã được giao hàng thành công. Hệ thống sẽ lưu đánh giá và hiển thị trên trang sản phẩm. | Đánh giá được gửi thành công và hiển thị trên trang sản phẩm. Thông báo xác nhận được hiển thị.      | Không thể gửi đánh giá hoặc đánh giá không được hiển thị trên trang sản phẩm. Thông báo lỗi được hiển thị. |
+| **Upload hình ảnh đánh giá** | Cho phép người dùng upload hình ảnh để minh họa cho đánh giá của mình. Hệ thống hỗ trợ upload nhiều hình ảnh và tự động resize để tối ưu hiệu suất. Hình ảnh được lưu trữ an toàn và hiển thị trong đánh giá.                                           | Hình ảnh được upload thành công và hiển thị trong đánh giá. Upload hoạt động mượt mà và nhanh chóng. | Không thể upload hình ảnh hoặc hình ảnh không được hiển thị trong đánh giá. Upload chậm hoặc bị lỗi.       |
+
+### 1.5 HỦY ĐƠN HÀNG
+
+#### 1.5.1 Thông tin màn hình:
+
+| Screen        | Hủy đơn hàng                                                                       |
+| ------------- | ---------------------------------------------------------------------------------- |
+| Description   | Cho phép người dùng hủy đơn hàng nếu đơn hàng chưa vào trạng thái "đang giao hàng" |
+| Screen Access | Từ chi tiết đơn hàng có trạng thái phù hợp                                         |
+
+#### 1.5.2 Chi tiết thành phần màn hình:
+
+| Item                     | Type     | Data                                    | Description                           |
+| ------------------------ | -------- | --------------------------------------- | ------------------------------------- |
+| **Nút hủy đơn hàng**     | Button   | Hủy đơn hàng                            | Nút để hủy đơn hàng                   |
+| **Modal xác nhận**       | Dialog   | Xác nhận hủy đơn hàng                   | Dialog để xác nhận hủy đơn hàng       |
+| **Thông báo xác nhận**   | Text     | Bạn có chắc chắn muốn hủy đơn hàng này? | Thông báo xác nhận                    |
+| **Lý do hủy đơn hàng**   | Select   | Lý do hủy đơn hàng                      | Dropdown để chọn lý do hủy            |
+| **Lý do chi tiết**       | Textarea | Nhập lý do hủy chi tiết (bắt buộc)     | Textarea để nhập lý do hủy tự do      |
+| **Ghi chú**              | Textarea | Ghi chú thêm                            | Textarea để nhập ghi chú              |
+| **Nút xác nhận hủy**     | Button   | Xác nhận hủy                            | Nút để xác nhận hủy đơn hàng          |
+| **Nút hủy**              | Button   | Hủy                                     | Nút để hủy thao tác                   |
+| **Thông báo thành công** | Toast    | Đơn hàng đã được hủy thành công         | Thông báo khi hủy đơn hàng thành công |
+| **Thông báo lỗi**        | Toast    | Không thể hủy đơn hàng                  | Thông báo khi có lỗi xảy ra           |
+
+#### 1.5.3 Hành động và xử lý:
+
+| Action Name                | Description                                                                                                                                                                                                                                              | Success                                                                                                 | Failure                                                                                           |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| **Hủy đơn hàng**           | Cho phép người dùng hủy đơn hàng nếu đơn hàng chưa vào trạng thái "Đang giao hàng". Khi hủy đơn hàng, người dùng cần chọn lý do hủy và nhập lý do chi tiết (bắt buộc) bằng văn bản tự do. Hệ thống sẽ cập nhật trạng thái đơn hàng thành "Đã hủy" và hoàn tiền nếu đã thanh toán. Trạng thái hoàn tiền sẽ được cập nhật thành "Đã hoàn tiền" hoặc "Hoàn tiền một phần" tùy theo tình huống. | Đơn hàng được hủy thành công và trạng thái được cập nhật. Hoàn tiền được xử lý đúng cách và trạng thái hoàn tiền được cập nhật. | Không thể hủy đơn hàng hoặc trạng thái không được cập nhật. Hoàn tiền không được xử lý đúng cách. Lý do hủy chi tiết chưa được nhập. |
+| **Kiểm tra điều kiện hủy** | Hệ thống tự động kiểm tra điều kiện để cho phép hủy đơn hàng. Chỉ những đơn hàng có trạng thái "Chờ xử lý" hoặc "Đã xác nhận" mới có thể được hủy. Đơn hàng đã vào trạng thái "Đang giao hàng" không thể hủy.                                            | Điều kiện hủy được kiểm tra chính xác và nút hủy được hiển thị/ẩn đúng cách.                            | Điều kiện hủy không được kiểm tra chính xác hoặc nút hủy được hiển thị khi không được phép.       |
+
+### 1.6 THEO DÕI ĐƠN HÀNG
+
+#### 1.6.1 Thông tin màn hình:
+
+| Screen        | Theo dõi đơn hàng                                                                                 |
+| ------------- | ------------------------------------------------------------------------------------------------- |
+| Description   | Cho phép người dùng theo dõi tình trạng đơn hàng mình đang ở đâu cũng như trạng thái của đơn hàng |
+| Screen Access | Từ danh sách đơn hàng hoặc chi tiết đơn hàng                                                      |
+
+#### 1.6.2 Chi tiết thành phần màn hình:
+
+| Item                     | Type         | Data                        | Description                                 |
+| ------------------------ | ------------ | --------------------------- | ------------------------------------------- |
+| **Tiêu đề theo dõi**     | Text         | Theo dõi đơn hàng           | Tiêu đề của trang theo dõi                  |
+| **Mã đơn hàng**          | Text         | Mã đơn hàng                 | Mã định danh duy nhất của đơn hàng          |
+| **Trạng thái hiện tại**  | Badge        | Trạng thái hiện tại         | Badge hiển thị trạng thái đơn hàng          |
+| **Timeline trạng thái**  | Timeline     | Timeline các trạng thái     | Hiển thị lịch sử thay đổi trạng thái        |
+| **Thông tin vận chuyển** | Card         | Thông tin vận chuyển        | Thông tin về quá trình vận chuyển           |
+| **Mã vận đơn**           | Text         | Mã vận đơn                  | Mã vận đơn để theo dõi                      |
+| **Địa chỉ giao hàng**    | Text         | Địa chỉ giao hàng           | Địa chỉ nhận hàng                           |
+| **Thời gian dự kiến**    | Text         | Thời gian giao hàng dự kiến | Thời gian dự kiến nhận hàng                 |
+| **Nút liên hệ hỗ trợ**   | Button       | Liên hệ hỗ trợ              | Nút để liên hệ hỗ trợ khi cần thiết         |
+| **Thông báo cập nhật**   | Notification | Thông báo khi có cập nhật   | Thông báo real-time khi trạng thái thay đổi |
+
+#### 1.6.3 Hành động và xử lý:
+
+| Action Name                      | Description                                                                                                                                                                                                                                                     | Success                                                                                                            | Failure                                                                                                                |
+| -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
+| **Hiển thị trạng thái đơn hàng** | Hiển thị trạng thái hiện tại của đơn hàng và timeline các thay đổi trạng thái theo thời gian. Bao gồm các trạng thái: Chờ xử lý, Đã xác nhận, Đang chuẩn bị, Đang giao hàng, Đã giao hàng. Mỗi trạng thái được hiển thị với thời gian cụ thể và mô tả chi tiết. | Trạng thái đơn hàng được hiển thị chính xác và timeline được cập nhật real-time. Giao diện rõ ràng và dễ theo dõi. | Trạng thái đơn hàng không được hiển thị chính xác hoặc timeline không được cập nhật real-time. Giao diện khó theo dõi. |
+| **Thông báo cập nhật real-time** | Hệ thống tự động gửi thông báo real-time khi có thay đổi trạng thái đơn hàng. Thông báo có thể được gửi qua email, SMS, hoặc push notification tùy theo cài đặt của người dùng.                                                                                 | Thông báo cập nhật được gửi real-time và chính xác. Người dùng nhận được thông tin đầy đủ về thay đổi trạng thái.  | Thông báo cập nhật không được gửi real-time hoặc không chính xác. Người dùng không nhận được thông tin về thay đổi.    |
+
+### 1.7 YÊU CẦU ĐỔI/TRẢ HÀNG
+
+#### 1.7.1 Thông tin màn hình:
+
+| Screen        | Yêu cầu đổi/trả hàng                                             |
+| ------------- | ---------------------------------------------------------------- |
+| Description   | Cho phép người dùng gửi yêu cầu đổi hàng / trả hàng đến chủ shop |
+| Screen Access | Từ chi tiết đơn hàng đã giao hàng                                |
+
+#### 1.7.2 Chi tiết thành phần màn hình:
+
+| Item                     | Type       | Data                           | Description                          |
+| ------------------------ | ---------- | ------------------------------ | ------------------------------------ |
+| **Nút yêu cầu đổi/trả**  | Button     | Yêu cầu đổi/trả hàng           | Nút để mở form yêu cầu               |
+| **Modal yêu cầu**        | Dialog     | Yêu cầu đổi/trả hàng           | Dialog để gửi yêu cầu                |
+| **Loại yêu cầu**         | Select     | Đổi hàng, Trả hàng             | Dropdown để chọn loại yêu cầu        |
+| **Sản phẩm**             | Select     | Chọn sản phẩm cần đổi/trả      | Dropdown để chọn sản phẩm            |
+| **Lý do**                | Select     | Lý do đổi/trả hàng             | Dropdown để chọn lý do               |
+| **Mô tả chi tiết**       | Textarea   | Mô tả chi tiết về vấn đề       | Textarea để mô tả chi tiết           |
+| **Upload hình ảnh**      | File Input | Upload hình ảnh minh chứng     | Input để upload hình ảnh             |
+| **Nút gửi yêu cầu**      | Button     | Gửi yêu cầu                    | Nút để gửi yêu cầu                   |
+| **Nút hủy**              | Button     | Hủy                            | Nút để hủy yêu cầu                   |
+| **Thông báo thành công** | Toast      | Yêu cầu đã được gửi thành công | Thông báo khi gửi yêu cầu thành công |
+
+#### 1.7.3 Hành động và xử lý:
+
+| Action Name                    | Description                                                                                                                                                                                                                                                       | Success                                                                                                           | Failure                                                                                                        |
+| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| **Gửi yêu cầu đổi/trả hàng**   | Cho phép người dùng gửi yêu cầu đổi hàng hoặc trả hàng với thông tin chi tiết bao gồm loại yêu cầu, sản phẩm, lý do, mô tả chi tiết, và hình ảnh minh chứng. Yêu cầu sẽ được gửi đến admin để xử lý và người dùng sẽ nhận được phản hồi trong thời gian sớm nhất. | Yêu cầu đổi/trả hàng được gửi thành công và admin nhận được thông báo. Người dùng nhận được xác nhận gửi yêu cầu. | Không thể gửi yêu cầu đổi/trả hàng hoặc admin không nhận được thông báo. Người dùng không nhận được xác nhận.  |
+| **Upload hình ảnh minh chứng** | Cho phép người dùng upload hình ảnh để minh chứng cho yêu cầu đổi/trả hàng của mình. Hình ảnh có thể là ảnh sản phẩm bị lỗi, ảnh hóa đơn, hoặc các bằng chứng khác. Hệ thống hỗ trợ upload nhiều hình ảnh và tự động resize để tối ưu hiệu suất.                  | Hình ảnh minh chứng được upload thành công và hiển thị trong yêu cầu. Upload hoạt động mượt mà và nhanh chóng.    | Không thể upload hình ảnh minh chứng hoặc hình ảnh không được hiển thị trong yêu cầu. Upload chậm hoặc bị lỗi. |
