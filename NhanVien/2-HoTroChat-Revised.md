@@ -1,194 +1,193 @@
 # TỔNG HỢP CHỨC NĂNG
 
-_Dựa trên tài liệu yêu cầu KH-20_RO.MD - Chức năng đánh giá nâng cao của User_
+_Dựa trên tài liệu yêu cầu KH-20_RO.MD - Chức năng hỗ trợ / liên hệ của User_
 
 ## MỤC LỤC
 
-1. [Chức năng đánh giá nâng cao](#1-chức-năng-đánh-giá-nâng-cao)
-   - 1.1 [Đánh giá sản phẩm](#11-đánh-giá-sản-phẩm)
-   - 1.2 [Viết review](#12-viết-review)
-   - 1.3 [Xem đánh giá](#13-xem-đánh-giá)
-   - 1.4 [Quản lý đánh giá của tôi](#14-quản-lý-đánh-giá-của-tôi)
-   - 1.5 [Tương tác với đánh giá](#15-tương-tác-với-đánh-giá)
+1. [Chức năng hỗ trợ / liên hệ](#1-chức-năng-hỗ-trợ--liên-hệ)
+   - 1.1 [Chat hỗ trợ](#11-chat-hỗ-trợ)
+   - 1.2 [Gửi phản hồi/khiếu nại](#12-gửi-phản-hồikhiếu-nại)
+   - 1.3 [Quản lý yêu cầu hỗ trợ](#13-quản-lý-yêu-cầu-hỗ-trợ)
+   - 1.4 [Câu hỏi thường gặp](#14-câu-hỏi-thường-gặp)
+   - 1.5 [Thông tin liên hệ](#15-thông-tin-liên-hệ)
 
 ---
 
-## 1. CHỨC NĂNG ĐÁNH GIÁ NÂNG CAO
+## 1. CHỨC NĂNG HỖ TRỢ / LIÊN HỆ
 
-### 1.1 ĐÁNH GIÁ SẢN PHẨM
+### 1.1 CHAT HỖ TRỢ
 
 #### 1.1.1 Thông tin màn hình:
 
-| Screen        | Đánh giá sản phẩm                              |
-| ------------- | ---------------------------------------------- |
-| Description   | Cho điểm từ 1-5 sao (chỉ khách đã mua)         |
-| Screen Access | Từ trang đánh giá hoặc trang chi tiết sản phẩm |
+| Screen        | Chat hỗ trợ                              |
+| ------------- | ---------------------------------------- |
+| Description   | Liên hệ trực tiếp với admin/chủ shop     |
+| Screen Access | Từ trang hỗ trợ với tab "Chat trực tiếp" |
 
 #### 1.1.2 Chi tiết thành phần màn hình:
 
-| Item                      | Type        | Data                            | Description                    |
-| ------------------------- | ----------- | ------------------------------- | ------------------------------ |
-| **Tiêu đề đánh giá**      | Text        | Đánh giá sản phẩm               | Tiêu đề của trang đánh giá     |
-| **Icon đánh giá**         | Icon        | Star                            | Icon đại diện cho đánh giá     |
-| **Sản phẩm cần đánh giá** | Card        | Danh sách sản phẩm chờ đánh giá | Hiển thị sản phẩm chờ đánh giá |
-| **Hình ảnh sản phẩm**     | Image       | Hình ảnh sản phẩm               | Hình ảnh của sản phẩm          |
-| **Tên sản phẩm**          | Text        | Tên sản phẩm                    | Tên đầy đủ của sản phẩm        |
-| **Ngày mua**              | Text        | Ngày mua sản phẩm               | Ngày mua sản phẩm              |
-| **Mã đơn hàng**           | Text        | Mã đơn hàng                     | Mã định danh của đơn hàng      |
-| **Hệ thống sao**          | Star Rating | 1-5 sao                         | Hệ thống đánh giá bằng sao     |
-| **Sao 1**                 | Star        | 1 sao                           | Đánh giá 1 sao                 |
-| **Sao 2**                 | Star        | 2 sao                           | Đánh giá 2 sao                 |
-| **Sao 3**                 | Star        | 3 sao                           | Đánh giá 3 sao                 |
-| **Sao 4**                 | Star        | 4 sao                           | Đánh giá 4 sao                 |
-| **Sao 5**                 | Star        | 5 sao                           | Đánh giá 5 sao                 |
-| **Nút đánh giá**          | Button      | Đánh giá                        | Nút để bắt đầu đánh giá        |
+| Item                    | Type      | Data                                        | Description                      |
+| ----------------------- | --------- | ------------------------------------------- | -------------------------------- |
+| **Tiêu đề chat**        | Text      | Chat trực tiếp với nhân viên hỗ trợ         | Tiêu đề của khu vực chat         |
+| **Icon chat**           | Icon      | MessageSquare                               | Icon đại diện cho chat           |
+| **Mô tả chat**          | Text      | Nhân viên hỗ trợ sẽ phản hồi trong vài phút | Mô tả về thời gian phản hồi      |
+| **Khu vực tin nhắn**    | Container | Hiển thị tin nhắn                           | Khu vực hiển thị cuộc trò chuyện |
+| **Lịch sử chat**        | List      | Danh sách tin nhắn đã lưu                   | Hiển thị lịch sử chat đã lưu     |
+| **Tìm kiếm trong chat** | Input     | Tìm kiếm trong lịch sử chat                 | Ô tìm kiếm tin nhắn trong chat   |
+| **Nút export chat**     | Button    | Xuất lịch sử chat                           | Nút để export lịch sử chat       |
+| **Tin nhắn người dùng** | Message   | Tin nhắn từ người dùng                      | Tin nhắn do người dùng gửi       |
+| **Tin nhắn hỗ trợ**     | Message   | Tin nhắn từ nhân viên hỗ trợ                | Tin nhắn do nhân viên hỗ trợ gửi |
+| **Thời gian tin nhắn**  | Text      | Thời gian gửi tin nhắn                      | Thời gian gửi tin nhắn           |
+| **Trạng thái đã đọc**   | Badge     | Đã đọc / Chưa đọc                           | Trạng thái đã đọc tin nhắn       |
+| **Ô nhập tin nhắn**     | Textarea  | Nhập tin nhắn                               | Ô để nhập tin nhắn               |
+| **Nút gửi tin nhắn**    | Button    | Gửi                                         | Nút để gửi tin nhắn              |
+| **Icon gửi**            | Icon      | Send                                        | Icon đại diện cho gửi            |
+| **Trạng thái kết nối**  | Badge     | Đang kết nối / Đã kết nối                   | Trạng thái kết nối với hỗ trợ    |
 
 #### 1.1.3 Hành động và xử lý:
 
-| Action Name                        | Description                                                                                                                                                                                                                          | Success                                                                                                                    | Failure                                                                                                                            |
-| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| **Hiển thị sản phẩm chờ đánh giá** | Hiển thị danh sách các sản phẩm mà người dùng đã mua nhưng chưa đánh giá. Chỉ những khách hàng đã mua sản phẩm mới có thể đánh giá. Hệ thống kiểm tra lịch sử mua hàng để xác định quyền đánh giá.                                   | Danh sách sản phẩm chờ đánh giá được hiển thị đầy đủ và chính xác. Hệ thống kiểm tra quyền đánh giá đúng cách.             | Danh sách sản phẩm chờ đánh giá không được hiển thị đầy đủ hoặc không chính xác. Hệ thống không kiểm tra quyền đánh giá đúng cách. |
-| **Chọn điểm đánh giá**             | Cho phép người dùng chọn điểm đánh giá từ 1-5 sao bằng cách click vào các ngôi sao. Hệ thống hiển thị trực quan điểm đánh giá đã chọn và cho phép thay đổi trước khi gửi đánh giá.                                                   | Điểm đánh giá được chọn thành công và hiển thị trực quan. Người dùng có thể thay đổi điểm đánh giá dễ dàng.                | Điểm đánh giá không được chọn thành công hoặc không được hiển thị trực quan. Người dùng không thể thay đổi điểm đánh giá.          |
-| **Xác thực quyền đánh giá**        | Hệ thống tự động xác thực quyền đánh giá của người dùng dựa trên lịch sử mua hàng. Chỉ những khách hàng đã mua sản phẩm mới có thể đánh giá. Hệ thống kiểm tra trạng thái đơn hàng và thời gian mua hàng để xác định quyền đánh giá. | Quyền đánh giá được xác thực chính xác và chỉ cho phép khách hàng đã mua đánh giá. Hệ thống kiểm tra đầy đủ các điều kiện. | Quyền đánh giá không được xác thực chính xác hoặc cho phép người chưa mua đánh giá. Hệ thống không kiểm tra đầy đủ các điều kiện.  |
+| Action Name              | Description                                                                                                                                                          | Success                                                                                                              | Failure                                                                                                                                         |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Kết nối chat hỗ trợ**  | Cho phép người dùng kết nối trực tiếp với nhân viên hỗ trợ để được hỗ trợ ngay lập tức. Hệ thống sẽ thiết lập kết nối chat real-time và hiển thị trạng thái kết nối. Tất cả tin nhắn được lưu trữ trong lịch sử chat để có thể xem lại sau. | Kết nối chat hỗ trợ thành công và trạng thái kết nối được hiển thị. Nhân viên hỗ trợ có thể phản hồi trong vài phút. Lịch sử chat được lưu trữ. | Kết nối chat hỗ trợ không thành công hoặc trạng thái kết nối không được hiển thị. Nhân viên hỗ trợ không thể phản hồi trong thời gian mong đợi. Lịch sử chat không được lưu trữ. |
+| **Gửi tin nhắn**         | Cho phép người dùng gửi tin nhắn đến nhân viên hỗ trợ để mô tả vấn đề hoặc câu hỏi cần hỗ trợ. Tin nhắn sẽ được gửi ngay lập tức, hiển thị trong cuộc trò chuyện và được lưu vào lịch sử chat.  | Tin nhắn được gửi thành công và hiển thị trong cuộc trò chuyện. Thời gian gửi được ghi nhận chính xác. Tin nhắn được lưu vào lịch sử.               | Tin nhắn không được gửi thành công hoặc không hiển thị trong cuộc trò chuyện. Thời gian gửi không được ghi nhận chính xác. Tin nhắn không được lưu vào lịch sử.                      |
+| **Nhận tin nhắn hỗ trợ** | Cho phép người dùng nhận tin nhắn phản hồi từ nhân viên hỗ trợ. Tin nhắn sẽ được hiển thị trong cuộc trò chuyện với thời gian và trạng thái đã đọc, đồng thời được lưu vào lịch sử chat.                  | Tin nhắn hỗ trợ được nhận và hiển thị chính xác trong cuộc trò chuyện. Trạng thái đã đọc được cập nhật đúng cách. Tin nhắn được lưu vào lịch sử.    | Tin nhắn hỗ trợ không được nhận hoặc không hiển thị chính xác trong cuộc trò chuyện. Trạng thái đã đọc không được cập nhật đúng cách. Tin nhắn không được lưu vào lịch sử.           |
+| **Xem lịch sử chat**     | Cho phép người dùng xem lại lịch sử chat đã lưu trữ, bao gồm tất cả tin nhắn đã gửi và nhận. Hệ thống hỗ trợ tìm kiếm trong lịch sử chat để tìm tin nhắn cụ thể. | Lịch sử chat được hiển thị đầy đủ và chính xác. Tìm kiếm trong chat hoạt động tốt. | Lịch sử chat không được hiển thị đầy đủ hoặc không chính xác. Tìm kiếm trong chat không hoạt động. |
+| **Export lịch sử chat**  | Cho phép người dùng xuất lịch sử chat ra file (CSV, TXT) để lưu trữ hoặc in. Hệ thống hỗ trợ export toàn bộ hoặc theo khoảng thời gian. | Lịch sử chat được export thành công. File được tạo đúng định dạng. | Không thể export lịch sử chat. File được tạo không đúng định dạng. |
 
-### 1.2 VIẾT REVIEW
+### 1.2 GỬI PHẢN HỒI/KHIẾU NẠI
 
 #### 1.2.1 Thông tin màn hình:
 
-| Screen        | Viết review                                                                               |
-| ------------- | ----------------------------------------------------------------------------------------- |
-| Description   | Nhận xét chi tiết về chất lượng mô hình (chỉ khách đã mua) có thể đính kèm ảnh hoặc video |
-| Screen Access | Từ trang đánh giá sau khi chọn sản phẩm cần đánh giá                                      |
+| Screen        | Gửi phản hồi/khiếu nại                           |
+| ------------- | ------------------------------------------------ |
+| Description   | Gửi phản hồi hoặc khiếu nại về dịch vụ, sản phẩm |
+| Screen Access | Từ trang hỗ trợ với tab "Yêu cầu hỗ trợ"         |
 
 #### 1.2.2 Chi tiết thành phần màn hình:
 
-| Item                         | Type        | Data                             | Description                       |
-| ---------------------------- | ----------- | -------------------------------- | --------------------------------- |
-| **Tiêu đề viết review**      | Text        | Viết đánh giá                    | Tiêu đề của trang viết review     |
-| **Thông tin sản phẩm**       | Card        | Thông tin sản phẩm đang đánh giá | Hiển thị thông tin sản phẩm       |
-| **Hình ảnh sản phẩm**        | Image       | Hình ảnh sản phẩm                | Hình ảnh của sản phẩm             |
-| **Tên sản phẩm**             | Text        | Tên sản phẩm                     | Tên đầy đủ của sản phẩm           |
-| **Hệ thống sao**             | Star Rating | 1-5 sao                          | Hệ thống đánh giá bằng sao        |
-| **Ô nhập nhận xét**          | Textarea    | Nhập nhận xét chi tiết           | Ô để nhập nhận xét chi tiết       |
-| **Upload ảnh**               | File Input  | Đính kèm ảnh                     | Nút để upload ảnh                 |
-| **Upload video**             | File Input  | Đính kèm video                   | Nút để upload video               |
-| **Danh sách file đã upload** | List        | Danh sách file đã upload         | Hiển thị danh sách file đã upload |
-| **Nút gửi đánh giá**         | Button      | Gửi đánh giá                     | Nút để gửi đánh giá               |
-| **Nút hủy**                  | Button      | Hủy                              | Nút để hủy viết đánh giá          |
-| **Thông báo lỗi**            | Alert       | Thông báo lỗi                    | Thông báo khi có lỗi              |
-| **Thông báo thành công**     | Alert       | Thông báo thành công             | Thông báo khi gửi thành công      |
+| Item                    | Type       | Data                        | Description                           |
+| ----------------------- | ---------- | --------------------------- | ------------------------------------- |
+| **Tiêu đề yêu cầu**     | Text       | Yêu cầu hỗ trợ              | Tiêu đề của trang yêu cầu hỗ trợ      |
+| **Icon yêu cầu**        | Icon       | FileText                    | Icon đại diện cho yêu cầu hỗ trợ      |
+| **Nút tạo yêu cầu mới** | Button     | Tạo yêu cầu hỗ trợ mới      | Nút để tạo yêu cầu hỗ trợ mới         |
+| **Form tạo yêu cầu**    | Form       | Form nhập thông tin yêu cầu | Form để nhập thông tin yêu cầu hỗ trợ |
+| **Tiêu đề yêu cầu**     | Input      | Tiêu đề yêu cầu             | Ô nhập tiêu đề yêu cầu                |
+| **Danh mục**            | Select     | Danh mục yêu cầu            | Dropdown chọn danh mục                |
+| **Mức độ ưu tiên**      | Select     | Mức độ ưu tiên              | Dropdown chọn mức độ ưu tiên          |
+| **Mô tả vấn đề**        | Textarea   | Mô tả chi tiết vấn đề       | Ô nhập mô tả chi tiết vấn đề          |
+| **Mã đơn hàng**         | Input      | Mã đơn hàng liên quan       | Ô nhập mã đơn hàng liên quan          |
+| **File đính kèm**       | File Input | Đính kèm file               | Nút để đính kèm file                  |
+| **Nút gửi yêu cầu**     | Button     | Gửi yêu cầu                 | Nút để gửi yêu cầu hỗ trợ             |
+| **Nút hủy**             | Button     | Hủy                         | Nút để hủy tạo yêu cầu                |
 
 #### 1.2.3 Hành động và xử lý:
 
-| Action Name                | Description                                                                                                                                                                                                                                          | Success                                                                                                                              | Failure                                                                                                                                                                |
-| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Nhập nhận xét chi tiết** | Cho phép người dùng nhập nhận xét chi tiết về chất lượng sản phẩm, trải nghiệm sử dụng, và các đánh giá khác. Ô nhập hỗ trợ nhiều dòng và có thể chứa nhiều ký tự để người dùng có thể mô tả đầy đủ trải nghiệm của mình.                            | Nhận xét chi tiết được nhập thành công và hiển thị đầy đủ. Ô nhập hoạt động mượt mà và không có lỗi.                                 | Nhận xét chi tiết không được nhập thành công hoặc không được hiển thị đầy đủ. Ô nhập hoạt động không mượt mà hoặc có lỗi.                                              |
-| **Upload ảnh và video**    | Cho phép người dùng đính kèm ảnh hoặc video để minh họa cho đánh giá của mình. Hệ thống hỗ trợ nhiều định dạng file và có giới hạn kích thước file. File được upload sẽ được hiển thị trong danh sách để người dùng có thể xem trước và xóa nếu cần. | File ảnh và video được upload thành công và hiển thị trong danh sách. Hệ thống hỗ trợ nhiều định dạng và giới hạn kích thước hợp lý. | File ảnh và video không được upload thành công hoặc không được hiển thị trong danh sách. Hệ thống không hỗ trợ đầy đủ định dạng hoặc giới hạn kích thước không hợp lý. |
-| **Gửi đánh giá**           | Khi người dùng hoàn thành việc nhập điểm đánh giá và nhận xét, hệ thống sẽ gửi đánh giá đến hệ thống để xử lý. Đánh giá sẽ được lưu trữ với trạng thái "Đang chờ duyệt" và chờ admin kiểm duyệt trước khi hiển thị công khai. Chỉ những đánh giá đã được duyệt mới hiển thị cho người dùng khác xem. Hệ thống gửi thông báo xác nhận khi đánh giá được gửi thành công và thông báo khi đánh giá được duyệt hoặc từ chối.   | Đánh giá được gửi thành công và lưu trữ trong hệ thống với trạng thái "Đang chờ duyệt". Thông báo xác nhận được hiển thị rõ ràng.                                    | Đánh giá không được gửi thành công hoặc không được lưu trữ trong hệ thống. Thông báo xác nhận không được hiển thị rõ ràng.                                             |
+| Action Name                | Description                                                                                                                                                                                                                      | Success                                                                                                                        | Failure                                                                                                                                                     |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Tạo yêu cầu hỗ trợ mới** | Cho phép người dùng tạo yêu cầu hỗ trợ mới bằng cách điền thông tin vào form bao gồm tiêu đề, danh mục, mức độ ưu tiên, mô tả vấn đề, và mã đơn hàng liên quan. Hệ thống sẽ tạo ticket hỗ trợ và gửi đến admin để xử lý.         | Yêu cầu hỗ trợ được tạo thành công và gửi đến admin. Form được điền đầy đủ thông tin và validation hoạt động đúng cách.        | Yêu cầu hỗ trợ không được tạo thành công hoặc không được gửi đến admin. Form không được điền đầy đủ thông tin hoặc validation không hoạt động đúng cách.    |
+| **Chọn danh mục yêu cầu**  | Cho phép người dùng chọn danh mục phù hợp cho yêu cầu hỗ trợ từ các danh mục có sẵn như đơn hàng, sản phẩm, thanh toán, vận chuyển, tài khoản, kỹ thuật, hoặc khác. Danh mục giúp admin phân loại và xử lý yêu cầu hiệu quả hơn. | Danh mục yêu cầu được chọn chính xác và phù hợp với vấn đề. Admin có thể phân loại và xử lý yêu cầu hiệu quả.                  | Danh mục yêu cầu không được chọn chính xác hoặc không phù hợp với vấn đề. Admin không thể phân loại và xử lý yêu cầu hiệu quả.                              |
+| **Đính kèm file**          | Cho phép người dùng đính kèm file để minh họa cho vấn đề cần hỗ trợ như hình ảnh, tài liệu, hoặc file log. Hệ thống hỗ trợ nhiều định dạng file và có giới hạn kích thước file.                                                  | File được đính kèm thành công và hiển thị trong danh sách. Hệ thống hỗ trợ nhiều định dạng file và giới hạn kích thước hợp lý. | File không được đính kèm thành công hoặc không hiển thị trong danh sách. Hệ thống không hỗ trợ đầy đủ định dạng file hoặc giới hạn kích thước không hợp lý. |
 
-### 1.3 XEM ĐÁNH GIÁ
+### 1.3 QUẢN LÝ YÊU CẦU HỖ TRỢ
 
 #### 1.3.1 Thông tin màn hình:
 
-| Screen        | Xem đánh giá                                                   |
-| ------------- | -------------------------------------------------------------- |
-| Description   | Xem danh sách reviews của khách hàng khác (ai cũng có thể xem) |
-| Screen Access | Từ trang chi tiết sản phẩm hoặc trang đánh giá                 |
+| Screen        | Quản lý yêu cầu hỗ trợ                   |
+| ------------- | ---------------------------------------- |
+| Description   | Quản lý các yêu cầu hỗ trợ đã gửi        |
+| Screen Access | Từ trang hỗ trợ với tab "Yêu cầu hỗ trợ" |
 
 #### 1.3.2 Chi tiết thành phần màn hình:
 
-| Item                         | Type        | Data                            | Description                        |
-| ---------------------------- | ----------- | ------------------------------- | ---------------------------------- |
-| **Tiêu đề đánh giá**         | Text        | Đánh giá sản phẩm               | Tiêu đề của trang đánh giá         |
-| **Số lượng đánh giá**        | Text        | Số lượng đánh giá từ khách hàng | Tổng số đánh giá hiện có           |
-| **Bộ lọc đánh giá**          | Filter      | Lọc theo điểm đánh giá          | Bộ lọc để tìm đánh giá theo điểm   |
-| **Sắp xếp đánh giá**         | Sort        | Sắp xếp theo thời gian / điểm   | Tùy chọn sắp xếp đánh giá          |
-| **Danh sách đánh giá**       | List        | Danh sách các đánh giá          | Hiển thị danh sách đánh giá        |
-| **Thông tin người đánh giá** | Card        | Thông tin người đánh giá        | Hiển thị thông tin người đánh giá  |
-| **Tên người dùng**           | Text        | Tên người dùng                  | Tên của người đánh giá             |
-| **Badge đã mua**             | Badge       | Đã mua                          | Badge xác nhận đã mua sản phẩm     |
-| **Điểm đánh giá**            | Star Rating | 1-5 sao                         | Điểm đánh giá của người dùng       |
-| **Ngày đánh giá**            | Text        | Ngày đánh giá                   | Thời gian đánh giá                 |
-| **Nội dung đánh giá**        | Text        | Nội dung đánh giá               | Nội dung chi tiết của đánh giá     |
-| **Ảnh đính kèm**             | Image       | Ảnh đính kèm                    | Ảnh được đính kèm trong đánh giá   |
-| **Video đính kèm**           | Video       | Video đính kèm                  | Video được đính kèm trong đánh giá |
-| **Nút hữu ích**              | Button      | Hữu ích                         | Nút để đánh dấu đánh giá hữu ích   |
-| **Số lượt hữu ích**          | Text        | Số lượt hữu ích                 | Số lượt đánh dấu hữu ích           |
+| Item                  | Type   | Data                         | Description                       |
+| --------------------- | ------ | ---------------------------- | --------------------------------- |
+| **Danh sách yêu cầu** | List   | Danh sách các yêu cầu hỗ trợ | Hiển thị danh sách yêu cầu hỗ trợ |
+| **Bộ lọc trạng thái** | Select | Lọc theo trạng thái          | Dropdown để lọc theo trạng thái   |
+| **Bộ lọc danh mục**   | Select | Lọc theo danh mục            | Dropdown để lọc theo danh mục     |
+| **Ô tìm kiếm**        | Input  | Tìm kiếm yêu cầu             | Ô để tìm kiếm yêu cầu             |
+| **Card yêu cầu**      | Card   | Thông tin yêu cầu hỗ trợ     | Card hiển thị thông tin yêu cầu   |
+| **Mã yêu cầu**        | Text   | Mã định danh yêu cầu         | Mã định danh của yêu cầu          |
+| **Tiêu đề yêu cầu**   | Text   | Tiêu đề yêu cầu              | Tiêu đề của yêu cầu               |
+| **Danh mục**          | Badge  | Danh mục yêu cầu             | Danh mục của yêu cầu              |
+| **Mức độ ưu tiên**    | Badge  | Mức độ ưu tiên               | Mức độ ưu tiên của yêu cầu        |
+| **Trạng thái**        | Badge  | Trạng thái xử lý             | Trạng thái hiện tại của yêu cầu   |
+| **Ngày tạo**          | Text   | Ngày tạo yêu cầu             | Thời gian tạo yêu cầu             |
+| **Ngày cập nhật**     | Text   | Ngày cập nhật cuối           | Thời gian cập nhật cuối           |
+| **Phản hồi admin**    | Text   | Phản hồi từ admin            | Phản hồi của admin về yêu cầu     |
+| **Nút xem chi tiết**  | Button | Xem chi tiết                 | Nút để xem chi tiết yêu cầu       |
 
 #### 1.3.3 Hành động và xử lý:
 
-| Action Name                     | Description                                                                                                                                                                                                                                              | Success                                                                                                    | Failure                                                                                                                        |
-| ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| **Hiển thị danh sách đánh giá** | Hiển thị danh sách đánh giá của các khách hàng khác với thông tin đầy đủ bao gồm tên người đánh giá, điểm đánh giá, nội dung đánh giá, và thời gian đánh giá. Chỉ hiển thị những đánh giá đã được admin duyệt (trạng thái "Đã duyệt"). Danh sách được sắp xếp theo thời gian hoặc điểm đánh giá tùy theo lựa chọn của người dùng. | Danh sách đánh giá được hiển thị đầy đủ và chính xác, chỉ bao gồm đánh giá đã được duyệt. Danh sách được sắp xếp theo lựa chọn của người dùng. | Danh sách đánh giá không được hiển thị đầy đủ hoặc không chính xác. Hiển thị cả đánh giá chưa được duyệt. Danh sách không được sắp xếp theo lựa chọn của người dùng. |
-| **Lọc và sắp xếp đánh giá**     | Cho phép người dùng lọc đánh giá theo điểm đánh giá (1-5 sao) và sắp xếp theo thời gian hoặc điểm đánh giá. Hệ thống cập nhật danh sách đánh giá ngay lập tức khi có thay đổi bộ lọc hoặc cách sắp xếp.                                                  | Đánh giá được lọc và sắp xếp chính xác theo lựa chọn của người dùng. Danh sách được cập nhật ngay lập tức. | Đánh giá không được lọc và sắp xếp chính xác theo lựa chọn của người dùng. Danh sách không được cập nhật ngay lập tức.         |
-| **Hiển thị đánh giá chi tiết**  | Hiển thị đầy đủ thông tin của từng đánh giá bao gồm thông tin người đánh giá, điểm đánh giá, nội dung đánh giá, ảnh/video đính kèm, và số lượt hữu ích. Thông tin được trình bày rõ ràng và dễ đọc.                                                      | Đánh giá chi tiết được hiển thị đầy đủ và chính xác. Thông tin được trình bày rõ ràng và dễ đọc.           | Đánh giá chi tiết không được hiển thị đầy đủ hoặc không chính xác. Thông tin không được trình bày rõ ràng hoặc khó đọc.        |
+| Action Name                    | Description                                                                                                                                                                                                                     | Success                                                                                                             | Failure                                                                                                                         |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| **Hiển thị danh sách yêu cầu** | Hiển thị danh sách tất cả các yêu cầu hỗ trợ mà người dùng đã gửi với thông tin đầy đủ bao gồm mã yêu cầu, tiêu đề, danh mục, mức độ ưu tiên, trạng thái, và thời gian tạo. Danh sách được sắp xếp theo thời gian tạo mới nhất. | Danh sách yêu cầu hỗ trợ được hiển thị đầy đủ và chính xác. Thông tin được trình bày rõ ràng và dễ đọc.             | Danh sách yêu cầu hỗ trợ không được hiển thị đầy đủ hoặc không chính xác. Thông tin không được trình bày rõ ràng hoặc khó đọc.  |
+| **Lọc và tìm kiếm yêu cầu**    | Cho phép người dùng lọc yêu cầu hỗ trợ theo trạng thái và danh mục, đồng thời tìm kiếm theo tiêu đề hoặc mô tả. Hệ thống sẽ cập nhật danh sách ngay lập tức khi có thay đổi bộ lọc hoặc từ khóa tìm kiếm.                       | Yêu cầu được lọc và tìm kiếm chính xác theo tiêu chí đã chọn. Danh sách được cập nhật ngay lập tức khi có thay đổi. | Yêu cầu không được lọc và tìm kiếm chính xác theo tiêu chí đã chọn. Danh sách không được cập nhật ngay lập tức khi có thay đổi. |
+| **Xem chi tiết yêu cầu**       | Cho phép người dùng xem chi tiết đầy đủ của yêu cầu hỗ trợ bao gồm mô tả vấn đề, phản hồi từ admin, thời gian tạo và cập nhật, và các file đính kèm. Thông tin được hiển thị rõ ràng và dễ đọc.                                 | Chi tiết yêu cầu được hiển thị đầy đủ và chính xác. Thông tin được trình bày rõ ràng và dễ đọc.                     | Chi tiết yêu cầu không được hiển thị đầy đủ hoặc không chính xác. Thông tin không được trình bày rõ ràng hoặc khó đọc.          |
 
-### 1.4 QUẢN LÝ ĐÁNH GIÁ CỦA TÔI
+### 1.4 CÂU HỎI THƯỜNG GẶP
 
 #### 1.4.1 Thông tin màn hình:
 
-| Screen        | Quản lý đánh giá của tôi                     |
-| ------------- | -------------------------------------------- |
-| Description   | Quản lý các đánh giá mà người dùng đã viết   |
-| Screen Access | Từ trang đánh giá với tab "Đánh giá của tôi" |
+| Screen        | Câu hỏi thường gặp                             |
+| ------------- | ---------------------------------------------- |
+| Description   | Hiển thị các câu hỏi thường gặp và câu trả lời |
+| Screen Access | Từ trang hỗ trợ với tab "Câu hỏi thường gặp"   |
 
 #### 1.4.2 Chi tiết thành phần màn hình:
 
-| Item                     | Type        | Data                           | Description                          |
-| ------------------------ | ----------- | ------------------------------ | ------------------------------------ |
-| **Tiêu đề quản lý**      | Text        | Đánh giá của tôi               | Tiêu đề của trang quản lý            |
-| **Tab đánh giá của tôi** | Tab         | Đánh giá của tôi               | Tab để xem đánh giá của mình         |
-| **Danh sách đánh giá**   | List        | Danh sách đánh giá của tôi     | Hiển thị danh sách đánh giá của mình |
-| **Thông tin sản phẩm**   | Card        | Thông tin sản phẩm đã đánh giá | Hiển thị thông tin sản phẩm          |
-| **Hình ảnh sản phẩm**    | Image       | Hình ảnh sản phẩm              | Hình ảnh của sản phẩm                |
-| **Tên sản phẩm**         | Text        | Tên sản phẩm                   | Tên đầy đủ của sản phẩm              |
-| **Điểm đánh giá**        | Star Rating | 1-5 sao                        | Điểm đánh giá của tôi                |
-| **Nội dung đánh giá**    | Text        | Nội dung đánh giá của tôi      | Nội dung chi tiết của đánh giá       |
-| **Ngày đánh giá**        | Text        | Ngày đánh giá                  | Thời gian đánh giá                   |
-| **Trạng thái**           | Badge       | Đã gửi / Đang chờ duyệt / Đã duyệt / Từ chối        | Trạng thái của đánh giá (moderation)              |
-| **Nút chỉnh sửa**        | Button      | Chỉnh sửa                      | Nút để chỉnh sửa đánh giá            |
-| **Nút xóa**              | Button      | Xóa                            | Nút để xóa đánh giá                  |
-| **Số lượt hữu ích**      | Text        | Số lượt hữu ích                | Số lượt đánh dấu hữu ích             |
+| Item                   | Type      | Data                             | Description                                          |
+| ---------------------- | --------- | -------------------------------- | ---------------------------------------------------- |
+| **Tiêu đề FAQ**        | Text      | Câu hỏi thường gặp               | Tiêu đề của trang FAQ                                |
+| **Icon FAQ**           | Icon      | HelpCircle                       | Icon đại diện cho FAQ                                |
+| **Ô tìm kiếm FAQ**     | Input     | Tìm kiếm câu hỏi                 | Ô để tìm kiếm câu hỏi                                |
+| **Danh mục FAQ**       | Select    | Lọc theo danh mục                | Dropdown để lọc theo danh mục                        |
+| **Danh sách câu hỏi**  | Accordion | Danh sách câu hỏi và câu trả lời | Hiển thị câu hỏi và câu trả lời                      |
+| **Câu hỏi**            | Text      | Tiêu đề câu hỏi                  | Tiêu đề của câu hỏi                                  |
+| **Câu trả lời**        | Text      | Nội dung câu trả lời             | Nội dung chi tiết câu trả lời                        |
+| **Danh mục câu hỏi**   | Badge     | Danh mục của câu hỏi             | Danh mục phân loại câu hỏi                           |
+| **Nút hữu ích**        | Button    | Hữu ích / Không hữu ích          | Nút để đánh giá câu trả lời                          |
+| **Số lượt hữu ích**    | Text      | Số lượt đánh giá hữu ích         | Số lượt đánh giá hữu ích                             |
+| **Nút liên hệ hỗ trợ** | Button    | Liên hệ hỗ trợ                   | Nút để liên hệ hỗ trợ nếu không tìm thấy câu trả lời |
 
 #### 1.4.3 Hành động và xử lý:
 
-| Action Name                   | Description                                                                                                                                                                                                                        | Success                                                                                                                 | Failure                                                                                                                                          |
-| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Hiển thị đánh giá của tôi** | Hiển thị danh sách tất cả các đánh giá mà người dùng đã viết với thông tin đầy đủ bao gồm sản phẩm đã đánh giá, điểm đánh giá, nội dung đánh giá, và trạng thái đánh giá. Danh sách được sắp xếp theo thời gian đánh giá mới nhất. | Danh sách đánh giá của tôi được hiển thị đầy đủ và chính xác. Danh sách được sắp xếp theo thời gian đánh giá mới nhất.  | Danh sách đánh giá của tôi không được hiển thị đầy đủ hoặc không chính xác. Danh sách không được sắp xếp theo thời gian đánh giá mới nhất.       |
-| **Chỉnh sửa đánh giá**        | Cho phép người dùng chỉnh sửa đánh giá đã viết bao gồm thay đổi điểm đánh giá, nội dung đánh giá, và các file đính kèm. Hệ thống lưu lại lịch sử chỉnh sửa và hiển thị thời gian chỉnh sửa cuối cùng.                              | Đánh giá được chỉnh sửa thành công và lưu lại lịch sử chỉnh sửa. Thời gian chỉnh sửa cuối cùng được hiển thị chính xác. | Đánh giá không được chỉnh sửa thành công hoặc không được lưu lại lịch sử chỉnh sửa. Thời gian chỉnh sửa cuối cùng không được hiển thị chính xác. |
-| **Xóa đánh giá**              | Cho phép người dùng xóa đánh giá đã viết. Hệ thống sẽ hiển thị xác nhận trước khi xóa và cập nhật danh sách đánh giá sau khi xóa thành công. Đánh giá đã xóa sẽ không thể khôi phục.                                               | Đánh giá được xóa thành công và danh sách được cập nhật. Hệ thống hiển thị xác nhận trước khi xóa.                      | Đánh giá không được xóa thành công hoặc danh sách không được cập nhật. Hệ thống không hiển thị xác nhận trước khi xóa.                           |
+| Action Name                     | Description                                                                                                                                                                                | Success                                                                                                                         | Failure                                                                                                                                        |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Hiển thị câu hỏi thường gặp** | Hiển thị danh sách các câu hỏi thường gặp được phân loại theo danh mục với câu trả lời chi tiết. Người dùng có thể mở rộng/thu gọn từng câu hỏi để xem câu trả lời.                        | Danh sách câu hỏi thường gặp được hiển thị đầy đủ và chính xác. Câu trả lời được trình bày rõ ràng và dễ hiểu.                  | Danh sách câu hỏi thường gặp không được hiển thị đầy đủ hoặc không chính xác. Câu trả lời không được trình bày rõ ràng hoặc khó hiểu.          |
+| **Tìm kiếm câu hỏi**            | Cho phép người dùng tìm kiếm câu hỏi thường gặp bằng cách nhập từ khóa vào ô tìm kiếm. Hệ thống sẽ tìm kiếm theo tiêu đề câu hỏi và nội dung câu trả lời, sau đó hiển thị kết quả phù hợp. | Câu hỏi được tìm kiếm chính xác và kết quả được hiển thị đầy đủ. Hệ thống tìm kiếm theo nhiều tiêu chí và phản hồi nhanh chóng. | Câu hỏi không được tìm kiếm chính xác hoặc kết quả không được hiển thị đầy đủ. Hệ thống không tìm kiếm theo nhiều tiêu chí hoặc phản hồi chậm. |
+| **Đánh giá câu trả lời**        | Cho phép người dùng đánh giá câu trả lời là hữu ích hoặc không hữu ích để giúp cải thiện chất lượng FAQ. Hệ thống sẽ cập nhật số lượt đánh giá và lưu lại phản hồi của người dùng.         | Câu trả lời được đánh giá thành công và số lượt đánh giá được cập nhật. Phản hồi của người dùng được lưu lại chính xác.         | Câu trả lời không được đánh giá thành công hoặc số lượt đánh giá không được cập nhật. Phản hồi của người dùng không được lưu lại chính xác.    |
 
-### 1.5 TƯƠNG TÁC VỚI ĐÁNH GIÁ
+### 1.5 THÔNG TIN LIÊN HỆ
 
 #### 1.5.1 Thông tin màn hình:
 
-| Screen        | Tương tác với đánh giá                         |
-| ------------- | ---------------------------------------------- |
-| Description   | Tương tác với các đánh giá của người dùng khác |
-| Screen Access | Từ trang xem đánh giá                          |
+| Screen        | Thông tin liên hệ                          |
+| ------------- | ------------------------------------------ |
+| Description   | Hiển thị thông tin liên hệ của shop        |
+| Screen Access | Từ trang hỗ trợ với phần thông tin liên hệ |
 
 #### 1.5.2 Chi tiết thành phần màn hình:
 
-| Item                      | Type     | Data                  | Description                            |
-| ------------------------- | -------- | --------------------- | -------------------------------------- |
-| **Nút hữu ích**           | Button   | Hữu ích               | Nút để đánh dấu đánh giá hữu ích       |
-| **Icon hữu ích**          | Icon     | ThumbsUp              | Icon đại diện cho hữu ích              |
-| **Số lượt hữu ích**       | Text     | Số lượt hữu ích       | Số lượt đánh dấu hữu ích               |
-| **Nút không hữu ích**     | Button   | Không hữu ích         | Nút để đánh dấu đánh giá không hữu ích |
-| **Icon không hữu ích**    | Icon     | ThumbsDown            | Icon đại diện cho không hữu ích        |
-| **Số lượt không hữu ích** | Text     | Số lượt không hữu ích | Số lượt đánh dấu không hữu ích         |
-| **Nút báo cáo**           | Button   | Báo cáo               | Nút để báo cáo đánh giá không phù hợp  |
-| **Icon báo cáo**          | Icon     | Flag                  | Icon đại diện cho báo cáo              |
-| **Modal báo cáo**         | Modal    | Modal báo cáo         | Modal để nhập lý do báo cáo            |
-| **Lý do báo cáo**         | Select   | Lý do báo cáo         | Dropdown để chọn lý do báo cáo         |
-| **Mô tả báo cáo**         | Textarea | Mô tả chi tiết        | Ô để nhập mô tả chi tiết về báo cáo    |
-| **Nút gửi báo cáo**       | Button   | Gửi báo cáo           | Nút để gửi báo cáo                     |
-| **Nút hủy báo cáo**       | Button   | Hủy                   | Nút để hủy báo cáo                     |
+| Item                  | Type   | Data                    | Description                        |
+| --------------------- | ------ | ----------------------- | ---------------------------------- |
+| **Tiêu đề liên hệ**   | Text   | Thông tin liên hệ       | Tiêu đề của phần thông tin liên hệ |
+| **Thông tin shop**    | Card   | Thông tin chi tiết shop | Card hiển thị thông tin shop       |
+| **Tên shop**          | Text   | Tên shop                | Tên đầy đủ của shop                |
+| **Địa chỉ**           | Text   | Địa chỉ shop            | Địa chỉ đầy đủ của shop            |
+| **Số điện thoại**     | Text   | Số điện thoại liên hệ   | Số điện thoại để liên hệ           |
+| **Email**             | Text   | Email liên hệ           | Email để liên hệ                   |
+| **Giờ làm việc**      | Text   | Giờ làm việc            | Thời gian làm việc của shop        |
+| **Icon địa chỉ**      | Icon   | MapPin                  | Icon đại diện cho địa chỉ          |
+| **Icon điện thoại**   | Icon   | Phone                   | Icon đại diện cho điện thoại       |
+| **Icon email**        | Icon   | Mail                    | Icon đại diện cho email            |
+| **Icon giờ làm việc** | Icon   | Clock3                  | Icon đại diện cho giờ làm việc     |
+| **Nút gọi điện**      | Button | Gọi điện                | Nút để gọi điện trực tiếp          |
+| **Nút gửi email**     | Button | Gửi email               | Nút để gửi email trực tiếp         |
 
 #### 1.5.3 Hành động và xử lý:
 
-| Action Name                       | Description                                                                                                                                                                                                                                              | Success                                                                                                                                        | Failure                                                                                                                                                                 |
-| --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Đánh dấu hữu ích**              | Cho phép người dùng đánh dấu đánh giá là hữu ích hoặc không hữu ích để giúp các người dùng khác đánh giá chất lượng của đánh giá. Hệ thống cập nhật số lượt hữu ích/không hữu ích ngay lập tức và lưu lại lựa chọn của người dùng.                       | Đánh giá được đánh dấu hữu ích/không hữu ích thành công và số lượt được cập nhật ngay lập tức. Lựa chọn của người dùng được lưu lại chính xác. | Đánh giá không được đánh dấu hữu ích/không hữu ích thành công hoặc số lượt không được cập nhật ngay lập tức. Lựa chọn của người dùng không được lưu lại chính xác.      |
-| **Báo cáo đánh giá**              | Cho phép người dùng báo cáo đánh giá không phù hợp hoặc vi phạm quy định. Hệ thống cung cấp các lý do báo cáo phổ biến và cho phép người dùng nhập mô tả chi tiết. Báo cáo sẽ được gửi đến admin để xem xét và xử lý.                                    | Đánh giá được báo cáo thành công và báo cáo được gửi đến admin. Hệ thống cung cấp đầy đủ các lý do báo cáo và cho phép nhập mô tả chi tiết.    | Đánh giá không được báo cáo thành công hoặc báo cáo không được gửi đến admin. Hệ thống không cung cấp đầy đủ các lý do báo cáo hoặc không cho phép nhập mô tả chi tiết. |
-| **Hiển thị trạng thái tương tác** | Hiển thị trạng thái tương tác của người dùng với từng đánh giá bao gồm đã đánh dấu hữu ích/không hữu ích hay chưa, và đã báo cáo hay chưa. Trạng thái được cập nhật real-time và hiển thị rõ ràng để người dùng biết được tình trạng tương tác của mình. | Trạng thái tương tác được hiển thị chính xác và cập nhật real-time. Người dùng có thể dễ dàng biết được tình trạng tương tác của mình.         | Trạng thái tương tác không được hiển thị chính xác hoặc không được cập nhật real-time. Người dùng không thể dễ dàng biết được tình trạng tương tác của mình.            |
+| Action Name                    | Description                                                                                                                                                                             | Success                                                                                                                      | Failure                                                                                                                                       |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Hiển thị thông tin liên hệ** | Hiển thị đầy đủ thông tin liên hệ của shop bao gồm tên shop, địa chỉ, số điện thoại, email, và giờ làm việc. Thông tin được trình bày rõ ràng với icon phù hợp cho từng loại thông tin. | Thông tin liên hệ được hiển thị đầy đủ và chính xác. Thông tin được trình bày rõ ràng với icon phù hợp.                      | Thông tin liên hệ không được hiển thị đầy đủ hoặc không chính xác. Thông tin không được trình bày rõ ràng hoặc icon không phù hợp.            |
+| **Liên hệ trực tiếp**          | Cho phép người dùng liên hệ trực tiếp với shop thông qua các kênh liên hệ như gọi điện, gửi email, hoặc chat hỗ trợ. Hệ thống sẽ mở ứng dụng tương ứng để thực hiện liên hệ.            | Liên hệ trực tiếp được thực hiện thành công và ứng dụng tương ứng được mở. Người dùng có thể liên hệ dễ dàng qua nhiều kênh. | Liên hệ trực tiếp không được thực hiện thành công hoặc ứng dụng tương ứng không được mở. Người dùng không thể liên hệ dễ dàng qua nhiều kênh. |
+| **Hiển thị giờ làm việc**      | Hiển thị thông tin giờ làm việc của shop để người dùng biết được thời gian có thể liên hệ và nhận hỗ trợ. Thông tin bao gồm ngày trong tuần và giờ làm việc cụ thể.                     | Giờ làm việc được hiển thị chính xác và đầy đủ. Người dùng có thể biết được thời gian có thể liên hệ và nhận hỗ trợ.         | Giờ làm việc không được hiển thị chính xác hoặc không đầy đủ. Người dùng không thể biết được thời gian có thể liên hệ và nhận hỗ trợ.         |
