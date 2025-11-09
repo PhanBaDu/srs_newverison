@@ -1,142 +1,158 @@
-# TỔNG HỢP CHỨC NĂNG (ĐÃ SỬA)
+# Non-Functional Requirements
 
-_Dựa trên tài liệu yêu cầu KH-19_RO.MD - Chức năng hỗ trợ chat của Nhân viên (Đã sửa theo review)_
+## 1. Performance (Hiệu năng)
 
-## MỤC LỤC
+| No. | Requirement |
+|-----|-------------|
+| 1 | Hệ thống phải hỗ trợ tối thiểu **2000 người dùng truy cập đồng thời** (peak load) với tối thiểu **500 đơn hàng/giờ** mà không ảnh hưởng đến hiệu suất |
+| 2 | Thời gian phản hồi API trung bình phải dưới 200ms cho các thao tác đơn giản (xem sản phẩm, giỏ hàng) và dưới 500ms cho các thao tác phức tạp (tìm kiếm, lọc) |
+| 3 | Thời gian tải trang không vượt quá 3 giây với kết nối internet tốc độ trung bình |
+| 4 | Thời gian xử lý thanh toán và đặt hàng không vượt quá 5 giây |
+| 5 | Real-time chat hỗ trợ khách hàng có độ trễ tối đa 1 giây (sử dụng Socket.IO) |
+| 6 | **Hỗ trợ batch jobs và report lớn**: Export dữ liệu (đơn hàng, sản phẩm, khách hàng) tối đa 10,000 bản ghi hoàn thành trong vòng 10 phút |
+| 7 | **Monitoring & Load Testing**: Thực hiện load testing định kỳ với các case: normal load (1000 users), peak load (2000 users), stress test (3000+ users) để đảm bảo hệ thống ổn định |
 
-1. [Chức năng hỗ trợ chat](#1-chức-năng-hỗ-trợ-chat)
-   - 1.1 [Xem chi tiết chat](#11-xem-chi-tiết-chat) - **ĐÃ SỬA**
-   - 1.2 [Chuyển tiếp / Escalate chat](#12-chuyển-tiếp--escalate-chat) - **MỚI**
-   - 1.3 [Xử lý error states](#13-xử-lý-error-states) - **MỚI**
-   - 1.4 [Danh sách chat](#14-danh-sách-chat)
+## 2. Scalability (Khả năng mở rộng)
 
----
+| No. | Requirement |
+|-----|-------------|
+| 1 | Database PostgreSQL phải có khả năng lưu trữ tối thiểu 10,000 sản phẩm và 50,000 người dùng |
+| 2 | Hệ thống phải xử lý được ít nhất 1,000 đơn hàng mỗi ngày |
+| 3 | Cho phép nhiều admin đồng thời quản lý đơn hàng, cập nhật sản phẩm mà không xung đột dữ liệu |
+| 4 | Hỗ trợ upload và lưu trữ tối thiểu 50,000 hình ảnh sản phẩm và 20,000 ảnh/video từ bài viết người dùng |
+| 5 | **Kiến trúc hệ thống phải hỗ trợ multi-region/cross-datacenter deployment và CDN cho ảnh/video** để tối ưu tốc độ truy cập toàn quốc |
+| 6 | Horizontal scaling: Có khả năng tăng số lượng server instances khi lưu lượng tăng cao |
 
-## 1. CHỨC NĂNG HỖ TRỢ CHAT
+## 3. Security (Bảo mật)
 
-### 1.1 XEM CHI TIẾT CHAT - **ĐÃ SỬA**
+| No. | Requirement |
+|-----|-------------|
+| 1 | Backend sử dụng Node.js phiên bản 20.0 trở lên để đảm bảo các bản vá bảo mật mới nhất |
+| 2 | Xác thực người dùng bắt buộc sử dụng JWT (JSON Web Token) với thời gian hết hạn 24 giờ |
+| 3 | Mật khẩu người dùng phải được mã hóa bằng Bcrypt với salt rounds tối thiểu là 10 |
+| 4 | Phân quyền rõ ràng giữa User và Admin - mỗi vai trò chỉ truy cập được các chức năng được phép |
+| 5 | **Tuân thủ compliance GDPR/PDPA**: Lưu trữ log truy cập, xóa dữ liệu theo yêu cầu người dùng/khách hàng, có cơ chế consent management |
+| 6 | **Logging & Audit Trail**: Ghi lại tất cả thao tác quan trọng (đăng nhập, thay đổi quyền, xóa dữ liệu, giao dịch thanh toán) trong hệ thống với đầy đủ thông tin user, timestamp, action |
+| 7 | Tích hợp các cổng thanh toán (VNPay, MoMo, ZaloPay, Viettel Money) phải tuân thủ chuẩn bảo mật PCI DSS |
+| 8 | Dữ liệu hệ thống được sao lưu tự động hàng ngày và lưu trữ tại server backup riêng biệt |
+| 9 | Tất cả API endpoints phải được bảo vệ bởi middleware xác thực (Passport.js) |
+| 10 | Sử dụng HTTPS/SSL cho mọi kết nối giữa client và server |
+| 11 | Implement CORS policy để chỉ cho phép các domain được phê duyệt truy cập API |
+| 12 | Chống tấn công XSS, SQL Injection, CSRF thông qua validation (Zod) và sanitization dữ liệu đầu vào |
 
-#### 1.1.1 Thông tin màn hình:
+## 4. Reliability (Độ tin cậy)
 
-| Screen        | Chi tiết chat hỗ trợ                                                      |
-| ------------- | ------------------------------------------------------------------------- |
-| Description   | Hiển thị thông tin chi tiết của cuộc chat hỗ trợ với khách hàng           |
-| Screen Access | Nhân viên click **Xem** từ danh sách chat hỗ trợ                          |
+| No. | Requirement |
+|-----|-------------|
+| 1 | Uptime hệ thống đạt tối thiểu 99.5% trong tháng (cho phép downtime không quá 3.6 giờ/tháng) |
+| 2 | **Recovery Plan**: Thời gian phục hồi hệ thống (RTO - Recovery Time Objective) không quá 4 giờ, điểm phục hồi dữ liệu (RPO - Recovery Point Objective) không quá 1 giờ |
+| 3 | Cơ chế retry tự động cho các giao dịch thanh toán thất bại |
+| 4 | Health check endpoints để monitor trạng thái hệ thống real-time |
 
-#### 1.1.2 Chi tiết thành phần màn hình:
+## 5. Availability (Tính sẵn sàng)
 
-| Item                  | Type         | Data                                    | Description                                    |
-| --------------------- | ------------ | --------------------------------------- | ---------------------------------------------- |
-| **Thông tin khách hàng** | Card       | Tên, email, SĐT, hạng...                | Hiển thị thông tin khách hàng                  |
-| **Cuộc hội thoại**    | Card         | Lịch sử tin nhắn                        | Hiển thị cuộc trò chuyện                       |
-| **Ghi chú & Ưu tiên** | Card         | Ghi chú nội bộ, độ ưu tiên              | Card để quản lý ghi chú và ưu tiên             |
-| **Nút hành động**     | Button Group | Trả lời, Đánh dấu hoàn thành, Chuyển tiếp, Đóng chat | Các nút để thao tác với chat                   |
+| No. | Requirement |
+|-----|-------------|
+| 1 | **Planned Maintenance**: Hệ thống chỉ được bảo trì trong khung giờ 2-4h sáng, thông báo trước ít nhất 24 giờ |
+| 2 | **Hotfix deployment**: Hỗ trợ triển khai bản vá khẩn cấp mà không cần restart toàn bộ hệ thống (zero-downtime deployment hoặc downtime < 10 phút) |
+| 3 | **Monitoring & Alerting**: Cảnh báo tự động khi uptime giảm dưới 99%, response time vượt ngưỡng, hoặc có lỗi nghiêm trọng |
 
----
+## 6. Maintainability (Khả năng bảo trì)
 
-### 1.2 CHUYỂN TIẾP / ESCALATE CHAT - **MỚI**
+| No. | Requirement |
+|-----|-------------|
+| 1 | **Upgrade Strategy**: Hệ thống cho phép nâng cấp Node.js, PostgreSQL, dependencies mà không cần downtime quá 10 phút |
+| 2 | Code phải tuân thủ coding standards, có documentation đầy đủ |
+| 3 | Sử dụng version control (Git) với branching strategy rõ ràng (GitFlow/trunk-based) |
 
-#### 1.2.1 Thông tin màn hình:
+## 7. Usability (Khả năng sử dụng)
 
-| Screen        | Chuyển tiếp chat hỗ trợ                                                      |
-| ------------- | ---------------------------------------------------------------------------- |
-| Description   | Cho phép nhân viên chuyển tiếp chat đến nhân viên khác hoặc cấp trên để xử lý |
-| Screen Access | Nhân viên click nút **Chuyển tiếp / Escalate** từ trang chi tiết chat        |
+| No. | Requirement |
+|-----|-------------|
+| 1 | **Accessibility**: Giao diện phải tuân thủ WCAG 2.1 Level AA - hỗ trợ người khuyết tật (screen reader, keyboard navigation, sufficient color contrast) |
+| 2 | Tab order logic và phím tắt cho các thao tác thường xuyên |
+| 3 | Error messages rõ ràng, hướng dẫn người dùng khắc phục |
+| 4 | Loading states và feedback cho mọi action |
 
-#### 1.2.2 Chi tiết thành phần màn hình:
+## 8. Browser (Trình duyệt)
 
-| Item                      | Type         | Data                                    | Description                                    |
-| ------------------------- | ------------ | --------------------------------------- | ---------------------------------------------- |
-| **Dialog chuyển tiếp**    | Dialog       | Chuyển tiếp chat hỗ trợ                 | **MỚI**: Dialog để chọn người nhận và lý do    |
-| **Select người nhận**     | Select       | Quản lý, Nhân viên B, Admin, Bộ phận Kỹ thuật... | **MỚI**: Dropdown chọn người/bộ phận nhận      |
-| **Textarea lý do**        | Textarea     | Nhập lý do chuyển tiếp *                | **MỚI**: Bắt buộc nhập lý do                   |
-| **Nút xác nhận**          | Button       | Xác nhận chuyển tiếp                    | **MỚI**: Nút để xác nhận chuyển tiếp           |
-| **Loading state**         | Text         | Đang chuyển tiếp...                     | **MỚI**: Hiển thị khi đang xử lý               |
+| No. | Requirement |
+|-----|-------------|
+| 1 | Hỗ trợ các trình duyệt hiện đại: **Chrome, Firefox (3 phiên bản gần nhất)** |
+| 2 | Hỗ trợ Microsoft Edge (phiên bản dựa trên Chromium) |
+| 3 | Hỗ trợ Safari 14 trở lên (cho người dùng macOS và iOS) |
+| 4 | Responsive design tương thích với các thiết bị mobile (iOS, Android) |
+| 5 | Không hỗ trợ Internet Explorer (đã ngừng hỗ trợ từ Microsoft) |
+| 6 | **Testing Coverage**: Có test matrix tự động trên các thiết bị/trình duyệt chính (automated cross-browser testing) |
 
-#### 1.2.3 Hành động và xử lý:
+## 9. Interfaces (Giao diện)
 
-| Action Name              | Description                                                                                                                                                                                                                                 | Success                                                                                    | Failure                                                                                    |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
-| **Chuyển tiếp chat**     | Cho phép nhân viên chuyển tiếp chat đến nhân viên khác hoặc cấp trên. Hệ thống sẽ yêu cầu chọn người nhận và nhập lý do trước khi chuyển tiếp.                                                                                              | Chat được chuyển tiếp thành công. Thông báo xác nhận hiển thị.                            | Không chọn người nhận. Không nhập lý do. Lỗi khi chuyển tiếp.                              |
-| **Validation người nhận** | **MỚI**: Hệ thống yêu cầu nhân viên phải chọn người nhận hoặc bộ phận để chuyển tiếp. Nếu không chọn, hệ thống sẽ từ chối và hiển thị thông báo lỗi.                                                                                      | Người nhận được chọn thành công. Cho phép chuyển tiếp.                                    | Không chọn người nhận. Hiển thị: "Vui lòng chọn nhân viên để chuyển tiếp".                 |
-| **Validation lý do**     | **MỚI**: Hệ thống yêu cầu nhân viên phải nhập lý do chuyển tiếp (tối thiểu 10 ký tự). Nếu không nhập hoặc quá ngắn, hệ thống sẽ từ chối.                                                                                                    | Lý do được validate thành công. Cho phép chuyển tiếp.                                     | Lý do không hợp lệ (quá ngắn hoặc không có). Hiển thị: "Vui lòng nhập lý do chuyển tiếp".  |
-| **Ghi nhận lịch sử**     | **MỚI**: Mỗi khi chat được chuyển tiếp, hệ thống tự động ghi nhận vào lịch sử: người chuyển, người nhận, thời gian, lý do.                                                                                                                  | Lịch sử chuyển tiếp được ghi nhận thành công.                                              | Không thể ghi nhận lịch sử. Thông tin lịch sử không đầy đủ.                                |
-| **Thông báo người nhận** | **MỚI**: Sau khi chuyển tiếp thành công, hệ thống tự động thông báo cho người nhận về chat mới được chuyển tiếp.                                                                                                                            | Người nhận được thông báo thành công.                                                      | Không thể thông báo cho người nhận.                                                         |
+| No. | Requirement |
+|-----|-------------|
+| 1 | **API Documentation**: Tất cả REST API endpoints phải có OpenAPI/Swagger documentation đầy đủ |
+| 2 | Sử dụng Framework Next.js để tạo giao diện người dùng |
+| 3 | Styling sử dụng Tailwind CSS kết hợp shadcn/ui components |
+| 4 | Hỗ trợ đa ngôn ngữ thông qua next-intl |
+| 5 | Responsive design tương thích mọi kích thước màn hình |
 
-#### 1.2.4 Escalate Options (MỚI):
+## 10. Compliance (Tuân thủ)
 
-| Option              | Description                                    |
-| ------------------- | ---------------------------------------------- |
-| **Quản lý / Supervisor** | Chuyển đến quản lý để xử lý vấn đề phức tạp    |
-| **Nhân viên khác**  | Chuyển đến nhân viên khác có chuyên môn phù hợp |
-| **Admin**           | Chuyển đến admin cho vấn đề cần quyền cao      |
-| **Bộ phận Kỹ thuật** | Chuyển đến bộ phận kỹ thuật cho vấn đề kỹ thuật |
+| No. | Requirement |
+|-----|-------------|
+| 1 | **Audit & Compliance Check**: Kiểm toán bảo mật/kiểm toán nghiệp vụ định kỳ **ít nhất 1 lần/năm** |
+| 2 | Tuân thủ luật bảo vệ dữ liệu cá nhân Việt Nam (Nghị định 13/2023/NĐ-CP) |
+| 3 | Compliance với các quy định về thương mại điện tử |
 
----
+## 11. Assumptions (Các giả định)
 
-### 1.3 XỬ LÝ ERROR STATES - **MỚI**
-
-#### 1.3.1 Thông tin màn hình:
-
-| Screen        | Error states trong chat hỗ trợ                                                      |
-| ------------- | ----------------------------------------------------------------------------------- |
-| Description   | Hiển thị và xử lý các lỗi có thể xảy ra trong quá trình hỗ trợ chat                  |
-| Screen Access | Tự động hiển thị khi có lỗi xảy ra                                                 |
-
-#### 1.3.2 Chi tiết thành phần màn hình:
-
-| Item                      | Type         | Data                                    | Description                                    |
-| ------------------------- | ------------ | --------------------------------------- | ---------------------------------------------- |
-| **Alert lỗi**             | Alert        | Lỗi: [chi tiết lỗi]                    | **MỚI**: Hiển thị thông báo lỗi cụ thể         |
-| **Icon lỗi**              | Icon         | AlertCircle                             | **MỚI**: Icon đại diện cho lỗi                 |
-| **Thông báo lỗi**         | Text         | Chi tiết lỗi và hướng dẫn xử lý         | **MỚI**: Mô tả lỗi và cách khắc phục           |
-
-#### 1.3.3 Hành động và xử lý:
-
-| Action Name              | Description                                                                                                                                                                                                                                 | Success                                                                                    | Failure                                                                                    |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
-| **Hiển thị error state** | Khi có lỗi xảy ra (network, timeout, server, permission), hệ thống tự động hiển thị error state với thông báo lỗi cụ thể và hướng dẫn xử lý.                                                                                              | Error state được hiển thị thành công với thông báo rõ ràng.                               | Không thể hiển thị error state. Thông báo lỗi không rõ ràng.                               |
-| **Xử lý lỗi network**    | **MỚI**: Khi có lỗi network (không thể kết nối đến server), hệ thống hiển thị: "Không thể kết nối đến server. Vui lòng kiểm tra kết nối mạng."                                                                                            | Thông báo lỗi network được hiển thị rõ ràng. Người dùng biết cách khắc phục.              | Thông báo lỗi không rõ ràng. Người dùng không biết cách khắc phục.                         |
-| **Xử lý lỗi timeout**    | **MỚI**: Khi có lỗi timeout (yêu cầu bị timeout), hệ thống hiển thị: "Yêu cầu bị timeout. Vui lòng thử lại sau."                                                                                                                              | Thông báo lỗi timeout được hiển thị rõ ràng.                                                | Thông báo lỗi không rõ ràng.                                                               |
-| **Xử lý lỗi server**     | **MỚI**: Khi có lỗi server (lỗi từ phía server), hệ thống hiển thị: "Lỗi server. Vui lòng liên hệ quản trị viên."                                                                                                                         | Thông báo lỗi server được hiển thị rõ ràng. Người dùng biết cần liên hệ admin.            | Thông báo lỗi không rõ ràng.                                                               |
-| **Xử lý lỗi permission** | **MỚI**: Khi có lỗi permission (không có quyền thực hiện hành động), hệ thống hiển thị: "Bạn không có quyền thực hiện hành động này."                                                                                                      | Thông báo lỗi permission được hiển thị rõ ràng.                                           | Thông báo lỗi không rõ ràng.                                                               |
-
-#### 1.3.4 Error Types (MỚI):
-
-| Error Type          | Message                                                                 | Handling                                    |
-| ------------------- | ----------------------------------------------------------------------- | ------------------------------------------- |
-| **Network Error**   | "Không thể kết nối đến server. Vui lòng kiểm tra kết nối mạng."         | Hiển thị alert, cho phép retry             |
-| **Timeout Error**   | "Yêu cầu bị timeout. Vui lòng thử lại sau."                             | Hiển thị alert, cho phép retry             |
-| **Server Error**    | "Lỗi server. Vui lòng liên hệ quản trị viên."                           | Hiển thị alert, ghi log                     |
-| **Permission Error** | "Bạn không có quyền thực hiện hành động này."                           | Hiển thị alert, disable action             |
-
----
-
-### 1.4 DANH SÁCH CHAT
-
-#### 1.4.1 Thông tin màn hình:
-
-| Screen        | Danh sách chat hỗ trợ                                                      |
-| ------------- | ------------------------------------------------------------------------- |
-| Description   | Hiển thị danh sách tất cả các cuộc chat hỗ trợ đang chờ xử lý             |
-| Screen Access | Nhân viên chọn **Chat hỗ trợ** từ menu chính                              |
-
-#### 1.4.2 Chi tiết thành phần màn hình:
-
-| Item                  | Type         | Data                    | Description                          |
-| --------------------- | ------------ | ----------------------- | ------------------------------------ |
-| **Danh sách chat**     | Table        | ID chat, khách hàng, trạng thái... | Hiển thị các cuộc chat               |
-| **Bộ lọc**            | Filter       | Trạng thái, độ ưu tiên... | Lọc chat theo tiêu chí               |
+| No. | Requirement |
+|-----|-------------|
+| 1 | Có thể tạm ngưng hệ thống nếu cần phải nâng cấp (thời gian bảo trì: 2-4h sáng, thông báo trước 24h) |
+| 2 | Người dùng có kết nối internet ổn định tối thiểu 5 Mbps |
+| 3 | Admin được đào tạo cơ bản trước khi vận hành hệ thống |
+| 4 | Môi trường dev, staging, production được tách biệt hoàn toàn |
 
 ---
 
-## THAY ĐỔI CHÍNH SO VỚI BẢN GỐC
+## Tóm tắt các thay đổi chính:
 
-1. **Escalate/Forward feature**: Thêm tính năng chuyển tiếp chat đến nhân viên khác hoặc cấp trên
-2. **Error states**: Xử lý và hiển thị các lỗi có thể xảy ra (network, timeout, server, permission)
-3. **Validation**: Yêu cầu chọn người nhận và nhập lý do khi chuyển tiếp
-4. **Lịch sử chuyển tiếp**: Ghi nhận lịch sử chuyển tiếp để theo dõi
-5. **Thông báo**: Tự động thông báo cho người nhận khi chat được chuyển tiếp
-6. **UI cải thiện**: Thêm dialog chuyển tiếp với validation và loading state
-7. **Error handling**: Hiển thị thông báo lỗi cụ thể và hướng dẫn xử lý cho từng loại lỗi
+### ✅ Performance
+- Tăng concurrent users từ 1000 → 2000 (peak load)
+- Thêm yêu cầu 500 đơn hàng/giờ
+- Bổ sung batch jobs/export report (10,000 bản ghi < 10 phút)
+- Thêm load testing định kỳ
 
+### ✅ Scalability
+- Bổ sung multi-region/CDN deployment
+- Rõ ràng hóa horizontal scaling
+
+### ✅ Security
+- Thêm GDPR/PDPA compliance
+- Bổ sung Logging & Audit Trail chi tiết
+
+### ✅ Reliability
+- Định nghĩa rõ RTO (4h) và RPO (1h)
+- Thêm health check endpoints
+
+### ✅ Availability (Mới)
+- Planned maintenance windows
+- Hotfix deployment strategy < 10 phút downtime
+- Monitoring & alerting tự động
+
+### ✅ Maintainability (Mới)
+- Upgrade strategy với downtime < 10 phút
+- Coding standards và documentation
+
+### ✅ Usability
+- Bổ sung WCAG 2.1 Level AA compliance
+- Tab order và keyboard navigation
+
+### ✅ Browser
+- Thêm automated cross-browser testing
+
+### ✅ Interfaces
+- Bổ sung OpenAPI/Swagger documentation
+
+### ✅ Compliance (Mới)
+- Kiểm toán định kỳ 1 lần/năm
+- Tuân thủ luật Việt Nam
