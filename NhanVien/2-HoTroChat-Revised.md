@@ -1,186 +1,191 @@
 # TỔNG HỢP CHỨC NĂNG
 
-_Dựa trên tài liệu yêu cầu KH-20_RO.MD - Chức năng thông báo của User_
+_Dựa trên tài liệu yêu cầu KH-20_RO.MD - Tương tác bài viết của User_
 
 ## MỤC LỤC
 
-1. [Chức năng thông báo](#1-chức-năng-thông-báo)
-   - 1.1 [Hiển thị danh sách thông báo](#11-hiển-thị-danh-sách-thông-báo)
-   - 1.2 [Thông báo giảm giá](#12-thông-báo-giảm-giá)
-   - 1.3 [Cập nhật đơn hàng](#13-cập-nhật-đơn-hàng)
-   - 1.4 [Thông báo có hàng](#14-thông-báo-có-hàng)
-   - 1.5 [Quản lý trạng thái thông báo](#15-quản-lý-trạng-thái-thông-báo)
+1. [Tương tác bài viết](#1-tương-tác-bài-viết)
+   - 1.1 [Hiển thị danh sách bình luận](#11-hiển-thị-danh-sách-bình-luận)
+   - 1.2 [Hiển thị số lượng like](#12-hiển-thị-số-lượng-like)
+   - 1.3 [Tạo bình luận](#13-tạo-bình-luận)
+   - 1.4 [Xóa bình luận](#14-xóa-bình-luận)
+   - 1.5 [Chỉnh sửa bình luận](#15-chỉnh-sửa-bình-luận)
 
 ---
 
-## 1. CHỨC NĂNG THÔNG BÁO
+## 1. TƯƠNG TÁC BÀI VIẾT
 
-### 1.1 HIỂN THỊ DANH SÁCH THÔNG BÁO
+### 1.1 HIỂN THỊ DANH SÁCH BÌNH LUẬN
 
 #### 1.1.1 Thông tin màn hình:
 
-| Screen        | Danh sách thông báo (được phân trang) |
-| ------------- | ------------------------------------- |
-| Description   | Hiển thị toàn bộ thông báo            |
-| Screen Access | Từ sidebar menu "Thông báo"           |
+| Screen        | Danh sách bình luận bài viết                   |
+| ------------- | ---------------------------------------------- |
+| Description   | Hiển thị danh sách bình luận từ người dùng     |
+| Screen Access | Từ trang chi tiết bài viết với tab "Bình luận" |
 
 #### 1.1.2 Chi tiết thành phần màn hình:
 
-| Item                      | Type       | Data                                                                      | Description                          |
-| ------------------------- | ---------- | ------------------------------------------------------------------------- | ------------------------------------ |
-| **Tiêu đề trang**         | Text       | Thông báo                                                                 | Tiêu đề của trang thông báo          |
-| **Icon trang**            | Icon       | Bell                                                                      | Icon đại diện cho thông báo          |
-| **Số thông báo chưa đọc** | Badge      | Số lượng thông báo chưa đọc                                               | Badge hiển thị số thông báo chưa đọc |
-| **Tab loại thông báo**    | Tabs       | Tất cả / Đơn hàng / Khuyến mãi / Yêu thích / Đánh giá / Hệ thống / Hỗ trợ | Tab để lọc theo loại thông báo       |
-| **Bộ lọc loại**           | Select     | Lọc theo loại thông báo                                                   | Dropdown để lọc theo loại            |
-| **Bộ lọc mức độ ưu tiên** | Select     | Lọc theo mức độ ưu tiên                                                   | Dropdown để lọc theo mức độ ưu tiên  |
-| **Ô tìm kiếm**            | Input      | Tìm kiếm thông báo                                                        | Ô để tìm kiếm thông báo              |
-| **Card thông báo**        | Card       | Thông tin thông báo                                                       | Card hiển thị thông tin thông báo    |
-| **Icon loại thông báo**   | Icon       | Package / Percent / Heart / Star / AlertCircle / MessageSquare            | Icon đại diện cho loại thông báo     |
-| **Tiêu đề thông báo**     | Text       | Tiêu đề thông báo                                                         | Tiêu đề của thông báo                |
-| **Nội dung thông báo**    | Text       | Nội dung chi tiết thông báo                                               | Nội dung chi tiết của thông báo      |
-| **Thời gian**             | Text       | Thời gian gửi thông báo                                                   | Thời gian thông báo được gửi         |
-| **Trạng thái đọc**        | Badge      | Đã đọc / Chưa đọc                                                         | Trạng thái đã đọc hay chưa           |
-| **Mức độ ưu tiên**        | Badge      | Thấp / Trung bình / Cao                                                   | Mức độ ưu tiên của thông báo         |
-| **Nút hành động**         | Button     | Xem chi tiết / Đánh dấu đã đọc                                            | Nút để thực hiện hành động           |
-| **Nút xóa**               | Button     | Xóa thông báo                                                             | Nút để xóa thông báo                 |
-| **Phân trang**            | Pagination | Điều hướng trang                                                          | Phân trang cho danh sách thông báo   |
+| Item                    | Type       | Data                                          | Description                        |
+| ----------------------- | ---------- | --------------------------------------------- | ---------------------------------- |
+| **Tiêu đề tab**         | Text       | Bình luận                                     | Tiêu đề của tab bình luận          |
+| **Số lượng bình luận**  | Badge      | Số lượng bình luận                            | Hiển thị tổng số bình luận         |
+| **Bộ lọc bình luận**    | Select     | Tất cả / Mới nhất / Nhiều like nhất / Cũ nhất | Dropdown để lọc bình luận          |
+| **Bộ lọc thời gian**    | Select     | Hôm nay / Tuần này / Tháng này / Tất cả       | Dropdown để lọc theo thời gian     |
+| **Danh sách bình luận** | List       | Danh sách bình luận                           | Danh sách các bình luận            |
+| **Card bình luận**      | Card       | Thông tin bình luận                           | Card hiển thị thông tin bình luận  |
+| **Ảnh đại diện**        | Avatar     | Ảnh đại diện người bình luận                  | Avatar của người bình luận         |
+| **Tên người dùng**      | Text       | Tên người bình luận                           | Tên của người bình luận            |
+| **Thời gian bình luận** | Text       | Thời gian bình luận                           | Thời gian bình luận được đăng      |
+| **Nội dung bình luận**  | Text       | Nội dung bình luận                            | Nội dung của bình luận             |
+| **Hình ảnh đính kèm**   | Image      | Hình ảnh trong bình luận                      | Hình ảnh được đính kèm             |
+| **Số lượng like**       | Badge      | Số lượng like bình luận                       | Số lượng người thích bình luận     |
+| **Số lượng phản hồi**   | Badge      | Số lượng phản hồi                             | Số lượng phản hồi cho bình luận    |
+| **Nút like bình luận**  | Button     | Like / Unlike                                 | Nút để thích/bỏ thích bình luận    |
+| **Nút phản hồi**        | Button     | Phản hồi                                      | Nút để phản hồi bình luận          |
+| **Nút báo cáo**         | Button     | Báo cáo                                       | Nút để báo cáo bình luận           |
+| **Nút chỉnh sửa**       | Button     | Chỉnh sửa                                     | Nút để chỉnh sửa bình luận         |
+| **Nút xóa**             | Button     | Xóa                                           | Nút để xóa bình luận               |
+| **Phân trang**          | Pagination | Điều hướng trang                              | Phân trang cho danh sách bình luận |
 
 #### 1.1.3 Hành động và xử lý:
 
-| Action Name                      | Description                                                                                                                                                                                                                                                                | Success                                                                                                                               | Failure                                                                                                                                              |
-| -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Hiển thị danh sách thông báo** | Hiển thị danh sách tất cả thông báo của người dùng với thông tin đầy đủ bao gồm loại thông báo, tiêu đề, nội dung, thời gian, trạng thái đọc, và mức độ ưu tiên. Danh sách được sắp xếp theo thời gian mới nhất và hỗ trợ phân trang.                                      | Danh sách thông báo được hiển thị đầy đủ và chính xác. Thông tin được trình bày rõ ràng và dễ đọc.                                    | Danh sách thông báo không được hiển thị đầy đủ hoặc không chính xác. Thông tin không được trình bày rõ ràng hoặc khó đọc.                            |
-| **Lọc và tìm kiếm thông báo**    | Cho phép người dùng lọc thông báo theo loại (Đơn hàng, Khuyến mãi, Yêu thích, Đánh giá, Hệ thống, Hỗ trợ) và mức độ ưu tiên (Thấp, Trung bình, Cao), đồng thời tìm kiếm theo tiêu đề hoặc nội dung thông báo. Hệ thống sẽ cập nhật danh sách ngay lập tức khi có thay đổi. | Thông báo được lọc và tìm kiếm chính xác theo tiêu chí đã chọn. Danh sách được cập nhật ngay lập tức khi có thay đổi.                 | Thông báo không được lọc và tìm kiếm chính xác theo tiêu chí đã chọn. Danh sách không được cập nhật ngay lập tức khi có thay đổi.                    |
-| **Đánh dấu đã đọc**              | Cho phép người dùng đánh dấu thông báo đã đọc hoặc chưa đọc. Hệ thống sẽ cập nhật trạng thái đọc và hiển thị số lượng thông báo chưa đọc. Có thể đánh dấu từng thông báo hoặc đánh dấu tất cả cùng lúc.                                                                    | Trạng thái đọc được cập nhật chính xác. Số lượng thông báo chưa đọc được hiển thị đúng. Người dùng có thể quản lý trạng thái dễ dàng. | Trạng thái đọc không được cập nhật chính xác. Số lượng thông báo chưa đọc không được hiển thị đúng. Người dùng không thể quản lý trạng thái dễ dàng. |
+| Action Name                      | Description                                                                                                                                                                                                                                 | Success                                                                                                              | Failure                                                                                                                          |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| **Hiển thị danh sách bình luận** | Hiển thị danh sách tất cả bình luận của bài viết với thông tin đầy đủ bao gồm người bình luận, nội dung, hình ảnh đính kèm, số lượng tương tác, và thời gian. Danh sách được sắp xếp theo thời gian mới nhất và hỗ trợ phân trang.          | Danh sách bình luận được hiển thị đầy đủ và chính xác. Thông tin được trình bày rõ ràng và dễ đọc.                   | Danh sách bình luận không được hiển thị đầy đủ hoặc không chính xác. Thông tin không được trình bày rõ ràng hoặc khó đọc.        |
+| **Lọc và sắp xếp bình luận**     | Cho phép người dùng lọc bình luận theo các tiêu chí khác nhau như "Tất cả", "Mới nhất", "Nhiều like nhất", "Cũ nhất" và theo thời gian (Hôm nay, Tuần này, Tháng này, Tất cả). Hệ thống sẽ cập nhật danh sách ngay lập tức khi có thay đổi. | Bình luận được lọc và sắp xếp chính xác theo tiêu chí đã chọn. Danh sách được cập nhật ngay lập tức khi có thay đổi. | Bình luận không được lọc và sắp xếp chính xác theo tiêu chí đã chọn. Danh sách không được cập nhật ngay lập tức khi có thay đổi. |
 
-### 1.2 THÔNG BÁO GIẢM GIÁ
+### 1.2 HIỂN THỊ SỐ LƯỢNG LIKE
 
 #### 1.2.1 Thông tin màn hình:
 
-| Screen        | Thông báo giảm giá                             |
-| ------------- | ---------------------------------------------- |
-| Description   | Thông báo khi sản phẩm yêu thích có khuyến mãi |
-| Screen Access | Từ tab "Khuyến mãi" trong trang thông báo      |
+| Screen        | Hiển thị số lượng like bài viết                    |
+| ------------- | -------------------------------------------------- |
+| Description   | Hiển thị chi tiết số lượng like                    |
+| Screen Access | Từ trang chi tiết bài viết với thông tin tương tác |
 
 #### 1.2.2 Chi tiết thành phần màn hình:
 
-| Item                    | Type   | Data                         | Description                      |
-| ----------------------- | ------ | ---------------------------- | -------------------------------- |
-| **Icon khuyến mãi**     | Icon   | Percent                      | Icon đại diện cho khuyến mãi     |
-| **Tiêu đề khuyến mãi**  | Text   | Tiêu đề thông báo khuyến mãi | Tiêu đề của thông báo khuyến mãi |
-| **Nội dung khuyến mãi** | Text   | Nội dung chi tiết khuyến mãi | Nội dung chi tiết của khuyến mãi |
-| **Phần trăm giảm giá**  | Text   | Phần trăm giảm giá           | Phần trăm giảm giá được áp dụng  |
-| **Thời gian áp dụng**   | Text   | Thời gian áp dụng khuyến mãi | Thời gian bắt đầu và kết thúc    |
-| **Ngày hết hạn**        | Text   | Ngày hết hạn khuyến mãi      | Ngày hết hạn của khuyến mãi      |
-| **Danh sách sản phẩm**  | List   | Danh sách sản phẩm áp dụng   | Danh sách sản phẩm được áp dụng  |
-| **Nút mua ngay**        | Button | Mua ngay                     | Nút để mua sản phẩm ngay         |
-| **Nút xem chi tiết**    | Button | Xem chi tiết                 | Nút để xem chi tiết khuyến mãi   |
-| **Mức độ ưu tiên**      | Badge  | Trung bình                   | Mức độ ưu tiên của thông báo     |
+| Item                     | Type   | Data                           | Description                         |
+| ------------------------ | ------ | ------------------------------ | ----------------------------------- |
+| **Thông tin tương tác**  | Card   | Thông tin like, comment, share | Card hiển thị thông tin tương tác   |
+| **Số lượng like**        | Badge  | Số lượng like                  | Số lượng người thích bài viết       |
+| **Nút like**             | Button | Like / Unlike                  | Nút để thích/bỏ thích bài viết      |
+| **Icon like**            | Icon   | Heart                          | Icon đại diện cho like              |
+| **Danh sách người like** | Modal  | Danh sách người đã like        | Modal hiển thị danh sách người like |
+| **Avatar người like**    | Avatar | Ảnh đại diện người like        | Avatar của người đã like            |
+| **Tên người like**       | Text   | Tên người đã like              | Tên của người đã like               |
+| **Thời gian like**       | Text   | Thời gian like                 | Thời gian người dùng like           |
+| **Nút đóng modal**       | Button | Đóng                           | Nút để đóng modal                   |
 
 #### 1.2.3 Hành động và xử lý:
 
-| Action Name                       | Description                                                                                                                                                                                                              | Success                                                                                                                         | Failure                                                                                                                                             |
-| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Hiển thị thông báo khuyến mãi** | Hiển thị thông báo khuyến mãi với thông tin đầy đủ bao gồm phần trăm giảm giá, thời gian áp dụng, danh sách sản phẩm được áp dụng, và ngày hết hạn. Thông báo được hiển thị với icon và màu sắc phù hợp để dễ nhận biết. | Thông báo khuyến mãi được hiển thị đầy đủ và chính xác. Thông tin được trình bày rõ ràng và dễ đọc.                             | Thông báo khuyến mãi không được hiển thị đầy đủ hoặc không chính xác. Thông tin không được trình bày rõ ràng hoặc khó đọc.                          |
-| **Truy cập sản phẩm khuyến mãi**  | Cho phép người dùng truy cập trực tiếp đến sản phẩm hoặc danh mục sản phẩm được áp dụng khuyến mãi thông qua nút "Mua ngay" hoặc "Xem chi tiết". Hệ thống sẽ chuyển hướng đến trang sản phẩm tương ứng.                  | Người dùng được chuyển hướng chính xác đến sản phẩm khuyến mãi. Trang sản phẩm hiển thị đầy đủ thông tin khuyến mãi.            | Người dùng không được chuyển hướng chính xác đến sản phẩm khuyến mãi. Trang sản phẩm không hiển thị đầy đủ thông tin khuyến mãi.                    |
-| **Theo dõi thời gian khuyến mãi** | Hiển thị thời gian còn lại của khuyến mãi và cảnh báo khi khuyến mãi sắp hết hạn. Hệ thống sẽ cập nhật thời gian real-time và thông báo cho người dùng khi khuyến mãi sắp kết thúc.                                      | Thời gian khuyến mãi được hiển thị chính xác và cập nhật real-time. Cảnh báo được hiển thị kịp thời khi khuyến mãi sắp hết hạn. | Thời gian khuyến mãi không được hiển thị chính xác hoặc không cập nhật real-time. Cảnh báo không được hiển thị kịp thời khi khuyến mãi sắp hết hạn. |
+| Action Name                | Description                                                                                                                                                                                                   | Success                                                                                                                | Failure                                                                                                                                    |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Hiển thị số lượng like** | Hiển thị số lượng like của bài viết với khả năng xem chi tiết danh sách người đã like. Khi click vào số lượng like, hiển thị modal với danh sách đầy đủ người đã like bao gồm avatar, tên, và thời gian like. | Số lượng like được hiển thị chính xác và modal danh sách người like hoạt động đúng cách.                               | Số lượng like không được hiển thị chính xác hoặc modal danh sách người like không hoạt động đúng cách.                                     |
+| **Tương tác like**         | Cho phép người dùng like hoặc unlike bài viết. Hệ thống sẽ cập nhật số lượng like real-time và hiển thị trạng thái like của người dùng. Khi like, người dùng sẽ được thêm vào danh sách người like. Hệ thống kiểm tra spam và giới hạn số lần like của mỗi user (mỗi user chỉ được like 1 lần cho mỗi bài viết). Hệ thống phát hiện và chặn hành vi bom like (nhiều like trong thời gian ngắn).           | Tương tác like được thực hiện thành công và số lượng được cập nhật real-time. Trạng thái like được hiển thị chính xác. Hệ thống chặn spam và bom like hiệu quả. | Tương tác like không được thực hiện thành công hoặc số lượng không được cập nhật real-time. Trạng thái like không được hiển thị chính xác. Hệ thống không chặn được spam hoặc bom like. |
 
-### 1.3 CẬP NHẬT ĐƠN HÀNG
+### 1.3 TẠO BÌNH LUẬN
 
 #### 1.3.1 Thông tin màn hình:
 
-| Screen        | Cập nhật đơn hàng                                  |
-| ------------- | -------------------------------------------------- |
-| Description   | Trạng thái đơn hàng (xác nhận, đang giao, đã giao) |
-| Screen Access | Từ tab "Đơn hàng" trong trang thông báo            |
+| Screen        | Tạo bình luận mới                             |
+| ------------- | --------------------------------------------- |
+| Description   | Cho phép mọi người bình luận vào bài viết     |
+| Screen Access | Từ trang chi tiết bài viết với form bình luận |
 
 #### 1.3.2 Chi tiết thành phần màn hình:
 
-| Item                    | Type   | Data                           | Description                    |
-| ----------------------- | ------ | ------------------------------ | ------------------------------ |
-| **Icon đơn hàng**       | Icon   | Package                        | Icon đại diện cho đơn hàng     |
-| **Tiêu đề cập nhật**    | Text   | Tiêu đề thông báo đơn hàng     | Tiêu đề của thông báo đơn hàng |
-| **Nội dung cập nhật**   | Text   | Nội dung chi tiết cập nhật     | Nội dung chi tiết của cập nhật |
-| **Mã đơn hàng**         | Text   | Mã định danh đơn hàng          | Mã định danh của đơn hàng      |
-| **Trạng thái mới**      | Badge  | Xác nhận / Đang giao / Đã giao | Trạng thái mới của đơn hàng    |
-| **Thời gian cập nhật**  | Text   | Thời gian cập nhật trạng thái  | Thời gian cập nhật trạng thái  |
-| **Thông tin giao hàng** | Text   | Thông tin giao hàng            | Thông tin về việc giao hàng    |
-| **Dự kiến nhận hàng**   | Text   | Dự kiến nhận hàng              | Thời gian dự kiến nhận hàng    |
-| **Nút xem chi tiết**    | Button | Xem chi tiết đơn hàng          | Nút để xem chi tiết đơn hàng   |
-| **Nút theo dõi**        | Button | Theo dõi đơn hàng              | Nút để theo dõi đơn hàng       |
-| **Mức độ ưu tiên**      | Badge  | Cao                            | Mức độ ưu tiên của thông báo   |
+| Item                       | Type      | Data                          | Description                    |
+| -------------------------- | --------- | ----------------------------- | ------------------------------ |
+| **Form bình luận**         | Form      | Form viết bình luận           | Form để viết bình luận mới     |
+| **Avatar người dùng**      | Avatar    | Ảnh đại diện người dùng       | Avatar của người dùng hiện tại |
+| **Tên người dùng**         | Text      | Tên người dùng hiện tại       | Tên của người dùng hiện tại    |
+| **Ô nhập bình luận**       | Textarea  | Nội dung bình luận            | Ô nhập nội dung bình luận      |
+| **Upload hình ảnh**        | FileInput | Upload hình ảnh đính kèm      | Ô upload hình ảnh đính kèm     |
+| **Preview hình ảnh**       | Image     | Xem trước hình ảnh đã upload  | Xem trước hình ảnh đã upload   |
+| **Nút xóa hình ảnh**       | Button    | Xóa hình ảnh                  | Nút để xóa hình ảnh đã upload  |
+| **Cài đặt quyền riêng tư** | Select    | Công khai / Bạn bè / Riêng tư | Dropdown chọn quyền riêng tư   |
+| **Nút gửi bình luận**      | Button    | Gửi bình luận                 | Nút để gửi bình luận           |
+| **Nút hủy**                | Button    | Hủy                           | Nút để hủy tạo bình luận       |
+| **Thông báo thành công**   | Toast     | Đã gửi bình luận              | Thông báo khi gửi thành công   |
+| **Thông báo lỗi**          | Toast     | Không thể gửi bình luận       | Thông báo khi không thể gửi    |
 
 #### 1.3.3 Hành động và xử lý:
 
-| Action Name                    | Description                                                                                                                                                                                                                                   | Success                                                                                                                 | Failure                                                                                                                                  |
-| ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| **Hiển thị cập nhật đơn hàng** | Hiển thị thông báo cập nhật trạng thái đơn hàng với thông tin đầy đủ bao gồm mã đơn hàng, trạng thái mới, thời gian cập nhật, thông tin giao hàng, và dự kiến nhận hàng. Thông báo được hiển thị với màu sắc và icon phù hợp theo trạng thái. | Thông báo cập nhật đơn hàng được hiển thị đầy đủ và chính xác. Thông tin được trình bày rõ ràng và dễ đọc.              | Thông báo cập nhật đơn hàng không được hiển thị đầy đủ hoặc không chính xác. Thông tin không được trình bày rõ ràng hoặc khó đọc.        |
-| **Truy cập chi tiết đơn hàng** | Cho phép người dùng truy cập trực tiếp đến trang chi tiết đơn hàng thông qua nút "Xem chi tiết đơn hàng" hoặc "Theo dõi đơn hàng". Hệ thống sẽ chuyển hướng đến trang quản lý đơn hàng tương ứng.                                             | Người dùng được chuyển hướng chính xác đến trang chi tiết đơn hàng. Trang đơn hàng hiển thị đầy đủ thông tin cập nhật.  | Người dùng không được chuyển hướng chính xác đến trang chi tiết đơn hàng. Trang đơn hàng không hiển thị đầy đủ thông tin cập nhật.       |
-| **Theo dõi tiến độ giao hàng** | Hiển thị thông tin chi tiết về tiến độ giao hàng bao gồm vị trí hiện tại, thời gian dự kiến nhận hàng, và thông tin liên hệ shipper. Hệ thống sẽ cập nhật thông tin real-time khi có thay đổi.                                                | Thông tin tiến độ giao hàng được hiển thị chính xác và cập nhật real-time. Người dùng có thể theo dõi đơn hàng dễ dàng. | Thông tin tiến độ giao hàng không được hiển thị chính xác hoặc không cập nhật real-time. Người dùng không thể theo dõi đơn hàng dễ dàng. |
+| Action Name                  | Description                                                                                                                                                                                               | Success                                                                                                                       | Failure                                                                                                                                                   |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Tạo bình luận mới**        | Cho phép người dùng tạo bình luận mới cho bài viết bằng cách điền nội dung vào form, đính kèm hình ảnh (tùy chọn), và chọn quyền riêng tư. Hệ thống sẽ validate dữ liệu trước khi cho phép gửi bình luận. Hệ thống kiểm tra spam và giới hạn số lần bình luận của mỗi user trong khoảng thời gian nhất định để chống bom comment. | Bình luận được tạo thành công và hiển thị trong danh sách. Form được điền đầy đủ thông tin và validation hoạt động đúng cách. Hệ thống chặn spam và bom comment hiệu quả. | Bình luận không được tạo thành công hoặc không hiển thị trong danh sách. Form không được điền đầy đủ thông tin hoặc validation không hoạt động đúng cách. Hệ thống không chặn được spam hoặc bom comment. |
+| **Upload hình ảnh đính kèm** | Cho phép người dùng upload hình ảnh đính kèm với bình luận và hiển thị preview trước khi gửi. Hệ thống sẽ validate định dạng file, kích thước, và hiển thị preview để người dùng kiểm tra.                | Hình ảnh được upload thành công và preview hiển thị chính xác. Validation file hoạt động đúng cách.                           | Hình ảnh không được upload thành công hoặc preview không hiển thị chính xác. Validation file không hoạt động đúng cách.                                   |
 
-### 1.4 THÔNG BÁO CÓ HÀNG
+### 1.4 XÓA BÌNH LUẬN
 
 #### 1.4.1 Thông tin màn hình:
 
-| Screen        | Thông báo có hàng                                                           |
-| ------------- | --------------------------------------------------------------------------- |
-| Description   | Thông báo khi sản phẩm đặt trước hoặc sản phẩm theo yêu cầu đã được nhập về |
-| Screen Access | Từ tab "Yêu thích" hoặc "Hệ thống" trong trang thông báo                    |
+| Screen        | Xóa bình luận                                           |
+| ------------- | ------------------------------------------------------- |
+| Description   | Cho phép người bình luận có thể xóa bình luận           |
+| Screen Access | Từ trang chi tiết bài viết với nút "Xóa" trên bình luận |
 
 #### 1.4.2 Chi tiết thành phần màn hình:
 
-| Item                  | Type   | Data                            | Description                        |
-| --------------------- | ------ | ------------------------------- | ---------------------------------- |
-| **Icon có hàng**      | Icon   | Package / Heart                 | Icon đại diện cho có hàng          |
-| **Tiêu đề có hàng**   | Text   | Tiêu đề thông báo có hàng       | Tiêu đề của thông báo có hàng      |
-| **Nội dung có hàng**  | Text   | Nội dung chi tiết có hàng       | Nội dung chi tiết của có hàng      |
-| **Tên sản phẩm**      | Text   | Tên sản phẩm có hàng            | Tên sản phẩm đã có hàng trở lại    |
-| **Loại thông báo**    | Badge  | Đặt trước / Yêu cầu / Yêu thích | Loại thông báo có hàng             |
-| **Số lượng có sẵn**   | Text   | Số lượng sản phẩm có sẵn        | Số lượng sản phẩm có sẵn           |
-| **Giá sản phẩm**      | Text   | Giá sản phẩm                    | Giá hiện tại của sản phẩm          |
-| **Thời gian có hàng** | Text   | Thời gian có hàng               | Thời gian sản phẩm có hàng trở lại |
-| **Cài đặt kênh thông báo** | Select | Push / Email / SMS / Tất cả     | Chọn kênh nhận thông báo           |
-| **Nút mua ngay**      | Button | Mua ngay                        | Nút để mua sản phẩm ngay           |
-| **Nút xem sản phẩm**  | Button | Xem sản phẩm                    | Nút để xem chi tiết sản phẩm       |
-| **Mức độ ưu tiên**    | Badge  | Trung bình                      | Mức độ ưu tiên của thông báo       |
+| Item                     | Type   | Data                                     | Description                       |
+| ------------------------ | ------ | ---------------------------------------- | --------------------------------- |
+| **Nút xóa bình luận**    | Button | Xóa                                      | Nút để xóa bình luận              |
+| **Icon xóa**             | Icon   | Trash2                                   | Icon đại diện cho xóa             |
+| **Modal xác nhận**       | Modal  | Modal xác nhận xóa                       | Modal để xác nhận xóa bình luận   |
+| **Tiêu đề modal**        | Text   | Xác nhận xóa bình luận                   | Tiêu đề của modal xác nhận        |
+| **Nội dung modal**       | Text   | Bạn có chắc chắn muốn xóa bình luận này? | Nội dung xác nhận xóa             |
+| **Thông tin bình luận**  | Card   | Thông tin bình luận sẽ xóa               | Card hiển thị thông tin bình luận |
+| **Nội dung bình luận**   | Text   | Nội dung bình luận                       | Nội dung của bình luận sẽ xóa     |
+| **Thời gian bình luận**  | Text   | Thời gian bình luận                      | Thời gian bình luận được đăng     |
+| **Số lượng tương tác**   | Text   | Số like, phản hồi                        | Số lượng tương tác của bình luận  |
+| **Cảnh báo dữ liệu**     | Alert  | Cảnh báo về việc mất dữ liệu             | Cảnh báo về hậu quả của việc xóa  |
+| **Nút xác nhận**         | Button | Xác nhận xóa                             | Nút để xác nhận xóa               |
+| **Nút hủy**              | Button | Hủy                                      | Nút để hủy thao tác xóa           |
+| **Thông báo thành công** | Toast  | Đã xóa bình luận                         | Thông báo khi xóa thành công      |
+| **Thông báo lỗi**        | Toast  | Không thể xóa bình luận                  | Thông báo khi không thể xóa       |
 
 #### 1.4.3 Hành động và xử lý:
 
-| Action Name                      | Description                                                                                                                                                                                               | Success                                                                                                                            | Failure                                                                                                                                             |
-| -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Hiển thị thông báo có hàng**   | Hiển thị thông báo có hàng với thông tin đầy đủ bao gồm tên sản phẩm, loại thông báo, số lượng có sẵn, giá sản phẩm, và thời gian có hàng. Thông báo được hiển thị với icon và màu sắc phù hợp theo loại. | Thông báo có hàng được hiển thị đầy đủ và chính xác. Thông tin được trình bày rõ ràng và dễ đọc.                                   | Thông báo có hàng không được hiển thị đầy đủ hoặc không chính xác. Thông tin không được trình bày rõ ràng hoặc khó đọc.                             |
-| **Truy cập sản phẩm có hàng**    | Cho phép người dùng truy cập trực tiếp đến trang sản phẩm đã có hàng thông qua nút "Mua ngay" hoặc "Xem sản phẩm". Hệ thống sẽ chuyển hướng đến trang sản phẩm tương ứng với thông tin cập nhật.          | Người dùng được chuyển hướng chính xác đến trang sản phẩm có hàng. Trang sản phẩm hiển thị đầy đủ thông tin và trạng thái có hàng. | Người dùng không được chuyển hướng chính xác đến trang sản phẩm có hàng. Trang sản phẩm không hiển thị đầy đủ thông tin và trạng thái có hàng.      |
-| **Cập nhật trạng thái sản phẩm** | Tự động cập nhật trạng thái sản phẩm từ "Hết hàng" hoặc "Đặt trước" thành "Có hàng" khi sản phẩm được nhập về. Hệ thống sẽ gửi thông báo cho tất cả người dùng đã quan tâm đến sản phẩm đó qua các kênh mà người dùng đã chọn (push notification, email, hoặc SMS). Người dùng có thể cài đặt kênh nhận thông báo trong cài đặt tài khoản.               | Trạng thái sản phẩm được cập nhật chính xác và thông báo được gửi đến đúng người dùng qua kênh đã chọn. Người dùng nhận được thông báo kịp thời.    | Trạng thái sản phẩm không được cập nhật chính xác hoặc thông báo không được gửi đến đúng người dùng. Thông báo không được gửi qua kênh đã chọn. Người dùng không nhận được thông báo kịp thời. |
+| Action Name                 | Description                                                                                                                                                                                                                         | Success                                                                                                         | Failure                                                                                                                      |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| **Xóa bình luận**           | Cho phép người dùng xóa bình luận đã đăng với xác nhận trước khi thực hiện. Hệ thống sẽ hiển thị modal xác nhận với thông tin bình luận và cảnh báo về việc mất dữ liệu. Sau khi xóa, tất cả dữ liệu liên quan sẽ bị xóa vĩnh viễn. | Bình luận được xóa thành công và tất cả dữ liệu liên quan được xóa. Modal xác nhận được hiển thị trước khi xóa. | Bình luận không được xóa thành công hoặc dữ liệu liên quan không được xóa. Modal xác nhận không được hiển thị trước khi xóa. |
+| **Xác nhận xóa**            | Cho phép người dùng xác nhận việc xóa bình luận thông qua modal xác nhận. Modal sẽ hiển thị thông tin chi tiết về bình luận, số lượng tương tác, và cảnh báo về hậu quả của việc xóa.                                               | Modal xác nhận được hiển thị với thông tin đầy đủ và người dùng có thể xác nhận dễ dàng.                        | Modal xác nhận không được hiển thị với thông tin đầy đủ hoặc người dùng không thể xác nhận dễ dàng.                          |
+| **Xử lý dữ liệu liên quan** | Tự động xóa tất cả dữ liệu liên quan đến bình luận bao gồm like, phản hồi, và thông báo. Hệ thống sẽ thông báo cho người tương tác về việc bình luận đã bị xóa.                                                                     | Tất cả dữ liệu liên quan được xóa chính xác và thông báo được gửi đến người tương tác.                          | Dữ liệu liên quan không được xóa chính xác hoặc thông báo không được gửi đến người tương tác.                                |
 
-### 1.5 QUẢN LÝ TRẠNG THÁI THÔNG BÁO
+### 1.5 CHỈNH SỬA BÌNH LUẬN
 
 #### 1.5.1 Thông tin màn hình:
 
-| Screen        | Quản lý trạng thái thông báo                           |
-| ------------- | ------------------------------------------------------ |
-| Description   | Theo dõi và quản lý trạng thái các thông báo           |
-| Screen Access | Từ trang danh sách thông báo với các chức năng quản lý |
+| Screen        | Chỉnh sửa bình luận                                           |
+| ------------- | ------------------------------------------------------------- |
+| Description   | Cho phép người dùng sửa đổi nội dung bình luận                |
+| Screen Access | Từ trang chi tiết bài viết với nút "Chỉnh sửa" trên bình luận |
 
 #### 1.5.2 Chi tiết thành phần màn hình:
 
-| Item                      | Type   | Data                          | Description                             |
-| ------------------------- | ------ | ----------------------------- | --------------------------------------- |
-| **Số thông báo chưa đọc** | Badge  | Số lượng thông báo chưa đọc   | Hiển thị số lượng thông báo chưa đọc    |
-| **Nút đánh dấu tất cả**   | Button | Đánh dấu tất cả đã đọc        | Nút để đánh dấu tất cả thông báo đã đọc |
-| **Nút xóa tất cả**        | Button | Xóa tất cả thông báo          | Nút để xóa tất cả thông báo             |
-| **Nút đánh dấu đã đọc**   | Button | Đánh dấu đã đọc               | Nút để đánh dấu thông báo đã đọc        |
-| **Nút xóa thông báo**     | Button | Xóa thông báo                 | Nút để xóa thông báo                    |
-| **Trạng thái đọc**        | Badge  | Đã đọc / Chưa đọc             | Badge hiển thị trạng thái đọc           |
-| **Màu trạng thái**        | Color  | Xanh / Xám                    | Màu sắc đại diện cho trạng thái đọc     |
-| **Thời gian cập nhật**    | Text   | Thời gian cập nhật cuối       | Thời gian cập nhật trạng thái cuối      |
-| **Thông báo cập nhật**    | Toast  | Thông báo cập nhật trạng thái | Thông báo khi trạng thái thay đổi       |
-| **Cập nhật real-time**    | System | Cập nhật tự động              | Hệ thống cập nhật trạng thái tự động    |
+| Item                     | Type      | Data                         | Description                         |
+| ------------------------ | --------- | ---------------------------- | ----------------------------------- |
+| **Nút chỉnh sửa**        | Button    | Chỉnh sửa                    | Nút để chỉnh sửa bình luận          |
+| **Icon chỉnh sửa**       | Icon      | Edit                         | Icon đại diện cho chỉnh sửa         |
+| **Form chỉnh sửa**       | Form      | Form chỉnh sửa bình luận     | Form để chỉnh sửa bình luận         |
+| **Nội dung hiện tại**    | Textarea  | Nội dung bình luận hiện tại  | Ô nhập nội dung bình luận           |
+| **Hình ảnh hiện tại**    | Image     | Hình ảnh đã đính kèm         | Hình ảnh hiện tại của bình luận     |
+| **Nút thêm hình ảnh**    | Button    | Thêm hình ảnh                | Nút để thêm hình ảnh mới            |
+| **Nút xóa hình ảnh**     | Button    | Xóa hình ảnh                 | Nút để xóa hình ảnh                 |
+| **Upload hình ảnh mới**  | FileInput | Upload hình ảnh mới          | Ô upload hình ảnh mới               |
+| **Preview hình ảnh mới** | Image     | Xem trước hình ảnh mới       | Xem trước hình ảnh mới              |
+| **Lịch sử chỉnh sửa**    | Timeline  | Lịch sử các lần chỉnh sửa    | Timeline hiển thị lịch sử chỉnh sửa |
+| **Nút lưu thay đổi**     | Button    | Lưu thay đổi                 | Nút để lưu các thay đổi             |
+| **Nút hủy**              | Button    | Hủy                          | Nút để hủy chỉnh sửa                |
+| **Thông báo thành công** | Toast     | Đã cập nhật bình luận        | Thông báo khi cập nhật thành công   |
+| **Thông báo lỗi**        | Toast     | Không thể cập nhật bình luận | Thông báo khi không thể cập nhật    |
 
 #### 1.5.3 Hành động và xử lý:
 
-| Action Name                     | Description                                                                                                                                                                                             | Success                                                                                                                                 | Failure                                                                                                                                                  |
-| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Đánh dấu thông báo đã đọc**   | Cho phép người dùng đánh dấu thông báo đã đọc hoặc chưa đọc. Hệ thống sẽ cập nhật trạng thái đọc và hiển thị số lượng thông báo chưa đọc. Có thể đánh dấu từng thông báo hoặc đánh dấu tất cả cùng lúc. | Trạng thái đọc được cập nhật chính xác và số lượng thông báo chưa đọc được hiển thị đúng. Người dùng có thể quản lý trạng thái dễ dàng. | Trạng thái đọc không được cập nhật chính xác hoặc số lượng thông báo chưa đọc không được hiển thị đúng. Người dùng không thể quản lý trạng thái dễ dàng. |
-| **Xóa thông báo**               | Cho phép người dùng xóa thông báo không cần thiết. Có thể xóa từng thông báo hoặc xóa tất cả thông báo cùng lúc. Hệ thống sẽ hiển thị xác nhận trước khi xóa và cập nhật danh sách sau khi xóa.         | Thông báo được xóa thành công và danh sách được cập nhật. Xác nhận xóa được hiển thị trước khi thực hiện.                               | Thông báo không được xóa thành công hoặc danh sách không được cập nhật. Xác nhận xóa không được hiển thị trước khi thực hiện.                            |
-| **Cập nhật số lượng thông báo** | Tự động cập nhật số lượng thông báo chưa đọc khi có thông báo mới hoặc khi trạng thái đọc thay đổi. Hệ thống sẽ hiển thị số lượng chính xác và cập nhật real-time.                                      | Số lượng thông báo chưa đọc được cập nhật chính xác và hiển thị real-time. Badge số lượng được cập nhật kịp thời.                       | Số lượng thông báo chưa đọc không được cập nhật chính xác hoặc không hiển thị real-time. Badge số lượng không được cập nhật kịp thời.                    |
+| Action Name               | Description                                                                                                                                                                                          | Success                                                                                                        | Failure                                                                                                                         |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| **Chỉnh sửa bình luận**   | Cho phép người dùng chỉnh sửa bình luận đã đăng bao gồm nội dung, hình ảnh đính kèm, và cài đặt quyền riêng tư. Hệ thống sẽ lưu lịch sử chỉnh sửa và thông báo cho người tương tác về việc cập nhật. | Bình luận được chỉnh sửa thành công và lịch sử được lưu. Thông báo được gửi đến người tương tác.               | Bình luận không được chỉnh sửa thành công hoặc lịch sử không được lưu. Thông báo không được gửi đến người tương tác.            |
+| **Quản lý hình ảnh**      | Cho phép người dùng thêm, xóa, hoặc thay thế hình ảnh trong bình luận. Hệ thống sẽ hiển thị preview của hình ảnh mới và xác nhận trước khi thực hiện thay đổi.                                       | Hình ảnh được quản lý thành công và preview hiển thị chính xác. Xác nhận hoạt động đúng cách.                  | Hình ảnh không được quản lý thành công hoặc preview không hiển thị chính xác. Xác nhận không hoạt động đúng cách.               |
+| **Lưu lịch sử chỉnh sửa** | Tự động lưu lịch sử các lần chỉnh sửa bình luận bao gồm thời gian, nội dung thay đổi, và người thực hiện. Hệ thống sẽ hiển thị timeline lịch sử để người dùng có thể theo dõi các thay đổi.          | Lịch sử chỉnh sửa được lưu đầy đủ và timeline hiển thị chính xác. Người dùng có thể theo dõi thay đổi dễ dàng. | Lịch sử chỉnh sửa không được lưu đầy đủ hoặc timeline không hiển thị chính xác. Người dùng không thể theo dõi thay đổi dễ dàng. |
