@@ -1,238 +1,217 @@
 # TỔNG HỢP CHỨC NĂNG
 
-_Dựa trên tài liệu yêu cầu KH-20_RO.MD - Chức năng quản lý đơn hàng của User_
+_Dựa trên tài liệu yêu cầu KH-20_RO.MD - Chức năng khuyến mãi của User_
 
 ## MỤC LỤC
 
-1. [Chức năng quản lý đơn hàng](#1-chức-năng-quản-lý-đơn-hàng)
-   - 1.1 [Hiển thị danh sách đơn hàng](#11-hiển-thị-danh-sách-đơn-hàng)
-   - 1.2 [Xem chi tiết đơn hàng](#12-xem-chi-tiết-đơn-hàng)
-   - 1.3 [Đặt lại đơn hàng](#13-đặt-lại-đơn-hàng)
-   - 1.4 [Đánh giá đơn hàng](#14-đánh-giá-đơn-hàng)
-   - 1.5 [Hủy đơn hàng](#15-hủy-đơn-hàng)
-   - 1.6 [Theo dõi đơn hàng](#16-theo-dõi-đơn-hàng)
-   - 1.7 [Yêu cầu đổi/trả hàng](#17-yêu-cầu-đổi-trả-hàng)
+1. [Chức năng khuyến mãi](#1-chức-năng-khuyến-mãi)
+   - 1.1 [Hiển thị các mã giảm giá](#11-hiển-thị-các-mã-giảm-giá)
+   - 1.2 [Xem chi tiết mã giảm](#12-xem-chi-tiết-mã-giảm)
+   - 1.3 [Áp dụng mã giảm giá](#13-áp-dụng-mã-giảm-giá)
+   - 1.4 [Chức năng xếp hạng người dùng](#14-chức-năng-xếp-hạng-người-dùng)
+   - 1.5 [Xem xếp hạng hiện tại](#15-xem-xếp-hạng-hiện-tại)
+   - 1.6 [Mã giảm cho riêng từng sản phẩm](#16-mã-giảm-cho-riêng-từng-sản-phẩm)
 
 ---
 
-## 1. CHỨC NĂNG QUẢN LÝ ĐƠN HÀNG
+## 1. CHỨC NĂNG KHUYẾN MÃI
 
-### 1.1 HIỂN THỊ DANH SÁCH ĐƠN HÀNG
+### 1.1 HIỂN THỊ CÁC MÃ GIẢM GIÁ
 
 #### 1.1.1 Thông tin màn hình:
 
-| Screen        | Danh sách đơn hàng                                        |
-| ------------- | --------------------------------------------------------- |
-| Description   | Hiển thị danh sách đơn hàng đã đặt hàng / đã hủy đặt hàng |
-| Screen Access | Từ trang tài khoản, click "Xem lịch sử giao dịch"         |
+| Screen        | Hiển thị các mã giảm giá                                                      |
+| ------------- | ----------------------------------------------------------------------------- |
+| Description   | Mã giảm giá được Admin tạo với số lượng có hạn và hiển thị ở các nơi mua hàng |
+| Screen Access | Tích hợp trong trang giỏ hàng và trang sản phẩm                               |
 
 #### 1.1.2 Chi tiết thành phần màn hình:
 
-| Item                    | Type      | Data                                                    | Description                              |
-| ----------------------- | --------- | ------------------------------------------------------- | ---------------------------------------- |
-| **Tiêu đề trang**       | Text      | Lịch sử đơn hàng                                        | Tiêu đề chính của trang                  |
-| **Bộ lọc trạng thái**   | Select    | Tất cả, Chờ xử lý, Đang giao hàng, Đã giao hàng, Đã hủy, Đã hoàn tiền, Hoàn tiền một phần | Dropdown để lọc đơn hàng theo trạng thái |
-| **Bộ lọc thời gian**    | Select    | 7 ngày qua, 30 ngày qua, 3 tháng qua, Tất cả            | Dropdown để lọc đơn hàng theo thời gian  |
-| **Tìm kiếm đơn hàng**   | Input     | Nhập mã đơn hàng                                        | Input để tìm kiếm đơn hàng theo mã       |
-| **Danh sách đơn hàng**  | Card List | Hiển thị từng đơn hàng                                  | Danh sách các đơn hàng                   |
-| **Mã đơn hàng**         | Text      | Mã đơn hàng                                             | Mã định danh duy nhất của đơn hàng       |
-| **Ngày đặt hàng**       | Text      | Ngày đặt hàng                                           | Ngày tạo đơn hàng                        |
-| **Trạng thái đơn hàng** | Badge     | Trạng thái hiện tại                                     | Badge hiển thị trạng thái đơn hàng       |
-| **Tổng tiền**           | Text      | Tổng tiền đơn hàng (VNĐ)                                | Tổng tiền của đơn hàng                   |
-| **Nút xem chi tiết**    | Button    | Xem chi tiết                                            | Nút để xem chi tiết đơn hàng             |
-| **Nút đặt lại**         | Button    | Đặt lại                                                 | Nút để đặt lại đơn hàng                  |
+| Item                      | Type   | Data                             | Description                       |
+| ------------------------- | ------ | -------------------------------- | --------------------------------- |
+| **Tiêu đề khuyến mãi**    | Text   | Mã giảm giá                      | Tiêu đề của khu vực khuyến mãi    |
+| **Icon khuyến mãi**       | Icon   | Percent                          | Icon đại diện cho khuyến mãi      |
+| **Danh sách mã giảm giá** | Card   | Danh sách các mã giảm giá có sẵn | Hiển thị danh sách mã giảm giá    |
+| **Mã giảm giá**           | Text   | WELCOME10, SAVE50K               | Mã code của giảm giá              |
+| **Loại giảm giá**         | Badge  | Phần trăm / Cố định              | Loại giảm giá (percentage/fixed)  |
+| **Mức giảm giá**          | Text   | 10% / 50.000 VNĐ                 | Mức giảm giá cụ thể               |
+| **Điều kiện áp dụng**     | Text   | Đơn hàng tối thiểu               | Điều kiện để áp dụng mã giảm giá  |
+| **Mô tả mã giảm giá**     | Text   | Mô tả chi tiết mã giảm giá       | Mô tả về mã giảm giá              |
+| **Thời gian hiệu lực**    | Text   | Thời gian áp dụng                | Thời gian mã giảm giá có hiệu lực |
+| **Số lượng còn lại**      | Text   | Số lượng mã còn lại              | Số lượng mã giảm giá còn lại      |
+| **Giới hạn lượt dùng/user** | Text   | Số lượt dùng tối đa mỗi user     | Giới hạn số lần mỗi user có thể dùng |
+| **Nút áp dụng**           | Button | Áp dụng mã                       | Nút để áp dụng mã giảm giá        |
 
 #### 1.1.3 Hành động và xử lý:
 
-| Action Name                      | Description                                                                                                                                                                                                                                           | Success                                                                                   | Failure                                                                                                       |
-| -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| **Hiển thị danh sách đơn hàng**  | Hiển thị tất cả đơn hàng của người dùng với thông tin cơ bản bao gồm mã đơn hàng, ngày đặt hàng, trạng thái, tổng tiền. Danh sách được sắp xếp theo thời gian đặt hàng mới nhất. Hỗ trợ phân trang để hiển thị nhiều đơn hàng.                        | Danh sách đơn hàng được hiển thị đầy đủ và chính xác. Giao diện rõ ràng và dễ sử dụng.    | Không thể hiển thị danh sách đơn hàng hoặc thông tin không chính xác. Giao diện bị lỗi hoặc không responsive. |
-| **Lọc đơn hàng theo trạng thái** | Cho phép người dùng lọc đơn hàng theo trạng thái cụ thể như Chờ xử lý, Đang giao hàng, Đã giao hàng, Đã hủy. Khi chọn trạng thái, danh sách sẽ chỉ hiển thị những đơn hàng có trạng thái tương ứng. Hỗ trợ chọn "Tất cả" để hiển thị tất cả đơn hàng. | Đơn hàng được lọc theo trạng thái chính xác. Danh sách được cập nhật ngay lập tức.        | Không thể lọc đơn hàng theo trạng thái hoặc kết quả lọc không chính xác. Danh sách không được cập nhật.       |
-| **Tìm kiếm đơn hàng**            | Cho phép người dùng tìm kiếm đơn hàng bằng cách nhập mã đơn hàng vào ô tìm kiếm. Hệ thống sẽ tìm kiếm và hiển thị đơn hàng có mã phù hợp. Tìm kiếm hỗ trợ tìm kiếm một phần của mã đơn hàng.                                                          | Đơn hàng được tìm thấy chính xác và hiển thị trong danh sách. Tìm kiếm hoạt động mượt mà. | Không thể tìm kiếm đơn hàng hoặc kết quả tìm kiếm không chính xác. Tìm kiếm không hoạt động hoặc chậm.        |
+| Action Name                     | Description                                                                                                                                                                                                                                                          | Success                                                                                                                       | Failure                                                                                                                     |
+| ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| **Hiển thị mã giảm giá**        | Hiển thị danh sách các mã giảm giá có sẵn với thông tin chi tiết bao gồm mã code, loại giảm giá, mức giảm giá, điều kiện áp dụng, và thời gian hiệu lực. Mã giảm giá được Admin tạo với số lượng có hạn và hiển thị ở các nơi mua hàng để người dùng có thể sử dụng. | Danh sách mã giảm giá được hiển thị đầy đủ và chính xác. Thông tin được trình bày rõ ràng và dễ hiểu.                         | Không thể hiển thị danh sách mã giảm giá hoặc thông tin không chính xác. Giao diện khó đọc hoặc thiếu thông tin quan trọng. |
+| **Hiển thị thông tin chi tiết** | Cung cấp thông tin chi tiết về từng mã giảm giá bao gồm mô tả, điều kiện áp dụng, thời gian hiệu lực, và số lượng còn lại. Thông tin được cập nhật real-time và phản ánh đúng tình trạng hiện tại của mã giảm giá.                                                   | Thông tin chi tiết được hiển thị đầy đủ và chính xác. Thông tin được cập nhật real-time và phản ánh đúng tình trạng hiện tại. | Thông tin chi tiết không được hiển thị đầy đủ hoặc không chính xác. Thông tin không được cập nhật real-time.                |
+| **Hiển thị điều kiện áp dụng**  | Hiển thị rõ ràng các điều kiện để áp dụng mã giảm giá như giá trị đơn hàng tối thiểu, loại sản phẩm áp dụng, và thời gian hiệu lực. Hệ thống tự động kiểm tra và hiển thị trạng thái khả dụng của mã giảm giá dựa trên điều kiện hiện tại.                           | Điều kiện áp dụng được hiển thị rõ ràng và chính xác. Hệ thống tự động kiểm tra trạng thái khả dụng đúng cách.                | Điều kiện áp dụng không được hiển thị rõ ràng hoặc không chính xác. Hệ thống không kiểm tra trạng thái khả dụng đúng cách.  |
 
-### 1.2 XEM CHI TIẾT ĐƠN HÀNG
+### 1.2 XEM CHI TIẾT MÃ GIẢM GIÁ
 
 #### 1.2.1 Thông tin màn hình:
 
-| Screen        | Chi tiết đơn hàng                                   |
-| ------------- | --------------------------------------------------- |
-| Description   | Xem chi tiết đơn hàng đã đặt hàng / đã hủy đặt hàng |
-| Screen Access | Từ danh sách đơn hàng, click "Xem chi tiết"         |
+| Screen        | Xem chi tiết mã giảm giá                                                      |
+| ------------- | ----------------------------------------------------------------------------- |
+| Description   | Cho phép người dùng xem chi tiết thông tin mức giảm giá và các thông tin khác |
+| Screen Access | Từ trang giỏ hàng hoặc trang sản phẩm                                         |
 
 #### 1.2.2 Chi tiết thành phần màn hình:
 
-| Item                     | Type      | Data                                     | Description                          |
-| ------------------------ | --------- | ---------------------------------------- | ------------------------------------ |
-| **Tiêu đề trang**        | Text      | Chi tiết đơn hàng                        | Tiêu đề chính của trang              |
-| **Mã đơn hàng**          | Text      | Mã đơn hàng                              | Mã định danh duy nhất của đơn hàng   |
-| **Trạng thái đơn hàng**  | Badge     | Trạng thái hiện tại                      | Badge hiển thị trạng thái đơn hàng   |
-| **Thông tin khách hàng** | Card      | Thông tin người đặt hàng                 | Thông tin khách hàng                 |
-| **Danh sách sản phẩm**   | Card List | Hiển thị sản phẩm trong đơn hàng         | Danh sách sản phẩm trong đơn hàng    |
-| **Hình ảnh sản phẩm**    | Image     | Hình ảnh sản phẩm                        | Hình ảnh đại diện của sản phẩm       |
-| **Tên sản phẩm**         | Text      | Tên sản phẩm                             | Tên đầy đủ của sản phẩm              |
-| **Số lượng**             | Text      | Số lượng sản phẩm                        | Số lượng sản phẩm trong đơn hàng     |
-| **Giá sản phẩm**         | Text      | Giá sản phẩm (VNĐ)                       | Giá của từng sản phẩm                |
-| **Tổng tiền sản phẩm**   | Text      | Tổng tiền sản phẩm (VNĐ)                 | Tổng tiền của từng sản phẩm          |
-| **Thông tin giao hàng**  | Card      | Thông tin người nhận và địa chỉ          | Thông tin giao hàng                  |
-| **Thông tin thanh toán** | Card      | Phương thức và trạng thái thanh toán     | Thông tin thanh toán                 |
-| **Tóm tắt đơn hàng**     | Card      | Tạm tính, phí vận chuyển, giảm giá, tổng | Tóm tắt chi phí đơn hàng             |
-| **Lịch sử trạng thái**   | Timeline  | Timeline các trạng thái (bao gồm trạng thái hoàn tiền)                  | Hiển thị lịch sử thay đổi trạng thái |
+| Item                           | Type  | Data                                 | Description                         |
+| ------------------------------ | ----- | ------------------------------------ | ----------------------------------- |
+| **Tiêu đề chi tiết**           | Text  | Chi tiết mã giảm giá                 | Tiêu đề của trang chi tiết          |
+| **Mã giảm giá**                | Text  | Mã code của giảm giá                 | Mã định danh của mã giảm giá        |
+| **Loại giảm giá**              | Badge | Phần trăm / Cố định                  | Loại giảm giá                       |
+| **Mức giảm giá**               | Text  | Mức giảm giá cụ thể                  | Mức giảm giá chi tiết               |
+| **Mô tả chi tiết**             | Text  | Mô tả đầy đủ về mã giảm giá          | Mô tả chi tiết về mã giảm giá       |
+| **Điều kiện áp dụng**          | Card  | Thông tin điều kiện áp dụng          | Hiển thị điều kiện áp dụng          |
+| **Giá trị đơn hàng tối thiểu** | Text  | Giá trị đơn hàng tối thiểu           | Điều kiện giá trị đơn hàng          |
+| **Loại sản phẩm áp dụng**      | Text  | Loại sản phẩm được áp dụng           | Điều kiện loại sản phẩm             |
+| **Thời gian hiệu lực**         | Card  | Thông tin thời gian hiệu lực         | Hiển thị thời gian hiệu lực         |
+| **Ngày bắt đầu**               | Text  | Ngày bắt đầu áp dụng                 | Thời gian bắt đầu hiệu lực          |
+| **Ngày kết thúc**              | Text  | Ngày kết thúc áp dụng                | Thời gian kết thúc hiệu lực         |
+| **Số lượng còn lại**           | Text  | Số lượng mã còn lại                  | Số lượng mã giảm giá còn lại        |
+| **Giới hạn lượt dùng/user**    | Text  | Số lượt dùng tối đa mỗi user         | Giới hạn số lần mỗi user có thể dùng |
+| **Trạng thái**                 | Badge | Có hiệu lực / Hết hạn / Hết số lượng | Trạng thái hiện tại của mã giảm giá |
 
 #### 1.2.3 Hành động và xử lý:
 
-| Action Name                     | Description                                                                                                                                                                                                                              | Success                                                                                                            | Failure                                                                                                                 |
-| ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
-| **Hiển thị chi tiết đơn hàng**  | Hiển thị đầy đủ thông tin chi tiết của đơn hàng bao gồm thông tin khách hàng, danh sách sản phẩm, thông tin giao hàng, thông tin thanh toán, tóm tắt đơn hàng, và lịch sử trạng thái. Tất cả thông tin được trình bày rõ ràng và dễ đọc. | Chi tiết đơn hàng được hiển thị đầy đủ và chính xác. Giao diện rõ ràng và dễ đọc.                                  | Không thể hiển thị chi tiết đơn hàng hoặc thông tin không chính xác. Giao diện khó đọc hoặc thiếu thông tin quan trọng. |
-| **Hiển thị lịch sử trạng thái** | Hiển thị timeline các thay đổi trạng thái của đơn hàng theo thời gian thực tế. Bao gồm thời gian thay đổi, trạng thái cũ và mới (bao gồm trạng thái hoàn tiền như "Đã hoàn tiền", "Hoàn tiền một phần"), và người thực hiện thay đổi. Timeline được sắp xếp theo thứ tự thời gian và dễ theo dõi.                | Lịch sử trạng thái được hiển thị đầy đủ và chính xác theo timeline, bao gồm cả trạng thái hoàn tiền. Thông tin được sắp xếp rõ ràng và dễ theo dõi. | Lịch sử trạng thái không được hiển thị đầy đủ hoặc không chính xác. Timeline không được sắp xếp đúng hoặc khó theo dõi. Trạng thái hoàn tiền không được hiển thị. |
+| Action Name                       | Description                                                                                                                                                                                                                                                 | Success                                                                                                                     | Failure                                                                                                                                            |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Hiển thị chi tiết mã giảm giá** | Hiển thị đầy đủ thông tin chi tiết về mã giảm giá bao gồm mức giảm giá, mô tả, điều kiện áp dụng, thời gian hiệu lực, và trạng thái hiện tại. Thông tin được trình bày rõ ràng và dễ hiểu để người dùng có thể nắm bắt được tất cả các thông tin cần thiết. | Thông tin chi tiết mã giảm giá được hiển thị đầy đủ và chính xác. Thông tin được trình bày rõ ràng và dễ hiểu.              | Thông tin chi tiết mã giảm giá không được hiển thị đầy đủ hoặc không chính xác. Thông tin được trình bày khó hiểu hoặc thiếu thông tin quan trọng. |
+| **Kiểm tra trạng thái mã**        | Hệ thống tự động kiểm tra trạng thái hiện tại của mã giảm giá bao gồm tính hợp lệ, thời gian hiệu lực, và số lượng còn lại. Trạng thái được cập nhật real-time và hiển thị ngay lập tức khi có thay đổi.                                                    | Trạng thái mã giảm giá được kiểm tra chính xác và cập nhật real-time. Thông tin được hiển thị ngay lập tức khi có thay đổi. | Trạng thái mã giảm giá không được kiểm tra chính xác hoặc không được cập nhật real-time. Thông tin không được hiển thị ngay lập tức.               |
+| **Hiển thị điều kiện áp dụng**    | Hiển thị rõ ràng các điều kiện để áp dụng mã giảm giá bao gồm giá trị đơn hàng tối thiểu, loại sản phẩm áp dụng, và các điều kiện đặc biệt khác. Điều kiện được trình bày một cách dễ hiểu và có thể kiểm tra được.                                         | Điều kiện áp dụng được hiển thị rõ ràng và chính xác. Điều kiện được trình bày dễ hiểu và có thể kiểm tra được.             | Điều kiện áp dụng không được hiển thị rõ ràng hoặc không chính xác. Điều kiện được trình bày khó hiểu hoặc không thể kiểm tra được.                |
 
-### 1.3 ĐẶT LẠI ĐƠN HÀNG
+### 1.3 ÁP DỤNG MÃ GIẢM GIÁ
 
 #### 1.3.1 Thông tin màn hình:
 
-| Screen        | Đặt lại đơn hàng                             |
-| ------------- | -------------------------------------------- |
-| Description   | Cho phép người dùng đặt lại đơn hàng đã mua  |
-| Screen Access | Từ danh sách đơn hàng hoặc chi tiết đơn hàng |
+| Screen        | Áp dụng mã giảm giá                                          |
+| ------------- | ------------------------------------------------------------ |
+| Description   | Cho phép người dùng nhập và áp dụng mã giảm giá vào đơn hàng |
+| Screen Access | Tích hợp trong trang giỏ hàng                                |
 
 #### 1.3.2 Chi tiết thành phần màn hình:
 
-| Item                     | Type   | Data                                        | Description                      |
-| ------------------------ | ------ | ------------------------------------------- | -------------------------------- |
-| **Nút đặt lại**          | Button | Đặt lại                                     | Nút để đặt lại đơn hàng          |
-| **Modal xác nhận**       | Dialog | Xác nhận đặt lại đơn hàng                   | Dialog để xác nhận đặt lại       |
-| **Thông báo xác nhận**   | Text   | Bạn có chắc chắn muốn đặt lại đơn hàng này? | Thông báo xác nhận               |
-| **Nút xác nhận**         | Button | Xác nhận                                    | Nút để xác nhận đặt lại          |
-| **Nút hủy**              | Button | Hủy                                         | Nút để hủy đặt lại               |
-| **Thông báo thành công** | Toast  | Đã thêm sản phẩm vào giỏ hàng               | Thông báo khi đặt lại thành công |
-| **Thông báo lỗi**        | Toast  | Không thể đặt lại đơn hàng                  | Thông báo khi có lỗi xảy ra      |
+| Item                     | Type   | Data                      | Description                       |
+| ------------------------ | ------ | ------------------------- | --------------------------------- |
+| **Tiêu đề áp dụng**      | Text   | Mã giảm giá               | Tiêu đề của khu vực áp dụng mã    |
+| **Icon mã giảm giá**     | Icon   | Percent                   | Icon đại diện cho mã giảm giá     |
+| **Ô nhập mã**            | Input  | Nhập mã giảm giá          | Ô để nhập mã giảm giá             |
+| **Nút áp dụng**          | Button | Áp dụng                   | Nút để áp dụng mã giảm giá        |
+| **Thông báo lỗi**        | Alert  | Thông báo lỗi             | Thông báo khi mã không hợp lệ     |
+| **Thông báo thành công** | Alert  | Thông báo thành công      | Thông báo khi áp dụng thành công  |
+| **Mã đã áp dụng**        | Card   | Thông tin mã đã áp dụng   | Hiển thị thông tin mã đã áp dụng  |
+| **Tên mã**               | Text   | Tên mã giảm giá           | Tên của mã giảm giá               |
+| **Mức giảm giá**         | Text   | Mức giảm giá được áp dụng | Mức giảm giá hiện tại             |
+| **Số tiền giảm**         | Text   | Số tiền được giảm         | Số tiền được giảm từ đơn hàng     |
+| **Nút xóa mã**           | Button | Xóa mã                    | Nút để xóa mã giảm giá đã áp dụng |
 
 #### 1.3.3 Hành động và xử lý:
 
-| Action Name          | Description                                                                                                                                                                                                                                                                                      | Success                                                                                                                 | Failure                                                                                                                 |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| **Đặt lại đơn hàng** | Cho phép người dùng đặt lại đơn hàng đã mua trước đó bằng cách thêm tất cả sản phẩm trong đơn hàng vào giỏ hàng với số lượng tương ứng. Hệ thống sẽ kiểm tra tồn kho của sản phẩm và chỉ thêm những sản phẩm còn hàng. Sau khi đặt lại thành công, người dùng sẽ được chuyển đến trang giỏ hàng. | Đơn hàng được đặt lại thành công và sản phẩm được thêm vào giỏ hàng. Người dùng được chuyển đến trang giỏ hàng.         | Không thể đặt lại đơn hàng hoặc sản phẩm không được thêm vào giỏ hàng. Người dùng không được chuyển đến trang giỏ hàng. |
-| **Kiểm tra tồn kho** | Hệ thống tự động kiểm tra tồn kho của từng sản phẩm trong đơn hàng cũ trước khi đặt lại. Nếu sản phẩm hết hàng hoặc không đủ số lượng, hệ thống sẽ hiển thị thông báo và chỉ thêm những sản phẩm còn hàng.                                                                                       | Tồn kho được kiểm tra chính xác và thông báo được hiển thị khi cần thiết. Chỉ sản phẩm còn hàng được thêm vào giỏ hàng. | Không thể kiểm tra tồn kho hoặc thông tin tồn kho không chính xác. Sản phẩm hết hàng vẫn được thêm vào giỏ hàng.        |
+| Action Name              | Description                                                                                                                                                                                                                        | Success                                                                                                                | Failure                                                                                                                              |
+| ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| **Nhập mã giảm giá**     | Cho phép người dùng nhập mã giảm giá vào ô input và hệ thống sẽ kiểm tra tính hợp lệ của mã. Mã giảm giá có thể được nhập bằng cách gõ trực tiếp hoặc copy-paste từ các nguồn khác. Hệ thống hỗ trợ cả mã viết hoa và viết thường. | Mã giảm giá được nhập thành công và hệ thống kiểm tra tính hợp lệ. Giao diện phản hồi nhanh chóng và chính xác.        | Không thể nhập mã giảm giá hoặc hệ thống không kiểm tra tính hợp lệ. Giao diện phản hồi chậm hoặc không chính xác.                   |
+| **Kiểm tra mã giảm giá** | Hệ thống tự động kiểm tra tính hợp lệ của mã giảm giá bao gồm kiểm tra mã có tồn tại, còn hiệu lực, đủ điều kiện áp dụng, còn số lượng, và kiểm tra giới hạn lượt dùng của user (nếu có). Nếu mã hết số lượng hoặc user đã dùng hết lượt cho phép, hệ thống sẽ báo lỗi rõ ràng. Nếu mã hợp lệ, hệ thống sẽ hiển thị thông tin chi tiết và cho phép áp dụng.             | Mã giảm giá được kiểm tra chính xác và thông tin được hiển thị đầy đủ. Hệ thống phản hồi nhanh chóng và chính xác. Thông báo lỗi rõ ràng khi hết số lượng hoặc vượt quá giới hạn lượt dùng.     | Mã giảm giá không được kiểm tra chính xác hoặc thông tin không được hiển thị đầy đủ. Hệ thống phản hồi chậm hoặc không chính xác. Không báo lỗi rõ ràng khi hết số lượng hoặc vượt quá giới hạn.    |
+| **Áp dụng mã giảm giá**  | Khi mã giảm giá hợp lệ, hệ thống sẽ tự động áp dụng vào đơn hàng và tính toán lại tổng tiền. Hệ thống sẽ giảm số lượng mã còn lại và tăng số lượt đã dùng của user (nếu có giới hạn). Mức giảm giá được tính theo loại mã (phần trăm hoặc cố định) và được hiển thị rõ ràng trong tổng kết đơn hàng.                        | Mã giảm giá được áp dụng thành công và tổng tiền được tính toán chính xác. Số lượng mã và lượt dùng được cập nhật. Thông tin được hiển thị rõ ràng và dễ hiểu. | Mã giảm giá không được áp dụng thành công hoặc tổng tiền không được tính toán chính xác. Số lượng mã và lượt dùng không được cập nhật. Thông tin không được hiển thị rõ ràng.      |
+| **Xóa mã giảm giá**      | Cho phép người dùng xóa mã giảm giá đã áp dụng và hệ thống sẽ tính toán lại tổng tiền đơn hàng. Khi xóa mã, đơn hàng sẽ trở về trạng thái ban đầu không có giảm giá.                                                               | Mã giảm giá được xóa thành công và tổng tiền được tính toán lại chính xác. Giao diện được cập nhật ngay lập tức.       | Mã giảm giá không được xóa thành công hoặc tổng tiền không được tính toán lại chính xác. Giao diện không được cập nhật ngay lập tức. |
 
-### 1.4 ĐÁNH GIÁ ĐƠN HÀNG
+### 1.4 CHỨC NĂNG XẾP HẠNG NGƯỜI DÙNG
 
 #### 1.4.1 Thông tin màn hình:
 
-| Screen        | Đánh giá đơn hàng                                       |
-| ------------- | ------------------------------------------------------- |
-| Description   | Cho phép người dùng đánh giá sao và reviews về sản phẩm |
-| Screen Access | Từ chi tiết đơn hàng đã giao hàng                       |
+| Screen        | Chức năng xếp hạng người dùng                                                        |
+| ------------- | ------------------------------------------------------------------------------------ |
+| Description   | Mỗi sản phẩm mua sẽ được quy đổi thành tổng giá trị chi tiêu để phân hạng người dùng |
+| Screen Access | Tích hợp trong trang tài khoản người dùng                                            |
 
 #### 1.4.2 Chi tiết thành phần màn hình:
 
-| Item                     | Type        | Data                            | Description                           |
-| ------------------------ | ----------- | ------------------------------- | ------------------------------------- |
-| **Nút đánh giá**         | Button      | Đánh giá sản phẩm               | Nút để mở form đánh giá               |
-| **Modal đánh giá**       | Dialog      | Đánh giá sản phẩm               | Dialog để đánh giá sản phẩm           |
-| **Tên sản phẩm**         | Text        | Tên sản phẩm                    | Tên sản phẩm cần đánh giá             |
-| **Hình ảnh sản phẩm**    | Image       | Hình ảnh sản phẩm               | Hình ảnh đại diện của sản phẩm        |
-| **Đánh giá sao**         | Star Rating | 1-5 sao                         | Component để đánh giá bằng sao        |
-| **Nhận xét**             | Textarea    | Nhận xét về sản phẩm            | Textarea để nhập nhận xét             |
-| **Upload hình ảnh**      | File Input  | Upload hình ảnh                 | Input để upload hình ảnh đánh giá     |
-| **Nút gửi đánh giá**     | Button      | Gửi đánh giá                    | Nút để gửi đánh giá                   |
-| **Nút hủy**              | Button      | Hủy                             | Nút để hủy đánh giá                   |
-| **Thông báo thành công** | Toast       | Đánh giá đã được gửi thành công | Thông báo khi gửi đánh giá thành công |
+| Item                         | Type     | Data                            | Description                          |
+| ---------------------------- | -------- | ------------------------------- | ------------------------------------ |
+| **Tiêu đề xếp hạng**         | Text     | Thông tin thành viên            | Tiêu đề của khu vực xếp hạng         |
+| **Icon xếp hạng**            | Icon     | Crown                           | Icon đại diện cho xếp hạng           |
+| **Hạng hiện tại**            | Badge    | Bronze, Silver, Gold, Platinum  | Hạng hiện tại của người dùng         |
+| **Tổng chi tiêu**            | Text     | Tổng số tiền đã chi tiêu        | Tổng giá trị chi tiêu của người dùng |
+| **Điểm tích lũy**            | Text     | Số điểm tích lũy                | Điểm tích lũy từ các giao dịch       |
+| **Mức giảm giá**             | Text     | Phần trăm giảm giá theo hạng    | Mức giảm giá được hưởng theo hạng    |
+| **Tiến độ hạng tiếp theo**   | Progress | Tiến độ đến hạng tiếp theo      | Thanh tiến độ đến hạng tiếp theo     |
+| **Điều kiện hạng tiếp theo** | Text     | Điều kiện để lên hạng tiếp theo | Thông tin điều kiện lên hạng         |
+| **Lịch sử giao dịch**        | Button   | Xem lịch sử giao dịch           | Nút để xem lịch sử giao dịch         |
+| **Quyền lợi hạng**           | Card     | Danh sách quyền lợi theo hạng   | Hiển thị quyền lợi của hạng hiện tại |
 
 #### 1.4.3 Hành động và xử lý:
 
-| Action Name                  | Description                                                                                                                                                                                                                                             | Success                                                                                              | Failure                                                                                                    |
-| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| **Đánh giá sản phẩm**        | Cho phép người dùng đánh giá sản phẩm bằng cách chọn số sao (1-5), nhập nhận xét, và upload hình ảnh (tùy chọn). Đánh giá chỉ có thể thực hiện sau khi đơn hàng đã được giao hàng thành công. Hệ thống sẽ lưu đánh giá và hiển thị trên trang sản phẩm. | Đánh giá được gửi thành công và hiển thị trên trang sản phẩm. Thông báo xác nhận được hiển thị.      | Không thể gửi đánh giá hoặc đánh giá không được hiển thị trên trang sản phẩm. Thông báo lỗi được hiển thị. |
-| **Upload hình ảnh đánh giá** | Cho phép người dùng upload hình ảnh để minh họa cho đánh giá của mình. Hệ thống hỗ trợ upload nhiều hình ảnh và tự động resize để tối ưu hiệu suất. Hình ảnh được lưu trữ an toàn và hiển thị trong đánh giá.                                           | Hình ảnh được upload thành công và hiển thị trong đánh giá. Upload hoạt động mượt mà và nhanh chóng. | Không thể upload hình ảnh hoặc hình ảnh không được hiển thị trong đánh giá. Upload chậm hoặc bị lỗi.       |
+| Action Name                 | Description                                                                                                                                                                                                                      | Success                                                                                                                  | Failure                                                                                                                                  |
+| --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| **Tính toán xếp hạng**      | Hệ thống tự động tính toán xếp hạng người dùng dựa trên tổng giá trị chi tiêu và các tiêu chí do Admin thiết lập. Mỗi sản phẩm mua sẽ được quy đổi thành điểm tích lũy và tổng giá trị chi tiêu để xác định hạng của người dùng. | Xếp hạng người dùng được tính toán chính xác và cập nhật real-time. Hệ thống phản ánh đúng tình trạng chi tiêu hiện tại. | Xếp hạng người dùng không được tính toán chính xác hoặc không được cập nhật real-time. Hệ thống không phản ánh đúng tình trạng chi tiêu. |
+| **Hiển thị thông tin hạng** | Hiển thị đầy đủ thông tin về hạng hiện tại của người dùng bao gồm tên hạng, tổng chi tiêu, điểm tích lũy, mức giảm giá được hưởng, và tiến độ đến hạng tiếp theo. Thông tin được trình bày rõ ràng và dễ hiểu.                   | Thông tin hạng được hiển thị đầy đủ và chính xác. Thông tin được trình bày rõ ràng và dễ hiểu.                           | Thông tin hạng không được hiển thị đầy đủ hoặc không chính xác. Thông tin được trình bày khó hiểu hoặc thiếu thông tin quan trọng.       |
+| **Cập nhật tiến độ hạng**   | Hệ thống tự động cập nhật tiến độ đến hạng tiếp theo dựa trên chi tiêu hiện tại và điều kiện lên hạng. Tiến độ được hiển thị bằng thanh progress bar và thông tin cụ thể về số tiền cần chi thêm để lên hạng tiếp theo.          | Tiến độ hạng được cập nhật chính xác và hiển thị rõ ràng. Thông tin về điều kiện lên hạng được hiển thị đầy đủ.          | Tiến độ hạng không được cập nhật chính xác hoặc không được hiển thị rõ ràng. Thông tin về điều kiện lên hạng không được hiển thị đầy đủ. |
 
-### 1.5 HỦY ĐƠN HÀNG
+### 1.5 XEM XẾP HẠNG HIỆN TẠI
 
 #### 1.5.1 Thông tin màn hình:
 
-| Screen        | Hủy đơn hàng                                                                       |
-| ------------- | ---------------------------------------------------------------------------------- |
-| Description   | Cho phép người dùng hủy đơn hàng nếu đơn hàng chưa vào trạng thái "đang giao hàng" |
-| Screen Access | Từ chi tiết đơn hàng có trạng thái phù hợp                                         |
+| Screen        | Xem xếp hạng hiện tại                                           |
+| ------------- | --------------------------------------------------------------- |
+| Description   | Hiển thị các thông tin đơn hàng, số tiền đã chi trong tháng/năm |
+| Screen Access | Từ trang tài khoản người dùng                                   |
 
 #### 1.5.2 Chi tiết thành phần màn hình:
 
-| Item                     | Type     | Data                                    | Description                           |
-| ------------------------ | -------- | --------------------------------------- | ------------------------------------- |
-| **Nút hủy đơn hàng**     | Button   | Hủy đơn hàng                            | Nút để hủy đơn hàng                   |
-| **Modal xác nhận**       | Dialog   | Xác nhận hủy đơn hàng                   | Dialog để xác nhận hủy đơn hàng       |
-| **Thông báo xác nhận**   | Text     | Bạn có chắc chắn muốn hủy đơn hàng này? | Thông báo xác nhận                    |
-| **Lý do hủy đơn hàng**   | Select   | Lý do hủy đơn hàng                      | Dropdown để chọn lý do hủy            |
-| **Lý do chi tiết**       | Textarea | Nhập lý do hủy chi tiết (bắt buộc)     | Textarea để nhập lý do hủy tự do      |
-| **Ghi chú**              | Textarea | Ghi chú thêm                            | Textarea để nhập ghi chú              |
-| **Nút xác nhận hủy**     | Button   | Xác nhận hủy                            | Nút để xác nhận hủy đơn hàng          |
-| **Nút hủy**              | Button   | Hủy                                     | Nút để hủy thao tác                   |
-| **Thông báo thành công** | Toast    | Đơn hàng đã được hủy thành công         | Thông báo khi hủy đơn hàng thành công |
-| **Thông báo lỗi**        | Toast    | Không thể hủy đơn hàng                  | Thông báo khi có lỗi xảy ra           |
+| Item                        | Type  | Data                              | Description                            |
+| --------------------------- | ----- | --------------------------------- | -------------------------------------- |
+| **Tiêu đề thống kê**        | Text  | Thống kê chi tiêu                 | Tiêu đề của trang thống kê             |
+| **Thống kê theo thời gian** | Card  | Thống kê chi tiêu theo thời gian  | Hiển thị thống kê theo thời gian       |
+| **Chi tiêu tháng này**      | Text  | Số tiền chi tiêu trong tháng      | Tổng chi tiêu trong tháng hiện tại     |
+| **Chi tiêu năm này**        | Text  | Số tiền chi tiêu trong năm        | Tổng chi tiêu trong năm hiện tại       |
+| **Số đơn hàng**             | Text  | Tổng số đơn hàng đã đặt           | Tổng số đơn hàng đã thực hiện          |
+| **Đơn hàng thành công**     | Text  | Số đơn hàng thành công            | Số đơn hàng đã hoàn thành thành công   |
+| **Đơn hàng đang xử lý**     | Text  | Số đơn hàng đang xử lý            | Số đơn hàng đang trong quá trình xử lý |
+| **Biểu đồ chi tiêu**        | Chart | Biểu đồ chi tiêu theo thời gian   | Biểu đồ hiển thị xu hướng chi tiêu     |
+| **Top sản phẩm**            | Card  | Danh sách sản phẩm mua nhiều nhất | Hiển thị sản phẩm được mua nhiều nhất  |
+| **Lịch sử giao dịch**       | Table | Bảng lịch sử giao dịch            | Hiển thị lịch sử giao dịch chi tiết    |
 
 #### 1.5.3 Hành động và xử lý:
 
-| Action Name                | Description                                                                                                                                                                                                                                              | Success                                                                                                 | Failure                                                                                           |
-| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| **Hủy đơn hàng**           | Cho phép người dùng hủy đơn hàng nếu đơn hàng chưa vào trạng thái "Đang giao hàng". Khi hủy đơn hàng, người dùng cần chọn lý do hủy và nhập lý do chi tiết (bắt buộc) bằng văn bản tự do. Hệ thống sẽ cập nhật trạng thái đơn hàng thành "Đã hủy" và hoàn tiền nếu đã thanh toán. Trạng thái hoàn tiền sẽ được cập nhật thành "Đã hoàn tiền" hoặc "Hoàn tiền một phần" tùy theo tình huống. | Đơn hàng được hủy thành công và trạng thái được cập nhật. Hoàn tiền được xử lý đúng cách và trạng thái hoàn tiền được cập nhật. | Không thể hủy đơn hàng hoặc trạng thái không được cập nhật. Hoàn tiền không được xử lý đúng cách. Lý do hủy chi tiết chưa được nhập. |
-| **Kiểm tra điều kiện hủy** | Hệ thống tự động kiểm tra điều kiện để cho phép hủy đơn hàng. Chỉ những đơn hàng có trạng thái "Chờ xử lý" hoặc "Đã xác nhận" mới có thể được hủy. Đơn hàng đã vào trạng thái "Đang giao hàng" không thể hủy.                                            | Điều kiện hủy được kiểm tra chính xác và nút hủy được hiển thị/ẩn đúng cách.                            | Điều kiện hủy không được kiểm tra chính xác hoặc nút hủy được hiển thị khi không được phép.       |
+| Action Name                    | Description                                                                                                                                                                                                | Success                                                                                                                | Failure                                                                                                                              |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| **Hiển thị thống kê chi tiêu** | Hiển thị đầy đủ thống kê chi tiêu của người dùng bao gồm chi tiêu theo tháng/năm, số đơn hàng, và các chỉ số khác. Thống kê được tính toán chính xác và hiển thị theo định dạng dễ đọc.                    | Thống kê chi tiêu được hiển thị đầy đủ và chính xác. Thống kê được trình bày theo định dạng dễ đọc và hiểu.            | Thống kê chi tiêu không được hiển thị đầy đủ hoặc không chính xác. Thống kê được trình bày khó đọc hoặc không hiểu được.             |
+| **Hiển thị biểu đồ chi tiêu**  | Hiển thị biểu đồ chi tiêu theo thời gian để người dùng có thể theo dõi xu hướng chi tiêu của mình. Biểu đồ được cập nhật real-time và hiển thị các thông tin quan trọng như xu hướng tăng/giảm chi tiêu.   | Biểu đồ chi tiêu được hiển thị chính xác và cập nhật real-time. Biểu đồ hiển thị xu hướng chi tiêu rõ ràng và dễ hiểu. | Biểu đồ chi tiêu không được hiển thị chính xác hoặc không được cập nhật real-time. Biểu đồ không hiển thị xu hướng chi tiêu rõ ràng. |
+| **Hiển thị lịch sử giao dịch** | Hiển thị lịch sử giao dịch chi tiết của người dùng bao gồm thông tin đơn hàng, số tiền, thời gian, và trạng thái. Lịch sử được sắp xếp theo thời gian và có thể tìm kiếm, lọc theo các tiêu chí khác nhau. | Lịch sử giao dịch được hiển thị đầy đủ và chính xác. Lịch sử được sắp xếp hợp lý và có thể tìm kiếm, lọc dễ dàng.      | Lịch sử giao dịch không được hiển thị đầy đủ hoặc không chính xác. Lịch sử không được sắp xếp hợp lý hoặc khó tìm kiếm, lọc.         |
 
-### 1.6 THEO DÕI ĐƠN HÀNG
+### 1.6 MÃ GIẢM CHO RIÊNG TỪNG SẢN PHẨM
 
 #### 1.6.1 Thông tin màn hình:
 
-| Screen        | Theo dõi đơn hàng                                                                                 |
-| ------------- | ------------------------------------------------------------------------------------------------- |
-| Description   | Cho phép người dùng theo dõi tình trạng đơn hàng mình đang ở đâu cũng như trạng thái của đơn hàng |
-| Screen Access | Từ danh sách đơn hàng hoặc chi tiết đơn hàng                                                      |
+| Screen        | Mã giảm cho riêng từng sản phẩm                                                   |
+| ------------- | --------------------------------------------------------------------------------- |
+| Description   | Mã giảm được Admin trực tiếp tạo ra cho từng sản phẩm và thông báo đến người dùng |
+| Screen Access | Tích hợp trong trang sản phẩm và trang chi tiết sản phẩm                          |
 
 #### 1.6.2 Chi tiết thành phần màn hình:
 
-| Item                     | Type         | Data                        | Description                                 |
-| ------------------------ | ------------ | --------------------------- | ------------------------------------------- |
-| **Tiêu đề theo dõi**     | Text         | Theo dõi đơn hàng           | Tiêu đề của trang theo dõi                  |
-| **Mã đơn hàng**          | Text         | Mã đơn hàng                 | Mã định danh duy nhất của đơn hàng          |
-| **Trạng thái hiện tại**  | Badge        | Trạng thái hiện tại         | Badge hiển thị trạng thái đơn hàng          |
-| **Timeline trạng thái**  | Timeline     | Timeline các trạng thái     | Hiển thị lịch sử thay đổi trạng thái        |
-| **Thông tin vận chuyển** | Card         | Thông tin vận chuyển        | Thông tin về quá trình vận chuyển           |
-| **Mã vận đơn**           | Text         | Mã vận đơn                  | Mã vận đơn để theo dõi                      |
-| **Địa chỉ giao hàng**    | Text         | Địa chỉ giao hàng           | Địa chỉ nhận hàng                           |
-| **Thời gian dự kiến**    | Text         | Thời gian giao hàng dự kiến | Thời gian dự kiến nhận hàng                 |
-| **Nút liên hệ hỗ trợ**   | Button       | Liên hệ hỗ trợ              | Nút để liên hệ hỗ trợ khi cần thiết         |
-| **Thông báo cập nhật**   | Notification | Thông báo khi có cập nhật   | Thông báo real-time khi trạng thái thay đổi |
+| Item                     | Type   | Data                            | Description                         |
+| ------------------------ | ------ | ------------------------------- | ----------------------------------- |
+| **Tiêu đề mã sản phẩm**  | Text   | Khuyến mãi đặc biệt             | Tiêu đề của mã giảm giá sản phẩm    |
+| **Badge khuyến mãi**     | Badge  | Giảm giá                        | Badge hiển thị có khuyến mãi        |
+| **Mã giảm giá sản phẩm** | Text   | Mã code riêng cho sản phẩm      | Mã giảm giá dành riêng cho sản phẩm |
+| **Mức giảm giá**         | Text   | Phần trăm hoặc số tiền giảm     | Mức giảm giá cụ thể cho sản phẩm    |
+| **Giá gốc**              | Text   | Giá gốc của sản phẩm            | Giá ban đầu của sản phẩm            |
+| **Giá sau giảm**         | Text   | Giá sau khi áp dụng mã giảm giá | Giá cuối cùng sau khi giảm giá      |
+| **Thời gian áp dụng**    | Text   | Thời gian mã có hiệu lực        | Thời gian mã giảm giá có hiệu lực   |
+| **Điều kiện áp dụng**    | Text   | Điều kiện để sử dụng mã         | Điều kiện để áp dụng mã giảm giá    |
+| **Nút áp dụng mã**       | Button | Áp dụng mã                      | Nút để áp dụng mã giảm giá          |
+| **Thông báo đặc biệt**   | Alert  | Thông báo về mã đặc biệt        | Thông báo về mã giảm giá đặc biệt   |
 
 #### 1.6.3 Hành động và xử lý:
 
-| Action Name                      | Description                                                                                                                                                                                                                                                     | Success                                                                                                            | Failure                                                                                                                |
-| -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
-| **Hiển thị trạng thái đơn hàng** | Hiển thị trạng thái hiện tại của đơn hàng và timeline các thay đổi trạng thái theo thời gian. Bao gồm các trạng thái: Chờ xử lý, Đã xác nhận, Đang chuẩn bị, Đang giao hàng, Đã giao hàng. Mỗi trạng thái được hiển thị với thời gian cụ thể và mô tả chi tiết. | Trạng thái đơn hàng được hiển thị chính xác và timeline được cập nhật real-time. Giao diện rõ ràng và dễ theo dõi. | Trạng thái đơn hàng không được hiển thị chính xác hoặc timeline không được cập nhật real-time. Giao diện khó theo dõi. |
-| **Thông báo cập nhật real-time** | Hệ thống tự động gửi thông báo real-time khi có thay đổi trạng thái đơn hàng. Thông báo có thể được gửi qua email, SMS, hoặc push notification tùy theo cài đặt của người dùng.                                                                                 | Thông báo cập nhật được gửi real-time và chính xác. Người dùng nhận được thông tin đầy đủ về thay đổi trạng thái.  | Thông báo cập nhật không được gửi real-time hoặc không chính xác. Người dùng không nhận được thông tin về thay đổi.    |
-
-### 1.7 YÊU CẦU ĐỔI/TRẢ HÀNG
-
-#### 1.7.1 Thông tin màn hình:
-
-| Screen        | Yêu cầu đổi/trả hàng                                             |
-| ------------- | ---------------------------------------------------------------- |
-| Description   | Cho phép người dùng gửi yêu cầu đổi hàng / trả hàng đến chủ shop |
-| Screen Access | Từ chi tiết đơn hàng đã giao hàng                                |
-
-#### 1.7.2 Chi tiết thành phần màn hình:
-
-| Item                     | Type       | Data                           | Description                          |
-| ------------------------ | ---------- | ------------------------------ | ------------------------------------ |
-| **Nút yêu cầu đổi/trả**  | Button     | Yêu cầu đổi/trả hàng           | Nút để mở form yêu cầu               |
-| **Modal yêu cầu**        | Dialog     | Yêu cầu đổi/trả hàng           | Dialog để gửi yêu cầu                |
-| **Loại yêu cầu**         | Select     | Đổi hàng, Trả hàng             | Dropdown để chọn loại yêu cầu        |
-| **Sản phẩm**             | Select     | Chọn sản phẩm cần đổi/trả      | Dropdown để chọn sản phẩm            |
-| **Lý do**                | Select     | Lý do đổi/trả hàng             | Dropdown để chọn lý do               |
-| **Mô tả chi tiết**       | Textarea   | Mô tả chi tiết về vấn đề       | Textarea để mô tả chi tiết           |
-| **Upload hình ảnh**      | File Input | Upload hình ảnh minh chứng     | Input để upload hình ảnh             |
-| **Nút gửi yêu cầu**      | Button     | Gửi yêu cầu                    | Nút để gửi yêu cầu                   |
-| **Nút hủy**              | Button     | Hủy                            | Nút để hủy yêu cầu                   |
-| **Thông báo thành công** | Toast      | Yêu cầu đã được gửi thành công | Thông báo khi gửi yêu cầu thành công |
-
-#### 1.7.3 Hành động và xử lý:
-
-| Action Name                    | Description                                                                                                                                                                                                                                                       | Success                                                                                                           | Failure                                                                                                        |
-| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| **Gửi yêu cầu đổi/trả hàng**   | Cho phép người dùng gửi yêu cầu đổi hàng hoặc trả hàng với thông tin chi tiết bao gồm loại yêu cầu, sản phẩm, lý do, mô tả chi tiết, và hình ảnh minh chứng. Yêu cầu sẽ được gửi đến admin để xử lý và người dùng sẽ nhận được phản hồi trong thời gian sớm nhất. | Yêu cầu đổi/trả hàng được gửi thành công và admin nhận được thông báo. Người dùng nhận được xác nhận gửi yêu cầu. | Không thể gửi yêu cầu đổi/trả hàng hoặc admin không nhận được thông báo. Người dùng không nhận được xác nhận.  |
-| **Upload hình ảnh minh chứng** | Cho phép người dùng upload hình ảnh để minh chứng cho yêu cầu đổi/trả hàng của mình. Hình ảnh có thể là ảnh sản phẩm bị lỗi, ảnh hóa đơn, hoặc các bằng chứng khác. Hệ thống hỗ trợ upload nhiều hình ảnh và tự động resize để tối ưu hiệu suất.                  | Hình ảnh minh chứng được upload thành công và hiển thị trong yêu cầu. Upload hoạt động mượt mà và nhanh chóng.    | Không thể upload hình ảnh minh chứng hoặc hình ảnh không được hiển thị trong yêu cầu. Upload chậm hoặc bị lỗi. |
+| Action Name                | Description                                                                                                                                                                                                              | Success                                                                                                               | Failure                                                                                                                       |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| **Hiển thị mã sản phẩm**   | Hiển thị mã giảm giá dành riêng cho từng sản phẩm được Admin tạo ra. Mã giảm giá được hiển thị nổi bật trên trang sản phẩm với thông tin chi tiết về mức giảm giá, thời gian áp dụng, và điều kiện sử dụng.              | Mã giảm giá sản phẩm được hiển thị nổi bật và chính xác. Thông tin chi tiết được trình bày rõ ràng và dễ hiểu.        | Mã giảm giá sản phẩm không được hiển thị nổi bật hoặc không chính xác. Thông tin chi tiết không được trình bày rõ ràng.       |
+| **Tính toán giá sau giảm** | Hệ thống tự động tính toán giá sau khi áp dụng mã giảm giá cho sản phẩm cụ thể. Giá được hiển thị rõ ràng với giá gốc và giá sau giảm để người dùng có thể so sánh và đưa ra quyết định mua hàng.                        | Giá sau giảm được tính toán chính xác và hiển thị rõ ràng. Người dùng có thể dễ dàng so sánh giá gốc và giá sau giảm. | Giá sau giảm không được tính toán chính xác hoặc không được hiển thị rõ ràng. Người dùng khó so sánh giá gốc và giá sau giảm. |
+| **Thông báo mã đặc biệt**  | Hệ thống tự động thông báo đến người dùng về mã giảm giá đặc biệt cho sản phẩm thông qua các kênh thông báo như email, SMS, hoặc push notification. Thông báo bao gồm thông tin chi tiết về mã giảm giá và cách sử dụng. | Thông báo mã đặc biệt được gửi thành công và chính xác. Người dùng nhận được thông tin đầy đủ về mã giảm giá.         | Thông báo mã đặc biệt không được gửi thành công hoặc không chính xác. Người dùng không nhận được thông tin về mã giảm giá.    |
